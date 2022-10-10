@@ -20,3 +20,18 @@
     font-size: 15px;
     font-weight: 300;
 }
+.content_center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.margin_x-10{
+    margin: 0px 10px;
+}
+.img_card > img{
+    width: 50px;
+}
+.width-max{
+    width: 100%;
+}
