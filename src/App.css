@@ -21,12 +21,19 @@
   display: flex;
   align-items: center;
 }
-.contact_img{
-  margin : 0px 10px;
+.discut_info{
+  height: 100px;
+  border-bottom: 1px solid gray;
+  margin: 0px 20px;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
-.contact_img > img{
-  width: 50px;
+.discut_status{
+  width: 100%;
+  border: 1px solid black;
+  margin : 0px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

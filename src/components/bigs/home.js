@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import discussionContext from "../../contexts/discussion";
 import Contact from "../basics/contact";
 
 export default function Home() {
+  const discut = useContext(discussionContext);
   const [contact, setContact] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3000/api/user")
@@ -10,7 +12,6 @@ export default function Home() {
           .json()
           .then((res) => {
             setContact(res);
-            console.log(res);
           })
           .catch((err) => console.log(err))
       )

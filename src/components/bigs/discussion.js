@@ -1,7 +1,10 @@
 import React from "react";
+import DiscutInfo from "../basics/discutInfo";
 
 export default function Discussion (){
     return (
-        <div className="discussion radius margin">THis will be the discussion</div>
+        <div className="discussion radius margin">
+            <DiscutInfo />
+        </div>
     )
 }
