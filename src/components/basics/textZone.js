@@ -4,7 +4,6 @@ import discussionContext from "../../contexts/discussion";
 
 export default function TextZone() {
   const { discut } = useContext(discussionContext);
-  const arr = [];
   const [value, setValue] = useState("");
   return (
     <div className="text_zone">

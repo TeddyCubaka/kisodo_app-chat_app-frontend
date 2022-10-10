@@ -3,7 +3,7 @@ import discussionContext from "../../contexts/discussion";
 import Contact from "../basics/contact";
 
 export default function Home() {
-  const {discut, setDiscut} = useContext(discussionContext);
+  const { discut } = useContext(discussionContext);
   const [contact, setContact] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3000/api/user")
