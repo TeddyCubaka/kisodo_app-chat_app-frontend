@@ -4,3 +4,19 @@
 .margin{
     margin: 10px;
 }
+.strongest{
+    font-size: larger;
+    font-weight: 800;
+}
+.strong{
+    font-size: large;
+    font-weight: 600;
+}
+.medium{
+    font-size: 18px;
+    font-weight: 300;
+}
+.small{
+    font-size: 15px;
+    font-weight: 300;
+}

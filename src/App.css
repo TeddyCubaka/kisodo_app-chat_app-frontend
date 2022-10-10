@@ -1,6 +1,8 @@
 .App {
   display: grid;
   grid-template-columns: 10% 30% 60%;
+  font-size: 18px;
+  font-weight: 300;
 }
 .navbarre{
   background-color: aqua;
@@ -13,4 +15,18 @@
 .discussion {
   background-color: red;
   height: 100vh;
+}
+.contact_card{
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.contact_img{
+  margin : 0px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contact_img > img{
+  width: 50px;
 }
