@@ -55,16 +55,22 @@
 }
 .text_zone{
   width: inherit;
+  height: 100px;
   margin: 20px;
   border: 1px solid black;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .text_input{
   width: 90%;
   display: flex;
-
 }
 .text_input > textarea{
   width: 100%;
+  height: fit-content;
+}
+.text_input > div{
+  display: flex;
+  align-items: center;
 }

@@ -3,17 +3,14 @@ import discussionContext from "../../contexts/discussion";
 import Contact from "../basics/contact";
 
 export default function Home() {
-  const discut = useContext(discussionContext);
-  console.log(discut);
+  const {discut, setDiscut} = useContext(discussionContext);
   const [contact, setContact] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3000/api/user")
       .then((data) =>
         data
           .json()
-          .then((res) => {
-            setContact(res);
-          })
+          .then((res) => setContact(res))
           .catch((err) => console.log(err))
       )
       .catch((err) => console.log(err));
@@ -25,7 +22,9 @@ export default function Home() {
         contact.map((cont) => (
           <Contact
             name={`${cont.firstName} ${cont.secondName}`}
-            message={false}
+            message={
+              discut.length ? discut[discut.length - 1] : false
+            }
             key={cont._id}
           />
         ))
