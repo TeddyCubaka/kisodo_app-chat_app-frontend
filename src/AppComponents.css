@@ -45,3 +45,13 @@
 .big_block{
     height: 90vh;
 }
+.flex_start-r{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.flex_end-r{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
