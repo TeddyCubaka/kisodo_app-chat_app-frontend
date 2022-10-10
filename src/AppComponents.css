@@ -2,7 +2,8 @@
     border-radius: 9px;
 }
 .margin{
-    margin: 10px;
+  height: 540px;
+  margin: 10px;
 }
 .strongest{
     font-size: larger;
@@ -34,4 +35,13 @@
 }
 .width-max{
     width: 100%;
+}
+.first_block{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin: 0px 10px;
+}
+.big_block{
+    height: 90vh;
 }
