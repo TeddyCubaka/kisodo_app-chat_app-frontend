@@ -15,7 +15,7 @@ function App() {
       <Router>
         <div className="App">
           <Navigation />
-          <div className="margin">
+          <div className="margin home">
             <Search />
             <Home />
           </div>

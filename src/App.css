@@ -1,20 +1,29 @@
 .App {
-  display: grid;
-  grid-template-columns: 10% 30% 60%;
+  height: 100%;
   font-size: 18px;
   font-weight: 300;
+  display: grid;
+  grid-template-columns: 10% 30% 60%;
 }
 .navbarre{
   background-color: aqua;
-  height: 100vh;
+  height: 100%;
 }
 .home{
+  height: fit-content;
+  min-height: 400px;
+  padding-bottom: 20px;
+  max-height: 500px;
+}
+.contacts{
   background-color: blue;
-  height: 100vh;
+  overflow-y: scroll;
+  margin-top: 20px;
+  max-height: 480px;
 }
 .discussion {
   background-color: red;
-  height: 100vh;
+  height: 100%;
 }
 .contact_card{
   height: 60px;
