@@ -16,7 +16,7 @@ export default function Home() {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div className="contacts radius">
+    <div className="contacts radius bloc_with_shaddow">
       <div className="first_block strongest">Recent</div>
       {contact.length > 1 ? (
         contact.map((cont) => (

@@ -7,7 +7,7 @@
 }
 
 .navbarre {
-  background-color: aqua;
+  background-color: #1966ff;
   height: 100%;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .contacts {
-  background-color: blue;
+  background-color: white;
   overflow-y: scroll;
   margin-top: 20px;
   max-height: 480px;
@@ -31,7 +31,7 @@
 }
 
 .discussion {
-  background-color: red;
+  background-color: white;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -64,9 +64,8 @@
 
 .text_zone {
   width: inherit;
-  height: 100px;
+  height: 80px;
   margin: 20px;
-  border: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -108,7 +107,7 @@
 .message_left {
   color: white;
   border-radius: 9px 9px 9px 0px;
-  background-color: rgb(19, 50, 226);
+  background-color: gray;
   min-height: 25px;
   min-width: 75px;
   height: auto;
@@ -121,7 +120,7 @@
 
 .message_right {
   border-radius: 9px 9px 0px 9px;
-  background-color: gray;
+  background-color: #1966ff;
   min-height: 25px;
   min-width: 75px;
   height: auto;
@@ -139,7 +138,7 @@
   right: -20px;
   width: 0;
   border-top: 20px solid transparent;
-  border-left: 20px solid gray;
+  border-left: 20px solid #1966ff;
   border-bottom: 0px solid transparent;
 }
 
@@ -150,6 +149,6 @@
   left: -20px;
   width: 0;
   border-top: 20px solid transparent;
-  border-right: 20px solid rgb(19, 50, 226);
+  border-right: 20px solid gray;
   border-bottom: 0px solid transparent;
 }

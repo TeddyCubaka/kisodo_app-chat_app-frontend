@@ -5,7 +5,7 @@ import TextZone from "../basics/textZone"
 
 export default function Discussion (){
     return (
-        <div className="discussion radius margin">
+        <div className="discussion radius margin bloc_with_shaddow">
             <DiscutInfo />
             <DiscutMessages />
             <TextZone />
