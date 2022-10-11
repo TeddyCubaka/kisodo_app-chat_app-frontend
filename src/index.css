@@ -17,4 +17,8 @@ code {
 #root {
   margin: 0px;
   padding: 0px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
