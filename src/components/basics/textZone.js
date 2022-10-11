@@ -3,7 +3,7 @@ import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
 
 export default function TextZone() {
-  const { discut, freind } = useContext(discussionContext);
+  const { discut, me } = useContext(discussionContext);
   const [value, setValue] = useState("");
   return (
     <div className="text_zone">
@@ -29,10 +29,10 @@ export default function TextZone() {
               vue: false,
               sendDate: new Date().toLocaleString(),
             };
-            message.sender = freind;
+            message.sender = me;
             discut.push(message);
             setValue("");
-            console.log(discut);
+            console.log(me);
           }
         }}
       >
