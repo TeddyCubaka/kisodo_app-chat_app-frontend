@@ -10,7 +10,6 @@ export default function DiscutMessages() {
     fetch("http://localhost:3000/api/message")
       .then((res) => {
         res.json().then((data) => {
-          console.log(data);
           data.message.reverse();
           setMessages(data.message);
         });

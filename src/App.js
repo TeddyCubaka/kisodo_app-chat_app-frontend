@@ -10,8 +10,9 @@ import { useContext, useState } from "react";
 
 function App() {
   const [discut, setDiscut] = useState(useContext(discussionContext))
+  const [freind, setFreind] = useState({})
   return (
-    <discussionContext.Provider value={{discut, setDiscut}}>
+    <discussionContext.Provider value={{discut, setDiscut, freind, setFreind}}>
       <Router>
         <div className="App">
           <Navigation />
