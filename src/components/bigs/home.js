@@ -25,6 +25,7 @@ export default function Home() {
             message={
               discut.length ? discut[discut.length - 1] : false
             }
+            data={cont}
             key={cont._id}
           />
         ))
