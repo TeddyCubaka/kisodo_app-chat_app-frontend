@@ -94,10 +94,21 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-start;
+  scrollbar-width: thin;
 }
 
 .discut_msg::-webkit-scrollbar {
-  display: none;
+  width: 6px;
+}
+
+.discut_msg::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+
+.discut_msg::-webkit-scrollbar-thumb {
+  background-color: #B9B9B9;
+  border-radius: 20px;
+  border: 1px solid #F5F5F5;
 }
 
 .message {
