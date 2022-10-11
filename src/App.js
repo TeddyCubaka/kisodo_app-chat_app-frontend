@@ -11,8 +11,9 @@ import { useContext, useState } from "react";
 function App() {
   const [discut, setDiscut] = useState(useContext(discussionContext))
   const [freind, setFreind] = useState({})
+  const [me, setMe] = useState({})
   return (
-    <discussionContext.Provider value={{discut, setDiscut, freind, setFreind}}>
+    <discussionContext.Provider value={{discut, setDiscut, freind, setFreind, me, setMe}}>
       <Router>
         <div className="App">
           <Navigation />
