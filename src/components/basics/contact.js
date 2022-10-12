@@ -15,7 +15,7 @@ export default function Contact({ name, message, image, data, array, index }) {
           biography: data.biography,
         };
         setFreind(obj);
-        if (index == 1) {
+        if (index === 1) {
           setMe({
             userId: array[0]._id,
             fullName: `${array[0].firstName} ${array[0].secondName}`,

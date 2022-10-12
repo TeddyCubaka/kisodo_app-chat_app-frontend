@@ -23,8 +23,8 @@ export default function DiscutMessages() {
         messages.map((data) => (
           <Message
             key={data.id}
-            bulle={data.sender.userId == freind.userId ? "message_left" : "message_right"}
-            position={ data.sender.userId == freind.userId ? "flex_start-r" : "flex_end-r"}
+            bulle={data.sender.userId === freind.userId ? "message_left" : "message_right"}
+            position={ data.sender.userId === freind.userId ? "flex_start-r" : "flex_end-r"}
             content={data.content}
             date={data.sendDate}
           />

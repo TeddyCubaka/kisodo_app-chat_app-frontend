@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
+import axios from "axios";
 
 export default function TextZone() {
   const { discut, me } = useContext(discussionContext);
   const [value, setValue] = useState("");
+
   return (
     <div className="text_zone">
       <div className="text_input">
@@ -22,18 +24,27 @@ export default function TextZone() {
       <button
         onClick={() => {
           if (value !== "") {
-            const message = {
-              content: value,
-              isPicture: false,
-              delete: false,
-              vue: false,
-              sendDate: new Date().toLocaleString(),
-            };
-            message.sender = me;
+            JSON.stringify(me);
+            const message = {};
             discut.push(message);
-            setValue("");
-            console.log(me);
+            const mess = JSON.stringify(message);
+            console.log(mess);
+            axios({
+              method: "post",
+              url: "http://localhost:3000/api/message",
+              data: {
+                "content": value,
+                "isPicture": false,
+                "delete": false,
+                "vue": false,
+                "sendDate": "",
+                "sender": me,
+              },
+            })
+              .then((res) => console.log(res))
+              .catch((err) => console.log(err));
           }
+          setValue("");
         }}
       >
         <AiOutlineSend />
