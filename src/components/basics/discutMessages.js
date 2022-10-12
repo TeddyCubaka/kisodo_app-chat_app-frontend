@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 import Message from "./message";
@@ -12,6 +11,7 @@ export default function DiscutMessages() {
       .then((res) =>
         res.json().then((data) => {
           data.messages.reverse();
+          console.log(data.messages);
           setMessages(data.messages);
           setActualDiscussion({
             name : data.name,
@@ -25,19 +25,23 @@ export default function DiscutMessages() {
 
   return (
     <div className="discut_msg">
-      {messages.length > 0 ? (
+      {messages.length > 1 ? (
         messages.map((data) => (
           <Message
             key={data.id}
             bulle={
-              data.sender.userId === freind.userId
+              data.sender ? 
+            data.sender.userId === freind.userId
                 ? "message_left"
                 : "message_right"
+                : false
             }
             position={
+              data.sender ?
               data.sender.userId === freind.userId
                 ? "flex_start-r"
                 : "flex_end-r"
+              : false
             }
             content={data.content}
             date={data.sendDate}
