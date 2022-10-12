@@ -4,7 +4,7 @@ import discussionContext from "../../contexts/discussion";
 import axios from "axios";
 
 export default function TextZone() {
-  const { discut, me } = useContext(discussionContext);
+  const { discut, me, discussion } = useContext(discussionContext);
   const [value, setValue] = useState("");
 
   return (
@@ -31,7 +31,7 @@ export default function TextZone() {
             console.log(mess);
             axios({
               method: "post",
-              url: "http://localhost:3000/api/message",
+              url: "http://localhost:3000/api/discussion/add_message",
               data: {
                 "content": value,
                 "isPicture": false,

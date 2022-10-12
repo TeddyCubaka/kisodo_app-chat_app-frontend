@@ -12,8 +12,9 @@ function App() {
   const [discut, setDiscut] = useState(useContext(discussionContext))
   const [freind, setFreind] = useState({})
   const [me, setMe] = useState({})
+  const [actualdiscussion, setActualDiscussion] = useState({})
   return (
-    <discussionContext.Provider value={{discut, setDiscut, freind, setFreind, me, setMe}}>
+    <discussionContext.Provider value={{discut, setDiscut, freind, setFreind, me, setMe, actualdiscussion, setActualDiscussion}}>
       <Router>
         <div className="App">
           <Navigation />

@@ -4,7 +4,7 @@ import discussionContext from "../../contexts/discussion";
 import Message from "./message";
 
 export default function DiscutMessages() {
-  let { freind } = useContext(discussionContext);
+  let { freind, setActualDiscussion } = useContext(discussionContext);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -13,6 +13,11 @@ export default function DiscutMessages() {
         res.json().then((data) => {
           data.messages.reverse();
           setMessages(data.messages);
+          setActualDiscussion({
+            name : data.name,
+            discussionId : data._id,
+            membres : data.membres,
+          })
         })
       )
       .catch((err) => console.log(err));
