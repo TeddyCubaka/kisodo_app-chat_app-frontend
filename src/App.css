@@ -116,17 +116,17 @@
 }
 
 .message {
-  min-height: 70px;
+  height: fit-content;
 }
 
 .message_left {
+  max-width: 300px;
+  min-width: 75px;
+  min-height: 25px;
+  height: fit-content;
   color: white;
   border-radius: 9px 9px 9px 0px;
   background-color: gray;
-  min-height: 25px;
-  min-width: 75px;
-  height: auto;
-  max-width: 300px;
   position: relative;
   padding: 10px;
   margin: 0px 20px;
@@ -134,12 +134,12 @@
 }
 
 .message_right {
-  border-radius: 9px 9px 0px 9px;
-  background-color: #1966ff;
   min-height: 25px;
   min-width: 75px;
-  height: auto;
+  height: fit-content;
   max-width: 300px;
+  border-radius: 9px 9px 0px 9px;
+  background-color: #1966ff;
   position: relative;
   border: none;
   padding: 10px;
