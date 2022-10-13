@@ -11,13 +11,12 @@ export default function DiscutMessages() {
       .then((res) =>
         res.json().then((data) => {
           data.messages.reverse();
-          console.log(data.messages);
           setMessages(data.messages);
           setActualDiscussion({
-            name : data.name,
-            discussionId : data._id,
-            membres : data.membres,
-          })
+            name: data.name,
+            discussionId: data._id,
+            membres: data.membres,
+          });
         })
       )
       .catch((err) => console.log(err));
@@ -26,22 +25,22 @@ export default function DiscutMessages() {
   return (
     <div className="discut_msg">
       {messages.length > 1 ? (
-        messages.map((data) => (
+        messages.map((data, index) => (
           <Message
-            key={data.id}
+            key={data.id ? data.id : index}
             bulle={
-              data.sender ? 
-            data.sender.userId === freind.userId
-                ? "message_left"
-                : "message_right"
-                : false
+              data.sender
+                ? data.sender.userId === freind.userId
+                  ? "message_left"
+                  : "message_right"
+                : ""
             }
             position={
-              data.sender ?
-              data.sender.userId === freind.userId
-                ? "flex_start-r"
-                : "flex_end-r"
-              : false
+              data.sender
+                ? data.sender.userId === freind.userId
+                  ? "flex_start-r"
+                  : "flex_end-r"
+                : ""
             }
             content={data.content}
             date={data.sendDate}

@@ -27,16 +27,15 @@ export default function TextZone() {
             JSON.stringify(me);
             const message = {};
             discut.push(message);
-            const mess = JSON.stringify(message);
             axios({
               method: "post",
               url: "http://localhost:3000/api/discussion/add_message",
               data: {
-                discussionId : actualDiscussion.discussionId,
-                message : {
-                  "content" : value,
-                  "sender" : me
-                }
+                discussionId: actualDiscussion.discussionId,
+                message: {
+                  content: value,
+                  sender: me,
+                },
               },
             })
               .then((res) => console.log(res))
