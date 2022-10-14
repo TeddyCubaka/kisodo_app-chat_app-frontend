@@ -222,6 +222,7 @@
     width: 80%;
     border-right: 4px solid yellow;
     border-radius: 9px 0px 0px 9px;
+    margin: 10px 0px;
     display: flex;
     justify-content: center;
     align-items: center;

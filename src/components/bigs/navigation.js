@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
 import AllMemberButton from "../basics/allMemberBtn";
+import Inbox from "../basics/inbox";
 
 export default function Navigation() {
     const { me, setMe } = useContext(discussionContext);
@@ -34,6 +35,7 @@ export default function Navigation() {
             </div>
             <div className="nav_list">
                 <AllMemberButton />
+                <Inbox />
             </div>
         </div>
     );
