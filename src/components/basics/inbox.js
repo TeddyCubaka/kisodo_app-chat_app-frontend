@@ -9,7 +9,7 @@ export default function Inbox() {
         <button
             className="nav_btn"
             onClick={() => {
-                setAllMember(members);
+                setAllMember(userInbox);
             }}
         >
             <h3>Inbox</h3>

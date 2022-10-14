@@ -4,7 +4,8 @@ import discussionContext from "../../contexts/discussion";
 import axios from "axios";
 
 export default function TextZone() {
-    const { discut, me, actualDiscussion } = useContext(discussionContext);
+    const { discut, me, actualDiscussion, freind } =
+        useContext(discussionContext);
     const [value, setValue] = useState("");
 
     return (
@@ -23,24 +24,56 @@ export default function TextZone() {
             </div>
             <button
                 onClick={() => {
-                    if (value !== "") {
-                        JSON.stringify(me);
-                        const message = {};
-                        discut.push(message);
+                    if (!actualDiscussion._id) {
                         axios({
                             method: "post",
-                            url: "http://localhost:3000/api/discussion/add_message",
+                            url: "http://localhost:3000/api/discussion/",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization:
+                                    "Bearer " + localStorage.getItem("token"),
+                            },
                             data: {
-                                discussionId: actualDiscussion.discussionId,
-                                message: {
-                                    content: value,
-                                    sender: me,
-                                },
+                                isGroup: false,
+                                membres: [
+                                    {
+                                        userId: freind.userId,
+                                        fullName: freind.fullName,
+                                        image: freind.image,
+                                        biography: freind.biography,
+                                    },
+                                    {
+                                        userId: me.userId,
+                                        fullName:
+                                            me.firstName + " " + me.secondName,
+                                        image: me.image,
+                                        biography: me.biography,
+                                    },
+                                ],
                             },
                         })
                             .then((res) => console.log(res))
                             .catch((err) => console.log(err));
                     }
+                    // if (value !== "") {
+                    //     JSON.stringify(me);
+                    //     const message = {};
+                    //     discut.push(message);
+                    //     axios({
+                    //         method: "post",
+                    //         url: "http://localhost:3000/api/discussion/add_message",
+                    //         data: {
+                    //             discussionId: actualDiscussion.discussionId,
+                    //             message: {
+                    //                 content: value,
+                    //                 sender: me,
+                    //             },
+                    //         },
+                    //     })
+                    //         .then((res) => console.log(res))
+                    //         .catch((err) => console.log(err));
+                    // }
+
                     setValue("");
                 }}
             >
