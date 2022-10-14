@@ -14,6 +14,8 @@ function App() {
     const [me, setMe] = useState({});
     const [actualDiscussion, setActualDiscussion] = useState({});
     const [meId, setMeId] = useState("");
+    const [userInbox, setUserInbox] = useState({});
+    const [allMember, setAllMember] = useState({});
     return (
         <discussionContext.Provider
             value={{
@@ -27,6 +29,10 @@ function App() {
                 setActualDiscussion,
                 meId,
                 setMeId,
+                userInbox,
+                setUserInbox,
+                allMember,
+                setAllMember,
             }}
         >
             <Router>

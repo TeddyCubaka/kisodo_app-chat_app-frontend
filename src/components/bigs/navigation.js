@@ -32,7 +32,9 @@ export default function Navigation() {
                 {" "}
                 {me.firstName} {me.secondName}{" "}
             </div>
-            <AllMemberButton />
+            <div className="nav_list">
+                <AllMemberButton />
+            </div>
         </div>
     );
 }
