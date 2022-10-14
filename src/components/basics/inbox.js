@@ -1,8 +1,17 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import discussionContext from "../../contexts/discussion";
 
 export default function Inbox() {
+    const { setAllMember, userInbox } = useContext(discussionContext);
+    const [members, setMembers] = useState([]);
     return (
-        <button className="nav_btn">
+        <button
+            className="nav_btn"
+            onClick={() => {
+                setAllMember(members);
+            }}
+        >
             <h3>Inbox</h3>
         </button>
     );

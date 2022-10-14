@@ -5,7 +5,7 @@ import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
 
 export default function Navigation() {
-    const { me, setMe } = useContext(discussionContext);
+    const { me, setMe, setUserInbox } = useContext(discussionContext);
     const [userId] = useState(localStorage.getItem("userId"));
     useEffect(() => {
         axios({
@@ -18,7 +18,10 @@ export default function Navigation() {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
         })
-            .then((res) => setMe(res.data))
+            .then((res) => {
+                setMe(res.data);
+                setUserInbox(res.data.inbox);
+            })
             .catch((err) => console.log(err));
     }, [userId, setMe]);
     return (
