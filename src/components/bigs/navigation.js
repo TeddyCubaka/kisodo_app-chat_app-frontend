@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
+import AllMemberButton from "../basics/allMemberBtn";
 
 export default function Navigation() {
     const { me, setMe } = useContext(discussionContext);
@@ -31,14 +32,7 @@ export default function Navigation() {
                 {" "}
                 {me.firstName} {me.secondName}{" "}
             </div>
-            <div>
-                {" "}
-                {me.inBox ? (
-                    me.inBox.map((disc) => <div> {disc.name} </div>)
-                ) : (
-                    <div>No discussion</div>
-                )}{" "}
-            </div>
+            <AllMemberButton />
         </div>
     );
 }
