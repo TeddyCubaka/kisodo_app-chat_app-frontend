@@ -226,4 +226,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: border-right 0.1s;
+}
+.nav_btn:hover {
+    border-right: 6px solid yellow;
+    transition: border-right 0.1s;
 }

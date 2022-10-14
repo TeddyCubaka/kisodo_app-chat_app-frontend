@@ -37,8 +37,8 @@ export default function Navigation() {
                 {me.firstName} {me.secondName}{" "}
             </div>
             <div className="nav_list">
-                <AllMemberButton />
                 <Inbox />
+                <AllMemberButton />
             </div>
         </div>
     );

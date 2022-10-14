@@ -9,7 +9,7 @@ export default function Contacts() {
     return (
         <div className="contacts radius bloc_with_shaddow">
             <div className="first_block strongest">Recent</div>
-            {allMember.length > 1 ? (
+            {allMember.length > 0 ? (
                 allMember.map((cont, index) => (
                     <Contact
                         name={`${cont.firstName} ${cont.secondName}`}
@@ -22,6 +22,14 @@ export default function Contacts() {
                         key={cont._id}
                     />
                 ))
+            ) : allMember.length == 0 ? (
+                <div className="img_card">
+                    <img
+                        className=""
+                        src="https://image.shutterstock.com/image-vector/file-delete-260nw-686125981.jpg"
+                        alt=""
+                    />
+                </div>
             ) : (
                 <div className="loader"></div>
             )}
