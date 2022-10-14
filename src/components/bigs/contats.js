@@ -19,16 +19,16 @@ export default function Contacts() {
                 setContact(data.data);
             })
             .catch((err) => console.log(err));
-        axios({
-            method: "get",
-            url: "http://localhost:3000/api/discussion",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-        })
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
+        // axios({
+        //     method: "get",
+        //     url: "http://localhost:3000/api/discussion",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Authorization: "Bearer " + localStorage.getItem("token"),
+        //     },
+        // })
+        //     .then((res) => console.log(res))
+        //     .catch((err) => console.log(err));
     }, []);
 
     return (

@@ -1,12 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import discussionContext from "../../contexts/discussion";
 
 export default function Login() {
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
-    const [token, setToken] = useState("");
     const [loader, setLoader] = useState("");
+    const { setMeId } = useContext(discussionContext);
     return (
         <div className="mum_card">
             <h2>What's up ?</h2>
@@ -43,7 +44,6 @@ export default function Login() {
                                 mail: mail,
                                 password: password,
                             };
-                            console.log(myData);
                             axios({
                                 method: "post",
                                 url: "http://localhost:3000/api/user/login",
@@ -52,13 +52,19 @@ export default function Login() {
                             })
                                 .then((res) => {
                                     console.log(res.data.token);
-                                    setToken(res.data.token);
                                     localStorage.setItem(
                                         "token",
                                         res.data.token,
                                     );
-                                    setLoader("");
+                                    localStorage.setItem(
+                                        "userId",
+                                        res.data.userId,
+                                    );
+                                    setMeId({
+                                        userId: res.data.userId,
+                                    });
                                     window.location = "/home";
+                                    setLoader("");
                                 })
                                 .catch((err) =>
                                     console.log(err, "jafuefoefuoeogfef"),

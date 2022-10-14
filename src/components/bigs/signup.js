@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { json } from "react-router-dom";
 
 export default function Signup() {
     const [mail, setMail] = useState("");
@@ -16,7 +15,7 @@ export default function Signup() {
         <div className="mum_card">
             <h2>Did you want to join us ?</h2>
             <fieldset className="fieldset_of_connexion">
-                {msg == "" ? (
+                {msg === "" ? (
                     false
                 ) : (
                     <div style={{ color: "red" }}> {msg} </div>
@@ -82,9 +81,9 @@ export default function Signup() {
                                   "Too short passeword change it plz",
                               )
                             : setNicePwdSize("nice password");
-                        if (mail == "" || password == "") {
+                        if (mail === "" || password === "") {
                             setMsg("The mail or the password is invalid");
-                        } else if (mail.endsWith("gmail.com") == false) {
+                        } else if (mail.endsWith("gmail.com") === false) {
                             setMsg("A gmail plz");
                         } else {
                             setMsg("");
