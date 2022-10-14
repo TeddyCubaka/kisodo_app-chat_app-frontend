@@ -58,7 +58,7 @@ export default function Login() {
                                         res.data.token,
                                     );
                                     setLoader("");
-                                    // window.location = "/home";
+                                    window.location = "/home";
                                 })
                                 .catch((err) =>
                                     console.log(err, "jafuefoefuoeogfef"),

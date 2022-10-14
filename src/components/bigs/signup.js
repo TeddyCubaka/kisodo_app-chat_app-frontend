@@ -101,7 +101,10 @@ export default function Signup() {
                                 data: myData,
                                 headers: { "Content-Type": "application/json" },
                             })
-                                .then((res) => console.log(res))
+                                .then((res) => {
+                                    console.log(res);
+                                    window.location = "/login";
+                                })
                                 .catch((err) =>
                                     console.log(err, "jafuefoefuoeogfef"),
                                 );
