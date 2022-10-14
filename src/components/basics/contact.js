@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 
-export default function Contact({ name, message, image, data, array, index }) {
+export default function Contact({ name, message, image, data }) {
     const { setFreind, setMe } = useContext(discussionContext);
 
     return (
@@ -14,21 +14,6 @@ export default function Contact({ name, message, image, data, array, index }) {
                     image: data.image,
                     biography: data.biography,
                 });
-                if (index === 1) {
-                    setMe({
-                        userId: array[0]._id,
-                        fullName: `${array[0].firstName} ${array[0].secondName}`,
-                        image: array[0].image,
-                        biography: array[0].biography,
-                    });
-                } else {
-                    setMe({
-                        userId: array[1]._id,
-                        fullName: `${array[1].firstName} ${array[1].secondName}`,
-                        image: array[1].image,
-                        biography: array[1].biography,
-                    });
-                }
             }}
         >
             <div className="margin_x-10 content_center img_card">

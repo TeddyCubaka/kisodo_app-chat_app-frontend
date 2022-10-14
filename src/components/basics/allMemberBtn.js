@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
 
 export default function AllMemberButton() {
-    const { setAllMember, allMember } = useContext(discussionContext);
+    const { setAllMember } = useContext(discussionContext);
     const [members, setMembers] = useState([]);
     useEffect(() => {
         axios({
