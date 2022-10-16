@@ -7,7 +7,7 @@ export default function Message({ position, content, date, bulle, state }) {
                 <div className="content">{content}</div>
                 <span className={`${state} smaller`}>
                     {" "}
-                    {/* {state == "msg_loader" ? false : "ok"}{" "} */}
+                    {state == "msg_sended" ? "ok" : false}{" "}
                     {state == "failure" ? "échec d'envoie" : false}{" "}
                 </span>
             </div>

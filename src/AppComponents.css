@@ -81,3 +81,7 @@
 .failure {
     color: red;
 }
+
+.msg_sended {
+    color: yellow;
+}

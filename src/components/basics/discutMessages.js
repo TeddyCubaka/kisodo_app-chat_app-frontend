@@ -57,7 +57,7 @@ export default function DiscutMessages() {
                             ? "msg_loader"
                             : discut.send === "failure"
                             ? "failure"
-                            : null
+                            : "msg_sended"
                     }
                 />
             ) : (
