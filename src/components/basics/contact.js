@@ -10,7 +10,7 @@ export default function Contact({ name, message, image, data }) {
             onClick={() => {
                 setFreind({
                     userId: data._id,
-                    fullName: `${data.firstName} ${data.secondName}`,
+                    fullName: name,
                     image: data.image,
                     biography: data.biography,
                 });

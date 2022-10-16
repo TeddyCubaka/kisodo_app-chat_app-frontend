@@ -8,11 +8,12 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [loader, setLoader] = useState("");
     const { setMeId } = useContext(discussionContext);
+    const [error, setError] = useState("");
     return (
         <div className="mum_card">
             <h2>What's up ?</h2>
             <fieldset className="fieldset_of_connexion">
-                <div className={loader}></div>
+                <div className={loader}> {error} </div>
                 <label>Enter your mail address</label>
                 <input
                     type="mail"
@@ -66,8 +67,13 @@ export default function Login() {
                                     window.location = "/home";
                                     setLoader("");
                                 })
-                                .catch((err) =>
-                                    console.log(err, "jafuefoefuoeogfef"),
+                                .catch(
+                                    (err) =>
+                                        console.log(err, "jafuefoefuoeogfef"),
+                                    setError(
+                                        "verifier your password or your mail. ",
+                                    ),
+                                    setLoader("error"),
                                 );
                         }
                     }}

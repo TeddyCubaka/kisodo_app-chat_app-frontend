@@ -16,6 +16,7 @@ function App() {
     const [meId, setMeId] = useState("");
     const [userInbox, setUserInbox] = useState({});
     const [allMember, setAllMember] = useState({});
+    const [relations, setRelations] = useState({});
     return (
         <discussionContext.Provider
             value={{
@@ -33,6 +34,8 @@ function App() {
                 setUserInbox,
                 allMember,
                 setAllMember,
+                relations,
+                setRelations,
             }}
         >
             <Router>

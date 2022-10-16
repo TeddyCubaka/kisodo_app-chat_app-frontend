@@ -25,8 +25,7 @@
 .contacts {
     background-color: white;
     overflow-y: scroll;
-    margin-top: 20px;
-    max-height: 480px;
+    max-height: 447px;
     min-height: 150px;
 }
 
@@ -226,9 +225,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: border-right 0.1s;
+    transition: border-right 0.1s, background-color 0.5s;
 }
 .nav_btn:hover {
+    background-color: #003297;
     border-right: 6px solid yellow;
-    transition: border-right 0.1s;
+    transition: border-right 0.1s, background-color 0.5s;
 }
