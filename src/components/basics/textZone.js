@@ -23,7 +23,7 @@ export default function TextZone() {
             </div>
             <button
                 onClick={() => {
-                    if (actualDiscussion.discussionId) {
+                    if (actualDiscussion.discussionId && value !== "") {
                         axios({
                             method: "post",
                             url: "http://localhost:3000/api/discussion/add_message",
@@ -58,12 +58,6 @@ export default function TextZone() {
                             });
                     }
                     if (value !== "") {
-                        JSON.stringify(me);
-                        setDiscut({
-                            content: value,
-                            date: new Date().toLocaleDateString(),
-                            send: false,
-                        });
                     }
 
                     setValue("");

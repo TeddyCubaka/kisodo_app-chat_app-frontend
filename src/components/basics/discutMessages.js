@@ -5,18 +5,6 @@ import Message from "./message";
 export default function DiscutMessages() {
     let { freind, discut } = useContext(discussionContext);
     const [messages, setMessages] = useState([]);
-    // useEffect(() => {
-    //     axios({
-    //         method: "get",
-    //         url: "http://localhost:3000/api/discussion",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             Authorization: "Bearer " + localStorage.getItem("token"),
-    //         },
-    //     })
-    //         .then((data) => console.log(data))
-    //         .catch((err) => console.error(err));
-    // }, []);
 
     return (
         <div className="discut_msg">
