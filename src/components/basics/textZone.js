@@ -48,7 +48,14 @@ export default function TextZone() {
                                 });
                                 console.log(res);
                             })
-                            .catch((err) => console.log(err));
+                            .catch((err) => {
+                                setDiscut({
+                                    content: value,
+                                    date: new Date().toLocaleDateString(),
+                                    send: "failure",
+                                });
+                                console.log(err);
+                            });
                     }
                     if (value !== "") {
                         JSON.stringify(me);

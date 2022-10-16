@@ -52,7 +52,13 @@ export default function DiscutMessages() {
                     position={"flex_end-r"}
                     content={discut.content}
                     date={discut.date}
-                    state={discut.send === false ? "msg_loader" : ""}
+                    state={
+                        discut.send === false
+                            ? "msg_loader"
+                            : discut.send === "failure"
+                            ? "failure"
+                            : null
+                    }
                 />
             ) : (
                 <div>No message in the array discut</div>
