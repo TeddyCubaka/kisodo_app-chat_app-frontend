@@ -10,6 +10,7 @@ export default function Inbox() {
             className="nav_btn"
             onClick={() => {
                 setAllMember(userInbox);
+                console.log(userInbox);
             }}
         >
             <h3>Inbox</h3>

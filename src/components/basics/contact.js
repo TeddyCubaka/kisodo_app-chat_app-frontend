@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 
-export default function Contact({ name, message, image, data }) {
-    const { setFreind, setMe } = useContext(discussionContext);
+export default function Contact({ name, message, image, data, discussionId }) {
+    const { setFreind } = useContext(discussionContext);
 
     return (
         <div
@@ -13,6 +13,7 @@ export default function Contact({ name, message, image, data }) {
                     fullName: name,
                     image: data.image,
                     biography: data.biography,
+                    discussionId: discussionId,
                 });
             }}
         >

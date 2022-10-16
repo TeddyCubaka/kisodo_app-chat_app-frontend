@@ -45,14 +45,14 @@ export default function DiscutMessages() {
             ) : (
                 <div>No message here</div>
             )}
-            {discut[0] ? (
+            {discut.content ? (
                 <Message
                     key={1}
                     bulle={"message_right"}
                     position={"flex_end-r"}
-                    content={discut[0].content}
-                    date={discut[0].date}
-                    state={discut[0].send === false ? "msg_loader" : ""}
+                    content={discut.content}
+                    date={discut.date}
+                    state={discut.send === false ? "msg_loader" : ""}
                 />
             ) : (
                 <div>No message in the array discut</div>

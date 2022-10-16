@@ -26,6 +26,7 @@ export default function Contacts() {
                             index={index}
                             array={allMember}
                             key={cont._id}
+                            discussionId={cont.membres ? cont._id : null}
                         />
                     ))
                 ) : allMember.length === 0 ? (

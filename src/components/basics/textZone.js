@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { useContext, useState } from "react";
 import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
 
 export default function TextZone() {
-    const { me, setDiscut } = useContext(discussionContext);
+    const { me, setDiscut, actualDiscussion } = useContext(discussionContext);
     const [value, setValue] = useState("");
 
     return (
@@ -22,16 +23,35 @@ export default function TextZone() {
             </div>
             <button
                 onClick={() => {
+                    if (!actualDiscussion._id) {
+                        axios({
+                            method: "post",
+                            url: "http://localhost:3000/api/discussion/add_message",
+                            data: {
+                                discussionId: actualDiscussion.discussionId,
+                                message: {
+                                    content: value,
+                                    sender: me,
+                                },
+                            },
+                        })
+                            .then((res) => console.log(res))
+                            .catch((err) => console.log(err));
+                    }
                     if (value !== "") {
                         JSON.stringify(me);
-                        const message = [
-                            {
+                        setDiscut({
+                            content: value,
+                            date: new Date().toLocaleDateString(),
+                            send: false,
+                        });
+                        setTimeout(() => {
+                            setDiscut({
                                 content: value,
                                 date: new Date().toLocaleDateString(),
-                                send: false,
-                            },
-                        ];
-                        setDiscut(message);
+                                send: true,
+                            });
+                        }, 1000);
                     }
 
                     setValue("");
