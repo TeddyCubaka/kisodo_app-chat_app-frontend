@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
-import axios from "axios";
 
 export default function TextZone() {
-    const { discut, me, setDiscut } = useContext(discussionContext);
+    const { me, setDiscut } = useContext(discussionContext);
     const [value, setValue] = useState("");
 
     return (
@@ -29,6 +28,7 @@ export default function TextZone() {
                             {
                                 content: value,
                                 date: new Date().toLocaleDateString(),
+                                send: false,
                             },
                         ];
                         setDiscut(message);

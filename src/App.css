@@ -232,3 +232,31 @@
     border-right: 6px solid yellow;
     transition: border-right 0.1s, background-color 0.5s;
 }
+
+.msg_loader {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: block;
+    margin: 5px auto;
+    position: relative;
+    background: #fff;
+    box-shadow: -10px 0 #fff, 10px 0 #fff;
+    box-sizing: border-box;
+    animation: shadowPulse 2s linear infinite;
+}
+
+@keyframes shadowPulse {
+    33% {
+        background: #fff;
+        box-shadow: -10px 0 green, 10px 0 #fff;
+    }
+    66% {
+        background: rgb(0, 255, 0);
+        box-shadow: -10px 0 #fff, 10px 0 #fff;
+    }
+    100% {
+        background: #fff;
+        box-shadow: -10px 0 #fff, 10px 0 green;
+    }
+}

@@ -1,24 +1,22 @@
-import axios from "axios";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 import Message from "./message";
 
 export default function DiscutMessages() {
-    let { freind, setActualDiscussion, discut } = useContext(discussionContext);
+    let { freind, discut } = useContext(discussionContext);
     const [messages, setMessages] = useState([]);
-
-    useEffect(() => {
-        axios({
-            method: "get",
-            url: "http://localhost:3000/api/discussion",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-        })
-            .then((data) => console.log(data))
-            .catch((err) => console.error(err));
-    }, []);
+    // useEffect(() => {
+    //     axios({
+    //         method: "get",
+    //         url: "http://localhost:3000/api/discussion",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: "Bearer " + localStorage.getItem("token"),
+    //         },
+    //     })
+    //         .then((data) => console.log(data))
+    //         .catch((err) => console.error(err));
+    // }, []);
 
     return (
         <div className="discut_msg">
@@ -54,6 +52,7 @@ export default function DiscutMessages() {
                     position={"flex_end-r"}
                     content={discut[0].content}
                     date={discut[0].date}
+                    state={discut[0].send === false ? "msg_loader" : ""}
                 />
             ) : (
                 <div>No message in the array discut</div>

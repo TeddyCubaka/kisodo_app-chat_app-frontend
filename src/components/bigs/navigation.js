@@ -5,15 +5,8 @@ import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
 
 export default function Navigation() {
-    const {
-        me,
-        setMe,
-        setUserInbox,
-        setAllMember,
-        userInbox,
-        relations,
-        setRelations,
-    } = useContext(discussionContext);
+    const { me, setMe, setUserInbox, setAllMember } =
+        useContext(discussionContext);
     const [userId] = useState(localStorage.getItem("userId"));
     useEffect(() => {
         axios({
