@@ -4,8 +4,7 @@ import discussionContext from "../../contexts/discussion";
 import axios from "axios";
 
 export default function TextZone() {
-    const { discut, me, actualDiscussion, freind } =
-        useContext(discussionContext);
+    const { discut, me, setDiscut } = useContext(discussionContext);
     const [value, setValue] = useState("");
 
     return (
@@ -24,55 +23,16 @@ export default function TextZone() {
             </div>
             <button
                 onClick={() => {
-                    if (!actualDiscussion._id) {
-                        axios({
-                            method: "post",
-                            url: "http://localhost:3000/api/discussion/",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization:
-                                    "Bearer " + localStorage.getItem("token"),
+                    if (value !== "") {
+                        JSON.stringify(me);
+                        const message = [
+                            {
+                                content: value,
+                                date: new Date().toLocaleDateString(),
                             },
-                            data: {
-                                isGroup: false,
-                                membres: [
-                                    {
-                                        userId: freind.userId,
-                                        fullName: freind.fullName,
-                                        image: freind.image,
-                                        biography: freind.biography,
-                                    },
-                                    {
-                                        userId: me.userId,
-                                        fullName:
-                                            me.firstName + " " + me.secondName,
-                                        image: me.image,
-                                        biography: me.biography,
-                                    },
-                                ],
-                            },
-                        })
-                            .then((res) => console.log(res))
-                            .catch((err) => console.log(err));
+                        ];
+                        setDiscut(message);
                     }
-                    // if (value !== "") {
-                    //     JSON.stringify(me);
-                    //     const message = {};
-                    //     discut.push(message);
-                    //     axios({
-                    //         method: "post",
-                    //         url: "http://localhost:3000/api/discussion/add_message",
-                    //         data: {
-                    //             discussionId: actualDiscussion.discussionId,
-                    //             message: {
-                    //                 content: value,
-                    //                 sender: me,
-                    //             },
-                    //         },
-                    //     })
-                    //         .then((res) => console.log(res))
-                    //         .catch((err) => console.log(err));
-                    // }
 
                     setValue("");
                 }}
@@ -82,3 +42,48 @@ export default function TextZone() {
         </div>
     );
 }
+
+// if (!actualDiscussion._id) {
+//     axios({
+//         method: "post",
+//         url: "http://localhost:3000/api/discussion/",
+//         headers: {
+//             "Content-Type": "application/json",
+//             Authorization:
+//                 "Bearer " + localStorage.getItem("token"),
+//         },
+//         data: {
+//             isGroup: false,
+//             membres: [
+//                 {
+//                     userId: freind.userId,
+//                     fullName: freind.fullName,
+//                     image: freind.image,
+//                     biography: freind.biography,
+//                 },
+//                 {
+//                     userId: me.userId,
+//                     fullName:
+//                         me.firstName + " " + me.secondName,
+//                     image: me.image,
+//                     biography: me.biography,
+//                 },
+//             ],
+//         },
+//     })
+//         .then((res) => console.log(res))
+//         .catch((err) => console.log(err));
+// }
+//     axios({
+//         method: "post",
+//         url: "http://localhost:3000/api/discussion/add_message",
+//         data: {
+//             discussionId: actualDiscussion.discussionId,
+//             message: {
+//                 content: value,
+//                 sender: me,
+//             },
+//         },
+//     })
+//         .then((res) => console.log(res))
+//         .catch((err) => console.log(err));

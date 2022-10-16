@@ -50,12 +50,6 @@ export default function Navigation() {
             .catch((err) => console.log(err));
     }, [userId, setMe]);
 
-    userInbox.length > 0
-        ? userInbox.map((user) => {
-              console.log(user);
-          })
-        : false;
-
     return (
         <div className="navbarre radius margin">
             <div className="margin_x-10 content_center img_card">

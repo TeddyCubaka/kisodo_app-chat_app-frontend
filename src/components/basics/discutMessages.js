@@ -1,25 +1,23 @@
+import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 import Message from "./message";
 
 export default function DiscutMessages() {
-    let { freind, setActualDiscussion } = useContext(discussionContext);
+    let { freind, setActualDiscussion, discut } = useContext(discussionContext);
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/discussion/63468f649e2ec6ed2dbf3975")
-            .then((res) =>
-                res.json().then((data) => {
-                    data.messages.reverse();
-                    setMessages(data.messages);
-                    setActualDiscussion({
-                        name: data.name,
-                        discussionId: data._id,
-                        membres: data.membres,
-                    });
-                }),
-            )
-            .catch((err) => console.log(err));
+        axios({
+            method: "get",
+            url: "http://localhost:3000/api/discussion",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        })
+            .then((data) => console.log(data))
+            .catch((err) => console.error(err));
     }, []);
 
     return (
@@ -48,6 +46,17 @@ export default function DiscutMessages() {
                 ))
             ) : (
                 <div>No message here</div>
+            )}
+            {discut[0] ? (
+                <Message
+                    key={1}
+                    bulle={"message_right"}
+                    position={"flex_end-r"}
+                    content={discut[0].content}
+                    date={discut[0].date}
+                />
+            ) : (
+                <div>No message in the array discut</div>
             )}
         </div>
     );

@@ -9,7 +9,7 @@ import Signup from "./components/bigs/signup";
 import Login from "./components/bigs/login";
 
 function App() {
-    const [discut, setDiscut] = useState(useContext(discussionContext));
+    const [discut, setDiscut] = useState([]);
     const [freind, setFreind] = useState({});
     const [me, setMe] = useState({});
     const [actualDiscussion, setActualDiscussion] = useState({});

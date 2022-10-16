@@ -28,7 +28,7 @@ export default function Contacts() {
                             key={cont._id}
                         />
                     ))
-                ) : allMember.length === 0 ? (
+                ) : allMember.length == 0 ? (
                     <div className="img_card">
                         <img
                             className=""
