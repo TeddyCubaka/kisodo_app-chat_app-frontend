@@ -23,10 +23,15 @@ export default function TextZone() {
             </div>
             <button
                 onClick={() => {
-                    if (!actualDiscussion._id) {
+                    if (actualDiscussion.discussionId) {
                         axios({
                             method: "post",
                             url: "http://localhost:3000/api/discussion/add_message",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization:
+                                    "Bearer " + localStorage.getItem("token"),
+                            },
                             data: {
                                 discussionId: actualDiscussion.discussionId,
                                 message: {
@@ -35,7 +40,14 @@ export default function TextZone() {
                                 },
                             },
                         })
-                            .then((res) => console.log(res))
+                            .then((res) => {
+                                setDiscut({
+                                    content: value,
+                                    date: new Date().toLocaleDateString(),
+                                    send: true,
+                                });
+                                console.log(res);
+                            })
                             .catch((err) => console.log(err));
                     }
                     if (value !== "") {
@@ -45,13 +57,6 @@ export default function TextZone() {
                             date: new Date().toLocaleDateString(),
                             send: false,
                         });
-                        setTimeout(() => {
-                            setDiscut({
-                                content: value,
-                                date: new Date().toLocaleDateString(),
-                                send: true,
-                            });
-                        }, 1000);
                     }
 
                     setValue("");

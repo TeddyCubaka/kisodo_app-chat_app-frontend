@@ -2,19 +2,37 @@ import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 
 export default function Contact({ name, message, image, data, discussionId }) {
-    const { setFreind } = useContext(discussionContext);
+    const { setFreind, setActualDiscussion } = useContext(discussionContext);
 
     return (
         <div
             className="contact_card"
             onClick={() => {
-                setFreind({
-                    userId: data._id,
-                    fullName: name,
-                    image: data.image,
-                    biography: data.biography,
-                    discussionId: discussionId,
-                });
+                if (!data.membres) {
+                    setFreind({
+                        userId: data._id,
+                        fullName: name,
+                        image: data.image,
+                        biography: data.biography,
+                        discussionId: discussionId,
+                    });
+                    setActualDiscussion({});
+                } else {
+                    setActualDiscussion({
+                        userId: data.membres[0]._id,
+                        fullName: name,
+                        image: data.image,
+                        biography: data.biography,
+                        discussionId: data._id,
+                    });
+                    setFreind({
+                        userId: data.membres[0]._id,
+                        fullName: name,
+                        image: data.image,
+                        biography: data.biography,
+                        discussionId: data._id,
+                    });
+                }
             }}
         >
             <div className="margin_x-10 content_center img_card">
