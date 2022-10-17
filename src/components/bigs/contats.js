@@ -30,15 +30,13 @@ export default function Contacts() {
                         />
                     ))
                 ) : allMember.length === 0 ? (
-                    <div className="img_card">
-                        <img
-                            className=""
-                            src="https://image.shutterstock.com/image-vector/file-delete-260nw-686125981.jpg"
-                            alt=""
-                        />
+                    <div className="block_with_loader">
+                        <div className="big_loader"></div>
                     </div>
                 ) : (
-                    <div className="loader"></div>
+                    <div className="block_with_loader">
+                        <div className="loader"></div>
+                    </div>
                 )}
             </div>
         </div>

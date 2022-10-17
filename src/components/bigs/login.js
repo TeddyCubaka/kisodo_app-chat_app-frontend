@@ -7,17 +7,17 @@ export default function Login() {
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
     const [loader, setLoader] = useState("");
-    const { setMeId } = useContext(discussionContext);
     const [error, setError] = useState("");
     return (
         <div className="mum_card">
             <h2>What's up ?</h2>
             <fieldset className="fieldset_of_connexion">
                 <div className={loader}> {error} </div>
-                <label>Enter your mail address</label>
+                <label forhtml="mail">Enter your mail address</label>
                 <input
                     type="mail"
                     name="email"
+                    id="mail"
                     placeholder="Enter your email address"
                     required
                     onChange={(e) => {
@@ -41,14 +41,13 @@ export default function Login() {
                     onClick={() => {
                         if (mail !== "" || password !== "") {
                             setLoader("loader");
-                            const myData = {
-                                mail: mail,
-                                password: password,
-                            };
                             axios({
                                 method: "post",
                                 url: "http://localhost:3000/api/user/login",
-                                data: myData,
+                                data: {
+                                    mail: mail,
+                                    password: password,
+                                },
                                 headers: { "Content-Type": "application/json" },
                             })
                                 .then((res) => {
@@ -61,20 +60,16 @@ export default function Login() {
                                         "userId",
                                         res.data.userId,
                                     );
-                                    setMeId({
-                                        userId: res.data.userId,
-                                    });
                                     window.location = "/home";
                                     setLoader("");
                                 })
-                                .catch(
-                                    (err) =>
-                                        console.log(err, "jafuefoefuoeogfef"),
+                                .catch((err) => {
+                                    console.log(err);
                                     setError(
                                         "verifier your password or your mail. ",
-                                    ),
-                                    setLoader("error"),
-                                );
+                                    );
+                                    setLoader("error");
+                                });
                         }
                     }}
                 />

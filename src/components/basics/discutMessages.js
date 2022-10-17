@@ -1,14 +1,65 @@
-import React, { useState, useContext } from "react";
+import axios from "axios";
+import React, { useState, useContext, useEffect } from "react";
 import discussionContext from "../../contexts/discussion";
 import Message from "./message";
 
 export default function DiscutMessages() {
-    let { freind, discut } = useContext(discussionContext);
-    const [messages, setMessages] = useState([]);
+    let {
+        freind,
+        discut,
+        actualDiscussion,
+        setLoading,
+        loading,
+        messages,
+        setMessages,
+    } = useContext(discussionContext);
+    const [text, setText] = useState(" ");
+    useEffect(() => {
+        if (actualDiscussion.discussionId) {
+            axios({
+                method: "get",
+                url:
+                    "http://localhost:3000/api/discussion/" +
+                    actualDiscussion.discussionId,
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+            })
+                .then((res) => {
+                    setMessages(res.data.messages);
+                    setLoading("null");
+                    if (res.data.messages.length === 0 && loading === " ")
+                        setText("Empty");
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setLoading("failure");
+                });
+        }
+    }, [actualDiscussion]);
 
     return (
         <div className="discut_msg">
-            {messages.length > 1 ? (
+            {discut.content ? (
+                <Message
+                    key={1}
+                    bulle={"message_right"}
+                    position={"flex_end-r"}
+                    content={discut.content}
+                    date={discut.date}
+                    state={
+                        discut.send === false
+                            ? "msg_loader"
+                            : discut.send === "failure"
+                            ? "failure"
+                            : "msg_sended"
+                    }
+                />
+            ) : (
+                <div className=""></div>
+            )}
+            {messages.length > 0 ? (
                 messages.map((data, index) => (
                     <Message
                         key={data.id ? data.id : index}
@@ -30,26 +81,15 @@ export default function DiscutMessages() {
                         date={data.sendDate}
                     />
                 ))
+            ) : messages.length === 0 ? (
+                <div className="weit_msg">
+                    <div className={loading}>
+                        {" "}
+                        {loading === "null" ? text : false}{" "}
+                    </div>
+                </div>
             ) : (
-                <div>No message here</div>
-            )}
-            {discut.content ? (
-                <Message
-                    key={1}
-                    bulle={"message_right"}
-                    position={"flex_end-r"}
-                    content={discut.content}
-                    date={discut.date}
-                    state={
-                        discut.send === false
-                            ? "msg_loader"
-                            : discut.send === "failure"
-                            ? "failure"
-                            : "msg_sended"
-                    }
-                />
-            ) : (
-                <div>No message in the array discut</div>
+                <div>Empty</div>
             )}
         </div>
     );

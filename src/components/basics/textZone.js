@@ -24,6 +24,11 @@ export default function TextZone() {
             <button
                 onClick={() => {
                     if (actualDiscussion.discussionId && value !== "") {
+                        setDiscut({
+                            content: value,
+                            date: new Date().toLocaleDateString(),
+                            send: false,
+                        });
                         axios({
                             method: "post",
                             url: "http://localhost:3000/api/discussion/add_message",
@@ -68,48 +73,3 @@ export default function TextZone() {
         </div>
     );
 }
-
-// if (!actualDiscussion._id) {
-//     axios({
-//         method: "post",
-//         url: "http://localhost:3000/api/discussion/",
-//         headers: {
-//             "Content-Type": "application/json",
-//             Authorization:
-//                 "Bearer " + localStorage.getItem("token"),
-//         },
-//         data: {
-//             isGroup: false,
-//             membres: [
-//                 {
-//                     userId: freind.userId,
-//                     fullName: freind.fullName,
-//                     image: freind.image,
-//                     biography: freind.biography,
-//                 },
-//                 {
-//                     userId: me.userId,
-//                     fullName:
-//                         me.firstName + " " + me.secondName,
-//                     image: me.image,
-//                     biography: me.biography,
-//                 },
-//             ],
-//         },
-//     })
-//         .then((res) => console.log(res))
-//         .catch((err) => console.log(err));
-// }
-//     axios({
-//         method: "post",
-//         url: "http://localhost:3000/api/discussion/add_message",
-//         data: {
-//             discussionId: actualDiscussion.discussionId,
-//             message: {
-//                 content: value,
-//                 sender: me,
-//             },
-//         },
-//     })
-//         .then((res) => console.log(res))
-//         .catch((err) => console.log(err));

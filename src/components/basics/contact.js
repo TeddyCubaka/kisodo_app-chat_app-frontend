@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 
 export default function Contact({ name, message, image, data, discussionId }) {
-    const { setFreind, setActualDiscussion } = useContext(discussionContext);
+    const { setFreind, setActualDiscussion, setLoading, setMessages } =
+        useContext(discussionContext);
 
     return (
         <div
@@ -16,8 +17,12 @@ export default function Contact({ name, message, image, data, discussionId }) {
                         biography: data.biography,
                         discussionId: discussionId,
                     });
+                    setMessages([]);
+                    setLoading("loader");
                     setActualDiscussion({});
                 } else {
+                    setMessages([]);
+                    setLoading("big_loader");
                     setActualDiscussion({
                         userId: data.membres[0]._id,
                         fullName: name,

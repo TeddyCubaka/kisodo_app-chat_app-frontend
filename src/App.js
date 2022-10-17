@@ -13,10 +13,11 @@ function App() {
     const [freind, setFreind] = useState({});
     const [me, setMe] = useState({});
     const [actualDiscussion, setActualDiscussion] = useState({});
-    const [meId, setMeId] = useState("");
+    const [loading, setLoading] = useState("");
     const [userInbox, setUserInbox] = useState({});
     const [allMember, setAllMember] = useState({});
     const [relations, setRelations] = useState({});
+    const [messages, setMessages] = useState({});
     return (
         <discussionContext.Provider
             value={{
@@ -28,14 +29,16 @@ function App() {
                 setMe,
                 actualDiscussion,
                 setActualDiscussion,
-                meId,
-                setMeId,
+                loading,
+                setLoading,
                 userInbox,
                 setUserInbox,
                 allMember,
                 setAllMember,
                 relations,
                 setRelations,
+                messages,
+                setMessages,
             }}
         >
             <Router>
