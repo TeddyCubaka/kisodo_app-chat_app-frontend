@@ -59,7 +59,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
                     <div className="small">No message here</div>
                 )}
             </div>
-            <button
+            {/* <button
                 type="button"
                 onClick={() => {
                     axios({
@@ -78,7 +78,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
                 }}
             >
                 del
-            </button>
+            </button> */}
         </div>
     );
 }
