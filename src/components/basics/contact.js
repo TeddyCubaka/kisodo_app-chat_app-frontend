@@ -3,8 +3,13 @@ import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 
 export default function Contact({ name, message, image, data, discussionId }) {
-    const { setFreind, setActualDiscussion, setLoading, setMessages } =
-        useContext(discussionContext);
+    const {
+        setFreind,
+        setActualDiscussion,
+        setLoading,
+        setMessages,
+        relations,
+    } = useContext(discussionContext);
 
     return (
         <div
@@ -59,6 +64,11 @@ export default function Contact({ name, message, image, data, discussionId }) {
                     <div className="small">No message here</div>
                 )}
             </div>
+            {relations.length > 1
+                ? relations.map((user) =>
+                      user[0].userId === data._id ? <button>ok</button> : false,
+                  )
+                : false}
             {/* <button
                 type="button"
                 onClick={() => {

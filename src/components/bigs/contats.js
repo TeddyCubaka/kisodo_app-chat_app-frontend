@@ -3,7 +3,7 @@ import discussionContext from "../../contexts/discussion";
 import Contact from "../basics/contact";
 
 export default function Contacts() {
-    const { discut, allMember } = useContext(discussionContext);
+    const { discut, allMember, relations } = useContext(discussionContext);
 
     return (
         <div className=" radius bloc_with_shaddow">

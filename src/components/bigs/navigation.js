@@ -5,7 +5,7 @@ import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
 
 export default function Navigation() {
-    const { me, setMe, setUserInbox, setAllMember } =
+    const { me, setMe, setUserInbox, setAllMember, setRelations } =
         useContext(discussionContext);
     const [userId] = useState(localStorage.getItem("userId"));
     useEffect(() => {
@@ -42,6 +42,15 @@ export default function Navigation() {
             .then((res) => {
                 setUserInbox(res.data);
                 setAllMember(res.data);
+                const array = [];
+                res.data.map((disc) => {
+                    const arr = disc.membres.filter(
+                        (user) =>
+                            user.userId !== localStorage.getItem("userId"),
+                    );
+                    array.push(arr);
+                });
+                setRelations(array);
             })
             .catch((err) => console.log(err));
     }, [userId, setMe]);
