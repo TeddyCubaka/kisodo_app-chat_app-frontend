@@ -57,7 +57,7 @@ export default function DiscutMessages() {
                     }
                 />
             ) : (
-                <div className=""></div>
+                false
             )}
             {messages.length > 0 ? (
                 messages.map((data, index) => (
@@ -83,14 +83,20 @@ export default function DiscutMessages() {
                 ))
             ) : messages.length === 0 ? (
                 <div className="weit_msg">
-                    <div className={loading}>
-                        {" "}
-                        {loading === "null" ? text : false}{" "}
-                    </div>
+                    {actualDiscussion.discussionId ? (
+                        <div className={loading}> {text} </div>
+                    ) : (
+                        "Start converse"
+                    )}
                 </div>
             ) : (
                 <div className="weit_msg">
-                    <div>Empty</div>
+                    <div>
+                        {text}
+                        {/* {actualDiscussion.discussionId
+                            ? "Empty"
+                            : "Start converse"} */}
+                    </div>
                 </div>
             )}
         </div>
