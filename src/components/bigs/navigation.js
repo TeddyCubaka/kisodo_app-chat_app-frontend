@@ -31,15 +31,17 @@ export default function Navigation() {
             .catch((err) => console.log(err));
         axios({
             method: "get",
-            url: "http://localhost:3000/api/discussion/",
+            url:
+                "http://localhost:3000/api/discussion/inbox/" +
+                localStorage.getItem("userId"),
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
         })
             .then((res) => {
-                console.log(res.data);
                 setUserInbox(res.data);
+                setAllMember(res.data);
             })
             .catch((err) => console.log(err));
     }, [userId, setMe]);

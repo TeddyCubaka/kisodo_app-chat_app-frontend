@@ -31,11 +31,11 @@ export default function Contacts() {
                     ))
                 ) : allMember.length === 0 ? (
                     <div className="block_with_loader">
-                        <div className="big_loader"> {allMember[0]} </div>
+                        <div className=""> Empty </div>
                     </div>
                 ) : (
                     <div className="block_with_loader">
-                        <div className="loader"></div>
+                        <div className="big_loader"></div>
                     </div>
                 )}
             </div>
