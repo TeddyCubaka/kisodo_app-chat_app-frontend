@@ -27,6 +27,7 @@ export default function DiscutMessages() {
                 },
             })
                 .then((res) => {
+                    res.data.messages.reverse();
                     setMessages(res.data.messages);
                     setLoading("null");
                     if (res.data.messages.length === 0) setText("Empty");
