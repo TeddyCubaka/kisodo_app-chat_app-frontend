@@ -48,6 +48,7 @@ export default function Navigation() {
                         (user) =>
                             user.userId !== localStorage.getItem("userId"),
                     );
+                    arr.push(disc._id);
                     array.push(arr);
                 });
                 setRelations(array);

@@ -26,6 +26,13 @@ export default function Contact({ name, message, image, data, discussionId }) {
                     setMessages([]);
                     setLoading("loader");
                     setActualDiscussion({});
+                    relations.map((user) =>
+                        user[0].userId === data._id
+                            ? setActualDiscussion({
+                                  discussionId: user[1],
+                              })
+                            : false,
+                    );
                 } else {
                     setMessages([]);
                     setLoading("big_loader");
@@ -64,11 +71,6 @@ export default function Contact({ name, message, image, data, discussionId }) {
                     <div className="small">No message here</div>
                 )}
             </div>
-            {relations.length > 1
-                ? relations.map((user) =>
-                      user[0].userId === data._id ? <button>ok</button> : false,
-                  )
-                : false}
             {/* <button
                 type="button"
                 onClick={() => {
