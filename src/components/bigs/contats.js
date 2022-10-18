@@ -31,7 +31,7 @@ export default function Contacts() {
                     ))
                 ) : allMember.length === 0 ? (
                     <div className="block_with_loader">
-                        <div className="big_loader"></div>
+                        <div className="big_loader"> {allMember[0]} </div>
                     </div>
                 ) : (
                     <div className="block_with_loader">

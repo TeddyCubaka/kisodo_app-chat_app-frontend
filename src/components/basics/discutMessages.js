@@ -29,8 +29,7 @@ export default function DiscutMessages() {
                 .then((res) => {
                     setMessages(res.data.messages);
                     setLoading("null");
-                    if (res.data.messages.length === 0 && loading === " ")
-                        setText("Empty");
+                    if (res.data.messages.length === 0) setText("Empty");
                 })
                 .catch((err) => {
                     console.log(err);
@@ -89,7 +88,9 @@ export default function DiscutMessages() {
                     </div>
                 </div>
             ) : (
-                <div>Empty</div>
+                <div className="weit_msg">
+                    <div>Empty</div>
+                </div>
             )}
         </div>
     );

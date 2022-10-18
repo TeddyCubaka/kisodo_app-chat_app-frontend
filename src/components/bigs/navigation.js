@@ -20,7 +20,6 @@ export default function Navigation() {
             },
         })
             .then((res) => {
-                setUserInbox(res.data.inbox);
                 setMe({
                     firstName: res.data.firstName,
                     secondName: res.data.secondName,
@@ -28,7 +27,6 @@ export default function Navigation() {
                     userId: res.data._id,
                     biography: res.data.biography,
                 });
-                setAllMember(res.data.inbox);
             })
             .catch((err) => console.log(err));
         axios({
