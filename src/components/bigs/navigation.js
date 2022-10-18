@@ -37,7 +37,10 @@ export default function Navigation() {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
         })
-            .then((res) => setUserInbox(res.data))
+            .then((res) => {
+                console.log(res.data);
+                setUserInbox(res.data);
+            })
             .catch((err) => console.log(err));
     }, [userId, setMe]);
 

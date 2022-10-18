@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 
@@ -58,6 +59,26 @@ export default function Contact({ name, message, image, data, discussionId }) {
                     <div className="small">No message here</div>
                 )}
             </div>
+            <button
+                type="button"
+                onClick={() => {
+                    axios({
+                        method: "get",
+                        url:
+                            "http://localhost:3000/api/discussion//delete/" +
+                            data._id,
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization:
+                                "Bearer " + localStorage.getItem("token"),
+                        },
+                    })
+                        .then((res) => console.log(res))
+                        .catch((err) => console.error(err));
+                }}
+            >
+                del
+            </button>
         </div>
     );
 }
