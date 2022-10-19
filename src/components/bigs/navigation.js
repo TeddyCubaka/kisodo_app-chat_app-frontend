@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
 import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
+import Profile from "../basics/profile";
 
 export default function Navigation() {
     const { me, setMe, setUserInbox, setAllMember, setRelations } =

@@ -7,6 +7,7 @@ import { useState } from "react";
 import Begin from "./components/bigs/begin";
 import Signup from "./components/bigs/signup";
 import Login from "./components/bigs/login";
+import SocketTest from "./components/basics/socketTest";
 
 function App() {
     const [discut, setDiscut] = useState([]);
@@ -47,6 +48,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/home" element={<Home />} />
+                    <Route path="/socket" element={<SocketTest />} />
                 </Routes>
             </Router>
         </discussionContext.Provider>

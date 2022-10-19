@@ -93,3 +93,7 @@
     justify-content: center;
     align-items: center;
 }
+.absolute {
+    position: absolute;
+    margin: auto !important;
+}

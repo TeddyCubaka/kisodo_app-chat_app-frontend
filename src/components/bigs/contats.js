@@ -42,3 +42,19 @@ export default function Contacts() {
         </div>
     );
 }
+
+/* relations.length > 1 ? (
+                    relations.map((cont, index) => (
+                        <Contact
+                            name={cont[0].fullName}
+                            message={null}
+                            data={cont}
+                            index={index}
+                            array={allMember}
+                            key={cont[1]}
+                            discussionId={cont.membres ? cont._id : null}
+                        />
+                    ))
+                ) : (
+                    <div> siuuuuuuu</div>
+                ) */
