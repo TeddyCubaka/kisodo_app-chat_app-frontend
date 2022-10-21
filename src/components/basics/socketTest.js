@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from "react";
-import io from "socket.io-client";
+import React, { useState } from "react";
+import { io } from "socket.io-client";
 
-const socket = io();
-
-export default function SocketTest() {
-    const [isConnected, setIsConnected] = useState(socket.connected);
-    const [lastPong, setLastPong] = useState(null);
-
-    useEffect(() => {
-        
+const SocketTest = () => {
+    const [time, setTime] = useState("fetching");
+    React.useEffect(() => {
+        const socket = io("http://localhost:3000");
+        socket.emit("message", "hello from frontend")
     }, []);
-
-    const sendPing = () => {
-        socket.emit("ping");
-    };
-
-    return (
-        <div>
-            <p>Connected: {"" + isConnected}</p>
-            <p>Last pong: {lastPong || "-"}</p>
-            <button onClick={sendPing}>Send ping</button>
-        </div>
-    );
-}
+    return <div className="App">{time}</div>;
+};
+export default SocketTest;
