@@ -31,7 +31,7 @@ export default function TextZone() {
                         });
                         axios({
                             method: "post",
-                            url: "http://localhost:3000/api/discussion/add_message",
+                            url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/add_message",
                             headers: {
                                 "Content-Type": "application/json",
                                 Authorization:

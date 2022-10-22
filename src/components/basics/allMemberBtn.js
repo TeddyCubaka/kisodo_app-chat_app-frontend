@@ -8,7 +8,7 @@ export default function AllMemberButton() {
     useEffect(() => {
         axios({
             method: "get",
-            url: "http://localhost:3000/api/user",
+            url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/user",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("token"),

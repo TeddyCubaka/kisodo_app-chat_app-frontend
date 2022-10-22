@@ -19,7 +19,7 @@ export default function DiscutMessages() {
             axios({
                 method: "get",
                 url:
-                    "http://localhost:3000/api/discussion/" +
+                    process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/" +
                     actualDiscussion.discussionId,
                 headers: {
                     "Content-Type": "application/json",

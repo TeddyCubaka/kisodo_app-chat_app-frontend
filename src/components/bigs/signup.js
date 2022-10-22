@@ -96,7 +96,7 @@ export default function Signup() {
 
                             axios({
                                 method: "post",
-                                url: "http://localhost:3000/api/user/signup",
+                                url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/user/signup",
                                 data: myData,
                                 headers: { "Content-Type": "application/json" },
                             })

@@ -13,7 +13,7 @@ export default function Navigation() {
         axios({
             method: "get",
             url:
-                "http://localhost:3000/api/user/" +
+                process.env.REACT_APP_SERVER_LINK_DEV + "/api/user/" +
                 localStorage.getItem("userId"),
             headers: {
                 "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export default function Navigation() {
         axios({
             method: "get",
             url:
-                "http://localhost:3000/api/discussion/inbox/" +
+                process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/inbox/" +
                 localStorage.getItem("userId"),
             headers: {
                 "Content-Type": "application/json",

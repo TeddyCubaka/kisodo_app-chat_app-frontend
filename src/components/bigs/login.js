@@ -43,7 +43,7 @@ export default function Login() {
                             setLoader("loader");
                             axios({
                                 method: "post",
-                                url: "http://localhost:3000/api/user/login",
+                                url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/user/login",
                                 data: {
                                     mail: mail,
                                     password: password,

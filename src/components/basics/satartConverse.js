@@ -22,7 +22,7 @@ export default function StartConverse() {
                     if (prompt("sure ?", "oui")) {
                         axios({
                             method: "post",
-                            url: "http://localhost:3000/api/discussion/",
+                            url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/",
                             headers: {
                                 "Content-Type": "application/json",
                                 Authorization:
@@ -63,7 +63,7 @@ export default function StartConverse() {
 //     if (!actualDiscussion.userId) {
 //         axios({
 //             method: "post",
-//             url: "http://localhost:3000/api/discussion/",
+//             url: "process.env.REACT_APP_SERVER_LINK_DEV/api/discussion/",
 //             headers: {
 //                 "Content-Type": "application/json",
 //                 Authorization:

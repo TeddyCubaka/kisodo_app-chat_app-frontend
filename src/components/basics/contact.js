@@ -77,7 +77,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
                     axios({
                         method: "get",
                         url:
-                            "http://localhost:3000/api/discussion//delete/" +
+                            "process.env.REACT_APP_SERVER_LINK_DEV/api/discussion//delete/" +
                             data._id,
                         headers: {
                             "Content-Type": "application/json",
