@@ -3,7 +3,7 @@ import discussionContext from "../../contexts/discussion";
 import Contact from "../basics/contact";
 
 export default function Contacts() {
-    const { discut, allMember, relations } = useContext(discussionContext);
+    const { discut, allMember, relations, me } = useContext(discussionContext);
 
     return (
         <div className=" radius bloc_with_shaddow">
@@ -14,7 +14,7 @@ export default function Contacts() {
                         <Contact
                             name={
                                 cont.membres
-                                    ? cont.membres[0].fullName
+                                    ? cont.membres[0].userId === me.userId ? cont.membres[1].fullName : cont.membres[0].fullName
                                     : `${cont.firstName} ${cont.secondName}`
                             }
                             message={
