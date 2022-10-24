@@ -1,37 +1,43 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-
+const socket = io("http://localhost:4000");
 
 export default function SocketTest() {
-    const socket = io(process.env.REACT_APP_SERVER_LINK_DEV);
-    const [isConnected, setIsConnected] = useState(socket.connected);
-    const [lastPong, setLastPong] = useState(null);
+    const [arr, setArr] = useState([]);
+    const [msg, setMsg] = useState("");
 
     useEffect(() => {
-        socket.on("connect", (socket)=>{
-            console.log("connected")
-            setIsConnected(true)
-        })
-        // socket.on("onLine", (socket)=>{
-        //     console.log(socket)
-        // })
-        socket.on("discussion", (disc)=>{
-            console.log(disc)
-        })
-        
-    }, []);
-
-    const sendPing = () => {
-        socket.emit("message", {
-            message : "That's me, my nigga"
+        socket.on("discussion", (message) => {
+            setArr(message);
         });
-    };
+    }, []);
 
     return (
         <div>
-            <p>Connected: {"  " + isConnected}</p>
-            <p>Last pong: {lastPong || "-"}</p>
-            <button onClick={sendPing}>Send ping</button>
+            <div className="flex_start-r">
+                {arr.length > 0 ? (
+                    arr.map((txt, index) => (
+                        <span key={index}> {txt.message || txt.usersId} </span>
+                    ))
+                ) : (
+                    <span>Empty</span>
+                )}
+            </div>
+            <input
+                type="text"
+                onChange={(e) => {
+                    setMsg(e.target.value);
+                }}
+            />
+            <button
+                onClick={() => {
+                    socket.emit("message", {
+                        message: msg,
+                    });
+                }}
+            >
+                Send ping
+            </button>
         </div>
     );
 }
