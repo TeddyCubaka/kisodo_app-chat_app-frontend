@@ -9,8 +9,6 @@ import Signup from "./components/bigs/signup";
 import Login from "./components/bigs/login";
 import SocketTest from "./components/basics/socketTest";
 
-
-
 function App() {
     const [discut, setDiscut] = useState([]);
     const [freind, setFreind] = useState({});
