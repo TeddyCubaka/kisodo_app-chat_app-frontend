@@ -6,6 +6,7 @@ import Message from "./message";
 export default function DiscutMessages() {
     let {
         freind,
+        me,
         discut,
         actualDiscussion,
         setLoading,
@@ -19,7 +20,8 @@ export default function DiscutMessages() {
             axios({
                 method: "get",
                 url:
-                    process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/" +
+                    process.env.REACT_APP_SERVER_LINK_DEV +
+                    "/api/discussion/" +
                     actualDiscussion.discussionId,
                 headers: {
                     "Content-Type": "application/json",
@@ -63,18 +65,19 @@ export default function DiscutMessages() {
                 messages.map((data, index) => (
                     <Message
                         key={data.id ? data.id : index}
+                        data={data}
                         bulle={
                             data.sender
-                                ? data.sender.userId === freind.userId
-                                    ? "message_left"
-                                    : "message_right"
+                                ? data.sender.userId === me.userId
+                                    ? "message_right"
+                                    : "message_left"
                                 : ""
                         }
                         position={
                             data.sender
-                                ? data.sender.userId === freind.userId
-                                    ? "flex_start-r"
-                                    : "flex_end-r"
+                                ? data.sender.userId === me.userId
+                                    ? "flex_end-r"
+                                    : "flex_start-r"
                                 : ""
                         }
                         content={data.content}

@@ -41,7 +41,10 @@ export default function TextZone() {
                                 discussionId: actualDiscussion.discussionId,
                                 message: {
                                     content: value,
-                                    sender: me,
+                                    sender: {
+                                        userId : me.userId,
+                                        fullName : `${me.firstName} ${me.secondName}`
+                                    },
                                 },
                             },
                         })
