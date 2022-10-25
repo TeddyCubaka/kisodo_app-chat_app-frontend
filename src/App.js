@@ -1,21 +1,21 @@
-import React from 'react';
-import Home from './components/bigs/home';
-import './App.css';
-import './AppComponents.css';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import discussionContext from './contexts/discussion';
-import { useState } from 'react';
-import Begin from './components/bigs/begin';
-import Signup from './components/bigs/signup';
-import Login from './components/bigs/login';
-import SocketTest from './components/basics/socketTest';
+import React from "react";
+import Home from "./components/bigs/home";
+import "./App.css";
+import "./AppComponents.css";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import discussionContext from "./contexts/discussion";
+import { useState } from "react";
+import Begin from "./components/bigs/begin";
+import Signup from "./components/bigs/signup";
+import Login from "./components/bigs/login";
+import SocketTest from "./components/basics/socketTest";
 
 function App() {
   const [discut, setDiscut] = useState([]);
   const [freind, setFreind] = useState({});
   const [me, setMe] = useState({});
   const [actualDiscussion, setActualDiscussion] = useState({});
-  const [loading, setLoading] = useState('');
+  const [loading, setLoading] = useState("");
   const [userInbox, setUserInbox] = useState({});
   const [allMember, setAllMember] = useState({});
   const [relations, setRelations] = useState({});
@@ -41,7 +41,8 @@ function App() {
         setRelations,
         messages,
         setMessages
-      }}>
+      }}
+    >
       <Router>
         <Routes>
           <Route path="/" element={<Begin />} />

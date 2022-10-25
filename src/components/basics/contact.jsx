@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import discussionContext from '../../contexts/discussion';
-import PropTypes from 'prop-types';
+import React, { useContext } from "react";
+import discussionContext from "../../contexts/discussion";
+import PropTypes from "prop-types";
 
 export default function Contact({ name, message, image, data, discussionId }) {
   const { setFreind, setActualDiscussion, setLoading, setMessages, relations } =
@@ -19,7 +19,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
             discussionId: discussionId
           });
           setMessages([]);
-          setLoading('loader');
+          setLoading("loader");
           setActualDiscussion({});
           relations.map((user) =>
             user[0].userId === data._id
@@ -30,7 +30,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
           );
         } else {
           setMessages([]);
-          setLoading('big_loader');
+          setLoading("big_loader");
           setActualDiscussion({
             userId: data.membres[0]._id,
             fullName: name,
@@ -46,7 +46,8 @@ export default function Contact({ name, message, image, data, discussionId }) {
             discussionId: data._id
           });
         }
-      }}>
+      }}
+    >
       <div className="margin_x-10 content_center img_card">
         {image ? (
           <img src={image} alt="" />

@@ -6,12 +6,12 @@ import StartConverse from "../basics/satartConverse";
 import TextZone from "../basics/textZone";
 
 export default function Discussion() {
-    const { actualDiscussion } = useContext(discussionContext);
-    return (
-        <div className="discussion radius margin bloc_with_shaddow">
-            <DiscutInfo />
-            <DiscutMessages />
-            {actualDiscussion.discussionId ? <TextZone /> : <StartConverse />}
-        </div>
-    );
+  const { actualDiscussion } = useContext(discussionContext);
+  return (
+    <div className="discussion radius margin bloc_with_shaddow">
+      <DiscutInfo />
+      <DiscutMessages />
+      {actualDiscussion.discussionId ? <TextZone /> : <StartConverse />}
+    </div>
+  );
 }
