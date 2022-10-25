@@ -1,12 +1,12 @@
-import axios from "axios";
-import React, { useContext, useState } from "react";
-import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
-import discussionContext from "../../contexts/discussion";
-import { socket } from "../bigs/home";
+import axios from 'axios'
+import React, { useContext, useState } from 'react'
+import { AiOutlineCamera, AiOutlineSend } from 'react-icons/ai'
+import discussionContext from '../../contexts/discussion'
+import { socket } from '../bigs/home'
 
 export default function TextZone() {
-  const { me, setDiscut, actualDiscussion } = useContext(discussionContext);
-  const [value, setValue] = useState("");
+  const { me, setDiscut, actualDiscussion } = useContext(discussionContext)
+  const [value, setValue] = useState('')
 
   return (
     <div className="text_zone">
@@ -14,7 +14,7 @@ export default function TextZone() {
         <textarea
           spellCheck="true"
           onChange={(e) => {
-            setValue(e.target.value);
+            setValue(e.target.value)
           }}
           value={value}
         ></textarea>
@@ -24,18 +24,20 @@ export default function TextZone() {
       </div>
       <button
         onClick={() => {
-          if (actualDiscussion.discussionId && value !== "") {
+          if (actualDiscussion.discussionId && value !== '') {
             setDiscut({
               content: value,
               date: new Date().toLocaleDateString(),
-              send: false
-            });
+              send: false,
+            })
             axios({
-              method: "post",
-              url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/add_message",
+              method: 'post',
+              url:
+                process.env.REACT_APP_SERVER_LINK_DEV +
+                '/api/discussion/add_message',
               headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token")
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('token'),
               },
               data: {
                 discussionId: actualDiscussion.discussionId,
@@ -43,45 +45,45 @@ export default function TextZone() {
                   content: value,
                   sender: {
                     userId: me.userId,
-                    fullName: `${me.firstName} ${me.secondName}`
-                  }
-                }
-              }
+                    fullName: `${me.firstName} ${me.secondName}`,
+                  },
+                },
+              },
             })
               .then((res) => {
                 setDiscut({
                   content: value,
                   date: new Date().toLocaleDateString(),
-                  send: true
-                });
+                  send: true,
+                })
                 setTimeout(() => {
-                  setDiscut({});
-                }, 500);
-                socket.emit("message", {
+                  setDiscut({})
+                }, 500)
+                socket.emit('message', {
                   content: value,
                   sender: {
                     userId: me.userId,
-                    fullName: `${me.firstName} ${me.secondName}`
-                  }
-                });
+                    fullName: `${me.firstName} ${me.secondName}`,
+                  },
+                })
               })
               .catch((err) => {
                 setDiscut({
                   content: value,
                   date: new Date().toLocaleDateString(),
-                  send: "failure"
-                });
-                console.log(err);
-              });
+                  send: 'failure',
+                })
+                console.log(err)
+              })
           }
-          if (value !== "") {
+          if (value !== '') {
           }
 
-          setValue("");
+          setValue('')
         }}
       >
         <AiOutlineSend />
       </button>
     </div>
-  );
+  )
 }

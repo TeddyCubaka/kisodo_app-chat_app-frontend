@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react'
 
 export default function Search() {
-  return <input type="search" />;
+  return <input type="search" />
 }
