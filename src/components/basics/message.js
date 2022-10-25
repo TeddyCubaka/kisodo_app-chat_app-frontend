@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default function Message({ position, content, date, bulle, state, data }) {
   return (
