@@ -59,13 +59,13 @@ export default function TextZone() {
                 setTimeout(() => {
                   setDiscut({})
                 }, 500)
-                socket.emit('message', {
-                  content: value,
-                  sender: {
-                    userId: me.userId,
-                    fullName: `${me.firstName} ${me.secondName}`,
-                  },
-                })
+                // socket.emit('message', {
+                //   content: value,
+                //   sender: {
+                //     userId: me.userId,
+                //     fullName: `${me.firstName} ${me.secondName}`,
+                //   },
+                // })
               })
               .catch((err) => {
                 setDiscut({
