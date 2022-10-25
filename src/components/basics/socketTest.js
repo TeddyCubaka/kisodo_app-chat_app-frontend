@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import discussionContext from "../../contexts/discussion";
 import { socket } from "../bigs/home"
 
 
 export default function SocketTest() {
     const [arr, setArr] = useState([]);
     const [msg, setMsg] = useState("");
+    const { me }  = useContext(discussionContext)
 
     useEffect(() => {
         socket.on("discussion", (message) => {
-            setArr(message);
+            // setArr(message);
+            console.log(message)
         });
     }, []);
 
     return (
         <div>
-            <div className="flex_start-r">
+            {/* <div className="flex_start-r">
                 {arr.length > 0 ? (
                     arr.map((txt, index) => (
                         <span key={index}> {txt.message || txt.usersId} </span>
@@ -22,7 +25,7 @@ export default function SocketTest() {
                 ) : (
                     <span>Empty</span>
                 )}
-            </div>
+            </div> */}
             <input
                 type="text"
                 onChange={(e) => {
@@ -32,7 +35,7 @@ export default function SocketTest() {
             <button
                 onClick={() => {
                     socket.emit("message", {
-                        message: msg,
+                        message: me,
                     });
                 }}
             >

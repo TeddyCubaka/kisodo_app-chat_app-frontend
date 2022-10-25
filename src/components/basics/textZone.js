@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
+import { socket } from "../bigs/home"
 
 export default function TextZone() {
     const { me, setDiscut, actualDiscussion } = useContext(discussionContext);
@@ -31,7 +32,9 @@ export default function TextZone() {
                         });
                         axios({
                             method: "post",
-                            url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/add_message",
+                            url:
+                                process.env.REACT_APP_SERVER_LINK_DEV +
+                                "/api/discussion/add_message",
                             headers: {
                                 "Content-Type": "application/json",
                                 Authorization:
@@ -42,8 +45,8 @@ export default function TextZone() {
                                 message: {
                                     content: value,
                                     sender: {
-                                        userId : me.userId,
-                                        fullName : `${me.firstName} ${me.secondName}`
+                                        userId: me.userId,
+                                        fullName: `${me.firstName} ${me.secondName}`,
                                     },
                                 },
                             },
@@ -54,7 +57,16 @@ export default function TextZone() {
                                     date: new Date().toLocaleDateString(),
                                     send: true,
                                 });
-                                console.log(res);
+                                setTimeout(() => {
+                                    setDiscut({});
+                                }, 500);
+                                socket.emit("message", {
+                                    content: value,
+                                    sender: {
+                                        userId: me.userId,
+                                        fullName: `${me.firstName} ${me.secondName}`,
+                                    },
+                                });
                             })
                             .catch((err) => {
                                 setDiscut({

@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useState, useContext, useEffect } from "react";
 import discussionContext from "../../contexts/discussion";
 import Message from "./message";
+import { socket } from "../bigs/home";
 
 export default function DiscutMessages() {
     let {
-        freind,
         me,
         discut,
         actualDiscussion,
@@ -15,6 +15,7 @@ export default function DiscutMessages() {
         setMessages,
     } = useContext(discussionContext);
     const [text, setText] = useState(" ");
+    const [socketMsg, setSocketMsg] = useState([]);
     useEffect(() => {
         if (actualDiscussion.discussionId) {
             axios({
@@ -40,6 +41,13 @@ export default function DiscutMessages() {
                 });
         }
     }, [actualDiscussion]);
+    useEffect(() => {
+        socket.on("discussion", (message) => {
+            setSocketMsg(message);
+        });
+    }, []);
+
+    console.log(socketMsg)
 
     return (
         <div className="discut_msg">
