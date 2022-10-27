@@ -1,19 +1,22 @@
-import React, { useContext, useEffect } from 'react'
-import Contacts from './contats'
-import Discussion from './discussion'
-import Navigation from './navigation'
-import Search from './search'
-import io from 'socket.io-client'
-import discussionContext from '../../contexts/discussion'
+import React, { useContext, useEffect } from "react";
+import Contacts from "./contats";
+import Discussion from "./discussion";
+import Navigation from "./navigation";
+import Search from "./search";
+import io from "socket.io-client";
+import discussionContext from "../../contexts/discussion";
 
 export let socket =
-  localStorage.getItem('token') !== '' ? io('http://localhost:4000') : 'shesh'
+  localStorage.getItem("token") !== "" ? io("http://localhost:4000") : "shesh";
 
 export default function Home() {
-  const { me } = useContext(discussionContext)
+  const { me } = useContext(discussionContext);
   useEffect(() => {
-    socket.emit('onLine', me)
-  }, [])
+    if (me.userId) socket.emit("online", me);
+    socket.on("userOnline", (users) => {
+      me.onLine = true;
+    });
+  }, [me]);
 
   return (
     <div className="App">
@@ -24,5 +27,5 @@ export default function Home() {
       </div>
       <Discussion />
     </div>
-  )
+  );
 }

@@ -1,13 +1,13 @@
-import axios from 'axios'
-import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
-import discussionContext from '../../contexts/discussion'
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import discussionContext from "../../contexts/discussion";
 
 export default function Login() {
-  const [mail, setMail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loader, setLoader] = useState('')
-  const [error, setError] = useState('')
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState("");
+  const [error, setError] = useState("");
   return (
     <div className="mum_card">
       <h2>What&lsquos up ?</h2>
@@ -21,7 +21,7 @@ export default function Login() {
           placeholder="Enter your email address"
           required
           onChange={(e) => {
-            setMail(e.target.value)
+            setMail(e.target.value);
           }}
         />
         <label>Enter your password</label>
@@ -31,7 +31,7 @@ export default function Login() {
           placeholder="Enter your password"
           required
           onChange={(e) => {
-            setPassword(e.target.value)
+            setPassword(e.target.value);
           }}
         />
         <input
@@ -39,38 +39,38 @@ export default function Login() {
           name="logIn"
           value="log in"
           onClick={() => {
-            if (mail !== '' || password !== '') {
-              setLoader('loader')
+            if (mail !== "" || password !== "") {
+              setLoader("loader");
               axios({
-                method: 'post',
-                url: process.env.REACT_APP_SERVER_LINK_DEV + '/api/user/login',
+                method: "post",
+                url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/user/login",
                 data: {
                   mail: mail,
                   password: password,
                 },
-                headers: { 'Content-Type': 'application/json' },
+                headers: { "Content-Type": "application/json" },
               })
                 .then((res) => {
-                  console.log(res.data.token)
-                  localStorage.setItem('token', res.data.token)
-                  localStorage.setItem('userId', res.data.userId)
-                  window.location = '/home'
-                  setLoader('')
+                  console.log(res.data.token);
+                  localStorage.setItem("token", res.data.token);
+                  localStorage.setItem("userId", res.data.userId);
+                  window.location = "/home";
+                  setLoader("");
                 })
                 .catch((err) => {
-                  console.log(err)
-                  setError('verifier your password or your mail. ')
-                  setLoader('error')
-                })
+                  console.log(err);
+                  setError("verifier your password or your mail. ");
+                  setLoader("error");
+                });
             }
           }}
         />
       </fieldset>
       <div>
         <div>
-          You don&lsquot have an account ? <Link to="/signup">Sign Up ?</Link>{' '}
+          You don&lsquot have an account ? <Link to="/signup">Sign Up ?</Link>{" "}
         </div>
       </div>
     </div>
-  )
+  );
 }

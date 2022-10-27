@@ -1,8 +1,8 @@
-import axios from 'axios'
-import React, { useState, useContext, useEffect } from 'react'
-import discussionContext from '../../contexts/discussion'
-import Message from './message'
-import { socket } from '../bigs/home'
+import axios from "axios";
+import React, { useState, useContext, useEffect } from "react";
+import discussionContext from "../../contexts/discussion";
+import Message from "./message";
+import { socket } from "../bigs/home";
 
 export default function DiscutMessages() {
   let {
@@ -13,55 +13,55 @@ export default function DiscutMessages() {
     loading,
     messages,
     setMessages,
-  } = useContext(discussionContext)
-  const [text, setText] = useState(' ')
-  const [socketMsg, setSocketMsg] = useState([])
+  } = useContext(discussionContext);
+  const [text, setText] = useState(" ");
+  const [socketMsg, setSocketMsg] = useState([]);
   useEffect(() => {
     if (actualDiscussion.discussionId) {
       axios({
-        method: 'get',
+        method: "get",
         url:
           process.env.REACT_APP_SERVER_LINK_DEV +
-          '/api/discussion/' +
+          "/api/discussion/" +
           actualDiscussion.discussionId,
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
         .then((res) => {
-          res.data.messages.reverse()
-          setMessages(res.data.messages)
-          setLoading('null')
-          if (res.data.messages.length === 0) setText('Empty')
+          res.data.messages.reverse();
+          setMessages(res.data.messages);
+          setLoading("null");
+          if (res.data.messages.length === 0) setText("Empty");
         })
         .catch((err) => {
-          console.log(err)
-          setLoading('failure')
-        })
+          console.log(err);
+          setLoading("failure");
+        });
     }
-  }, [actualDiscussion])
+  }, [actualDiscussion]);
   useEffect(() => {
-    socket.on('discussion', (message) => {
-      setSocketMsg(message)
-    })
-  }, [])
+    socket.on("discussion", (message) => {
+      setSocketMsg(message);
+    });
+  }, []);
 
   return (
     <div className="discut_msg">
       {discut.content ? (
         <Message
           key={1}
-          bulle={'message_right'}
-          position={'flex_end-r'}
+          bulle={"message_right"}
+          position={"flex_end-r"}
           content={discut.content}
           date={discut.date}
           state={
             discut.send === false
-              ? 'msg_loader'
-              : discut.send === 'failure'
-              ? 'failure'
-              : 'msg_sended'
+              ? "msg_loader"
+              : discut.send === "failure"
+              ? "failure"
+              : "msg_sended"
           }
         />
       ) : (
@@ -75,16 +75,16 @@ export default function DiscutMessages() {
             bulle={
               data.sender
                 ? data.sender.userId === me.userId
-                  ? 'message_right'
-                  : 'message_left'
-                : ''
+                  ? "message_right"
+                  : "message_left"
+                : ""
             }
             position={
               data.sender
                 ? data.sender.userId === me.userId
-                  ? 'flex_end-r'
-                  : 'flex_start-r'
-                : ''
+                  ? "flex_end-r"
+                  : "flex_start-r"
+                : ""
             }
             content={data.content}
             date={data.sendDate}
@@ -95,7 +95,7 @@ export default function DiscutMessages() {
           {actualDiscussion.discussionId ? (
             <div className={loading}> {text} </div>
           ) : (
-            'Start converse'
+            "Start converse"
           )}
         </div>
       ) : (
@@ -104,5 +104,5 @@ export default function DiscutMessages() {
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -146,7 +146,7 @@
 }
 
 .message_right:before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0%;
   right: -20px;
@@ -157,7 +157,7 @@
 }
 
 .message_left::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0%;
   left: -20px;
@@ -186,7 +186,7 @@
   overflow: hidden;
 }
 .loader::after {
-  content: '';
+  content: "";
   width: 96px;
   height: 4.8px;
   background: #fff;
@@ -279,7 +279,7 @@
 }
 .big_loader::before,
 .big_loader::after {
-  content: '';
+  content: "";
   box-sizing: border-box;
   position: absolute;
   inset: 0px;

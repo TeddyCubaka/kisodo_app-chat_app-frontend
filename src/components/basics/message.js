@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
 export default function Message({
   position,
@@ -13,20 +13,20 @@ export default function Message({
     <div
       className={`message ${position}`}
       onClick={() => {
-        console.log(data)
+        console.log(data);
       }}
     >
       <div className={`${bulle} msg_bulle`}>
         <div className="content">{content}</div>
         <span className={`${state} smaller`}>
-          {' '}
-          {state == 'msg_sended' ? 'ok' : false}{' '}
-          {state == 'failure' ? 'échec d&lsquoenvoie' : false}{' '}
+          {" "}
+          {state == "msg_sended" ? "ok" : false}{" "}
+          {state == "failure" ? "échec d&lsquoenvoie" : false}{" "}
         </span>
       </div>
       <div className="smaller"> {date} </div>
     </div>
-  )
+  );
 }
 
 Message.propTypes = {
@@ -37,4 +37,4 @@ Message.propTypes = {
   bulle: PropTypes.string,
   state: PropTypes.string,
   data: PropTypes.string,
-}
+};

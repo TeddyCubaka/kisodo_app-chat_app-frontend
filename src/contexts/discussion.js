@@ -1,5 +1,5 @@
-import { createContext } from 'react'
+import { createContext } from "react";
 
-const discussionContext = createContext([])
+const discussionContext = createContext([]);
 
-export default discussionContext
+export default discussionContext;

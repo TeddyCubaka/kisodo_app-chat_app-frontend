@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
-import discussionContext from '../../contexts/discussion'
-import Contact from '../basics/contact'
+import React, { useContext } from "react";
+import discussionContext from "../../contexts/discussion";
+import Contact from "../basics/contact";
 
 export default function Contacts() {
-  const { discut, allMember, relations, me } = useContext(discussionContext)
+  const { discut, allMember, relations, me } = useContext(discussionContext);
 
   return (
     <div className=" radius bloc_with_shaddow">
@@ -38,7 +38,7 @@ export default function Contacts() {
         )}
       </div>
     </div>
-  )
+  );
 }
 
 /* relations.length > 1 ? (

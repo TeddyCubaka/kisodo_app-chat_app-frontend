@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
-import discussionContext from '../../contexts/discussion'
+import React, { useContext } from "react";
+import discussionContext from "../../contexts/discussion";
 
 export default function DiscutInfo() {
-  const { freind } = useContext(discussionContext)
+  const { freind } = useContext(discussionContext);
   return (
     <div className="discut_info">
       <div className="img_card">
@@ -13,12 +13,12 @@ export default function DiscutInfo() {
       </div>
       <div className="margin_x-10 content_center width-max">
         <div className="strong">
-          {' '}
-          {freind.fullName ? freind.fullName : 'Freind name'}{' '}
+          {" "}
+          {freind.fullName ? freind.fullName : "Freind name"}{" "}
         </div>
         <div className="small">Online</div>
         <div className="small"> {freind.biography} </div>
       </div>
     </div>
-  )
+  );
 }

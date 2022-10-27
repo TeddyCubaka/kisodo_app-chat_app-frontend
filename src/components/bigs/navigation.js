@@ -1,24 +1,24 @@
-import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
-import discussionContext from '../../contexts/discussion'
-import AllMemberButton from '../basics/allMemberBtn'
-import Inbox from '../basics/inbox'
-import Profile from '../basics/profile'
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import discussionContext from "../../contexts/discussion";
+import AllMemberButton from "../basics/allMemberBtn";
+import Inbox from "../basics/inbox";
+import Profile from "../basics/profile";
 
 export default function Navigation() {
   const { me, setMe, setUserInbox, setAllMember, setRelations } =
-    useContext(discussionContext)
-  const [userId] = useState(localStorage.getItem('userId'))
+    useContext(discussionContext);
+  const [userId] = useState(localStorage.getItem("userId"));
   useEffect(() => {
     axios({
-      method: 'get',
+      method: "get",
       url:
         process.env.REACT_APP_SERVER_LINK_DEV +
-        '/api/user/' +
-        localStorage.getItem('userId'),
+        "/api/user/" +
+        localStorage.getItem("userId"),
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((res) => {
@@ -28,35 +28,35 @@ export default function Navigation() {
           joinDate: res.data.joinDate,
           userId: res.data._id,
           biography: res.data.biography,
-        })
+        });
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
     axios({
-      method: 'get',
+      method: "get",
       url:
         process.env.REACT_APP_SERVER_LINK_DEV +
-        '/api/discussion/inbox/' +
-        localStorage.getItem('userId'),
+        "/api/discussion/inbox/" +
+        localStorage.getItem("userId"),
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((res) => {
-        setUserInbox(res.data)
-        setAllMember(res.data)
-        const array = []
+        setUserInbox(res.data);
+        setAllMember(res.data);
+        const array = [];
         res.data.map((disc) => {
           const arr = disc.membres.filter(
-            (user) => user.userId !== localStorage.getItem('userId')
-          )
-          arr.push(disc._id)
-          array.push(arr)
-        })
-        setRelations(array)
+            (user) => user.userId !== localStorage.getItem("userId")
+          );
+          arr.push(disc._id);
+          array.push(arr);
+        });
+        setRelations(array);
       })
-      .catch((err) => console.log(err))
-  }, [userId, setMe])
+      .catch((err) => console.log(err));
+  }, [userId, setMe]);
 
   return (
     <div className="navbarre radius margin">
@@ -65,15 +65,16 @@ export default function Navigation() {
           src="https://cdn1.iconfinder.com/data/icons/circle-flats/170/contacts-512.png"
           alt=""
         />
+        <span> {me.onLine ? "yes" : "non"} </span>
       </div>
       <div>
-        {' '}
-        {me.firstName} {me.secondName}{' '}
+        {" "}
+        {me.firstName} {me.secondName}{" "}
       </div>
       <div className="nav_list">
         <Inbox />
         <AllMemberButton />
       </div>
     </div>
-  )
+  );
 }
