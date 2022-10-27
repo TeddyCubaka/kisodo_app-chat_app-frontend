@@ -87,3 +87,38 @@ export default function TextZone() {
     </div>
   );
 }
+
+// axios({
+//   method: "post",
+//   url:
+//     process.env.REACT_APP_SERVER_LINK_DEV +
+//     "/api/user/inbox/" +
+//     localStorage.getItem("userId"),
+//   headers: {
+//     "Content-Type": "application/json",
+//     Authorization: "Bearer " + localStorage.getItem("token"),
+//   },
+//   data: {
+//     data: {
+//       discussion_id: discussionId,
+//       users: [
+//         {
+//           userId: data.membres[0]._id,
+//           fullName: name,
+//           image: null,
+//           isOnline: false,
+//           biography: null,
+//         },
+//         {
+//           userId: me.userId,
+//           fullName: me.firstName + me.secondName,
+//           image: null,
+//           isOnline: false,
+//           biography: null,
+//         },
+//       ],
+//     },
+//   },
+// })
+//   .then((res) => console.log(res.data))
+//   .catch((err) => console.log(err));

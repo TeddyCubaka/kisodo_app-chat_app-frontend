@@ -1,10 +1,17 @@
 import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 export default function Contact({ name, message, image, data, discussionId }) {
-  const { setFreind, setActualDiscussion, setLoading, setMessages, relations } =
-    useContext(discussionContext);
+  const {
+    setFreind,
+    setActualDiscussion,
+    setLoading,
+    setMessages,
+    relations,
+    me,
+  } = useContext(discussionContext);
 
   return (
     <div

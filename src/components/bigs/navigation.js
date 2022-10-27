@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
 import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
-import Profile from "../basics/profile";
+import { TbPoint } from "react-icons/tb";
 
 export default function Navigation() {
   const { me, setMe, setUserInbox, setAllMember, setRelations } =
@@ -65,7 +65,11 @@ export default function Navigation() {
           src="https://cdn1.iconfinder.com/data/icons/circle-flats/170/contacts-512.png"
           alt=""
         />
-        <span> {me.onLine ? "yes" : "non"} </span>
+        {me.onLine ? (
+          <TbPoint size="15px" color="green" />
+        ) : (
+          <TbPoint size="15px" color="green" />
+        )}
       </div>
       <div>
         {" "}
