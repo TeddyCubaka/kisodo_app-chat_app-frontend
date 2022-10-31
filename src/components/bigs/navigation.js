@@ -65,7 +65,7 @@ export default function Navigation() {
   }, []);
   useEffect(() => {
     if (count === 1) {
-      socket.emit("join rooms", discussion);
+      socket.emit("send rooms", discussion);
     }
   }, [discussion]);
 

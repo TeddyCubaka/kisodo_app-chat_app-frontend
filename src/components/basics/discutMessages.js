@@ -40,11 +40,11 @@ export default function DiscutMessages() {
         });
     }
   }, [actualDiscussion]);
-  // useEffect(() => {
-  socket.on("message", (message) => {
-    console.log("message from socket", message);
-  });
-  // }, []);
+  useEffect(() => {
+    socket.on("message", (message) => {
+      console.log("message from socket", message);
+    });
+  }, []);
 
   return (
     <div className="discut_msg">

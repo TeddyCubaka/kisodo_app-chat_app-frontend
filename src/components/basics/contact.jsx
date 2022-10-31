@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { socket } from "../bigs/home";
 
 export default function Contact({ name, message, image, data, discussionId }) {
   const {
@@ -10,7 +11,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
     setLoading,
     setMessages,
     relations,
-    me,
+    actualDiscussion,
   } = useContext(discussionContext);
 
   return (
@@ -52,6 +53,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
             biography: data.biography,
             discussionId: data._id,
           });
+          socket.emit("join room", data._id);
         }
       }}
     >
