@@ -7,7 +7,7 @@ import { TbPoint } from "react-icons/tb";
 import { socket } from "./home";
 
 export default function Navigation() {
-  const { me, setMe, setUserInbox, setAllMember, setRelations, allMember } =
+  const { me, setMe, setUserInbox, setAllMember, setRelations, setDiscut } =
     useContext(discussionContext);
   const [discussion, setDiscussion] = useState({});
   const [count, setCount] = useState(0);

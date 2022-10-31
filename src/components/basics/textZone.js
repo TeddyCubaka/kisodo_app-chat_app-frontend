@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useContext, useState } from "react";
 import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
