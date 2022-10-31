@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import discussionContext from "../../contexts/discussion";
 import Contact from "../basics/contact";
+import { socket } from "./home";
 
 export default function Contacts() {
   const { discut, allMember, relations, me } = useContext(discussionContext);

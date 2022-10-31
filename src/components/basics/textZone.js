@@ -28,53 +28,58 @@ export default function TextZone() {
             setDiscut({
               content: value,
               date: new Date().toLocaleDateString(),
-              send: false,
+              send: true,
             });
-            axios({
-              method: "post",
-              url:
-                process.env.REACT_APP_SERVER_LINK_DEV +
-                "/api/discussion/add_message",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-              data: {
-                discussionId: actualDiscussion.discussionId,
-                message: {
-                  content: value,
-                  sender: {
-                    userId: me.userId,
-                    fullName: `${me.firstName} ${me.secondName}`,
-                  },
+            socket.emit("send", {
+              discussionId: actualDiscussion.discussionId,
+              message: {
+                content: value,
+                sender: {
+                  userId: me.userId,
+                  fullName: `${me.firstName} ${me.secondName}`,
                 },
               },
-            })
-              .then((res) => {
-                setDiscut({
-                  content: value,
-                  date: new Date().toLocaleDateString(),
-                  send: true,
-                });
-                setTimeout(() => {
-                  setDiscut({});
-                }, 500);
-                // socket.emit('message', {
-                //   content: value,
-                //   sender: {
-                //     userId: me.userId,
-                //     fullName: `${me.firstName} ${me.secondName}`,
-                //   },
-                // })
-              })
-              .catch((err) => {
-                setDiscut({
-                  content: value,
-                  date: new Date().toLocaleDateString(),
-                  send: "failure",
-                });
-                console.log(err);
-              });
+            });
+
+            // axios({
+            //   method: "post",
+            //   url:
+            //     process.env.REACT_APP_SERVER_LINK_DEV +
+            //     "/api/discussion/add_message",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //     Authorization: "Bearer " + localStorage.getItem("token"),
+            //   },
+            //   data: {
+            //     discussionId: actualDiscussion.discussionId,
+            //     message: {
+            //       content: value,
+            //       sender: {
+            //         userId: me.userId,
+            //         fullName: `${me.firstName} ${me.secondName}`,
+            //       },
+            //     },
+            //   },
+            // })
+            //   .then((res) => {
+            //     setDiscut({
+            //       content: value,
+            //       date: new Date().toLocaleDateString(),
+            //       send: true,
+            //     });
+            //     setTimeout(() => {
+            //       setDiscut({});
+            //     }, 500);
+
+            //   })
+            //   .catch((err) => {
+            //     setDiscut({
+            //       content: value,
+            //       date: new Date().toLocaleDateString(),
+            //       send: "failure",
+            //     });
+            //     console.log(err);
+            //   });
           }
           if (value !== "") {
           }

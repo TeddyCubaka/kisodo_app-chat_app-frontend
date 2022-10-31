@@ -81,24 +81,28 @@ export default function Signup() {
               setMsg("A gmail plz");
             } else {
               setMsg("");
-              const myData = {
-                firstName: firstName,
-                secondName: lastName,
-                mail: mail,
-                password: password,
-              };
-
               axios({
                 method: "post",
                 url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/user/signup",
-                data: myData,
+                data: {
+                  firstName: firstName,
+                  secondName: lastName,
+                  mail: mail,
+                  password: password,
+                },
                 headers: { "Content-Type": "application/json" },
               })
                 .then((res) => {
                   console.log(res);
                   window.location = "/login";
                 })
-                .catch((err) => console.log(err, "jafuefoefuoeogfef"));
+                .catch((err) => console.log(err));
+              console.log({
+                firstName: firstName,
+                secondName: lastName,
+                mail: mail,
+                password: password,
+              });
             }
           }}
         />

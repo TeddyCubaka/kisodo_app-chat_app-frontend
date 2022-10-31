@@ -33,9 +33,9 @@ export default function SocketTest() {
       />
       <button
         onClick={() => {
-          socket.emit("message", {
-            message: me,
-          });
+          // socket.emit("message", {
+          //   message: me,
+          // });
         }}
       >
         Send ping

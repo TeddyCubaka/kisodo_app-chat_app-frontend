@@ -4,11 +4,13 @@ import discussionContext from "../../contexts/discussion";
 import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
 import { TbPoint } from "react-icons/tb";
+import { socket } from "./home";
 
 export default function Navigation() {
-  const { me, setMe, setUserInbox, setAllMember, setRelations } =
+  const { me, setMe, setUserInbox, setAllMember, setRelations, allMember } =
     useContext(discussionContext);
-  const [userId] = useState(localStorage.getItem("userId"));
+  const [discussion, setDiscussion] = useState({});
+  const [count, setCount] = useState(0);
   useEffect(() => {
     axios({
       method: "get",
@@ -31,6 +33,8 @@ export default function Navigation() {
         });
       })
       .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
     axios({
       method: "get",
       url:
@@ -45,6 +49,8 @@ export default function Navigation() {
       .then((res) => {
         setUserInbox(res.data);
         setAllMember(res.data);
+        setDiscussion(res.data);
+        setCount(count + 1);
         const array = [];
         res.data.map((disc) => {
           const arr = disc.membres.filter(
@@ -56,7 +62,12 @@ export default function Navigation() {
         setRelations(array);
       })
       .catch((err) => console.log(err));
-  }, [userId, setMe]);
+  }, []);
+  useEffect(() => {
+    if (count === 1) {
+      socket.emit("join rooms", discussion);
+    }
+  }, [discussion]);
 
   return (
     <div className="navbarre radius margin">

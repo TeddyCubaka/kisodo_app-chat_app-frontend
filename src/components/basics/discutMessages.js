@@ -15,7 +15,6 @@ export default function DiscutMessages() {
     setMessages,
   } = useContext(discussionContext);
   const [text, setText] = useState(" ");
-  const [socketMsg, setSocketMsg] = useState([]);
   useEffect(() => {
     if (actualDiscussion.discussionId) {
       axios({
@@ -41,11 +40,11 @@ export default function DiscutMessages() {
         });
     }
   }, [actualDiscussion]);
-  useEffect(() => {
-    socket.on("discussion", (message) => {
-      setSocketMsg(message);
-    });
-  }, []);
+  // useEffect(() => {
+  socket.on("message", (message) => {
+    console.log("message from socket", message);
+  });
+  // }, []);
 
   return (
     <div className="discut_msg">
