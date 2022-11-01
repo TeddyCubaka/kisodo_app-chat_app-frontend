@@ -25,11 +25,7 @@ export default function TextZone() {
       <button
         onClick={() => {
           if (actualDiscussion.discussionId && value !== "") {
-            setDiscut({
-              // content: value,
-              // date: new Date().toLocaleDateString(),
-              // send: false,
-            });
+            setDiscut({});
             axios({
               method: "post",
               url:
@@ -51,14 +47,6 @@ export default function TextZone() {
               },
             })
               .then((res) => {
-                setDiscut({
-                  // content: value,
-                  // date: new Date().toLocaleDateString(),
-                  // send: true,
-                });
-                setTimeout(() => {
-                  setDiscut({});
-                }, 500);
                 socket.emit("send", {
                   discussionId: actualDiscussion.discussionId,
                   message: {

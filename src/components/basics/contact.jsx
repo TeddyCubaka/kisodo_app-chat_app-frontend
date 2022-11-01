@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
 import PropTypes from "prop-types";
 import { socket } from "../bigs/home";
@@ -6,6 +6,12 @@ import { socket } from "../bigs/home";
 export default function Contact({ name, message, image, data, discussionId }) {
   const { setFreind, setActualDiscussion, setLoading, setMessages, relations } =
     useContext(discussionContext);
+  const [last, setLast] = useState("");
+  useEffect(() => {
+    socket.on("new message", (msg) => {
+      if (msg.discussionId === data._id) setLast(msg.message.content);
+    });
+  }, []);
 
   return (
     <div
@@ -65,7 +71,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
         {message.message ? (
           <div className="small">{message.message}</div>
         ) : (
-          <div className="small">No message here</div>
+          <div className="small"> {last} </div>
         )}
       </div>
     </div>

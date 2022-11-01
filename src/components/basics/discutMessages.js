@@ -13,8 +13,11 @@ export default function DiscutMessages() {
     loading,
     messages,
     setMessages,
+    allMember,
+    freind,
   } = useContext(discussionContext);
   const [text, setText] = useState(" ");
+  const [id, setId] = useState("");
   const [last, setLast] = useState({});
   useEffect(() => {
     if (actualDiscussion.discussionId) {
@@ -30,6 +33,7 @@ export default function DiscutMessages() {
         },
       })
         .then((res) => {
+          setId(res.data._id);
           res.data.messages.reverse();
           setMessages(res.data.messages);
           setLoading("null");
@@ -42,11 +46,10 @@ export default function DiscutMessages() {
     }
   }, [actualDiscussion]);
   useEffect(() => {
-    socket.on("new message", (converse) => {
-      setMessages((prev) => [converse, ...prev]);
-      setLast(converse);
+    socket.on("new message", async (converse) => {
+      setLast(converse.message);
     });
-  }, []);
+  }, [last]);
   useEffect(() => {
     let arr = messages.filter((mess, index) => {
       return mess.content !== last.content && index < 20;
@@ -78,8 +81,7 @@ export default function DiscutMessages() {
       {messages.length > 0 ? (
         messages.map((data, index) => (
           <Message
-            key={data.id ? data.id : index}
-            data={data}
+            key={data._id ? data._id : index}
             bulle={
               data.sender
                 ? data.sender.userId === me.userId

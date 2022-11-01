@@ -116,12 +116,13 @@
 
 .message {
   height: fit-content;
+  width: 100%;
 }
 
 .message_left {
-  max-width: 300px;
   min-width: 75px;
   min-height: 25px;
+  max-width: 300px;
   height: fit-content;
   color: white;
   border-radius: 9px 9px 9px 0px;
@@ -266,8 +267,11 @@
   flex-direction: column;
 }
 .msg_bulle > .content {
-  height: 20px;
-  border: 1px solid white;
+  min-height: 20px;
+  max-width: 370px;
+  height: 100%;
+  width: 100%;
+  overflow-wrap : break-word;
 }
 
 .big_loader {
