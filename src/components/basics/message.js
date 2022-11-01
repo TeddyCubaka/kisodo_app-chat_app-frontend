@@ -36,5 +36,5 @@ Message.propTypes = {
   date: PropTypes.string,
   bulle: PropTypes.string,
   state: PropTypes.string,
-  data: PropTypes.string,
+  data: PropTypes.object,
 };

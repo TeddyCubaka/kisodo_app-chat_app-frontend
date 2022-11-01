@@ -1,18 +1,11 @@
 import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { socket } from "../bigs/home";
 
 export default function Contact({ name, message, image, data, discussionId }) {
-  const {
-    setFreind,
-    setActualDiscussion,
-    setLoading,
-    setMessages,
-    relations,
-    actualDiscussion,
-  } = useContext(discussionContext);
+  const { setFreind, setActualDiscussion, setLoading, setMessages, relations } =
+    useContext(discussionContext);
 
   return (
     <div
@@ -69,7 +62,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
       </div>
       <div className="contact_info">
         <div className="strong"> {name} </div>
-        {message ? (
+        {message.message ? (
           <div className="small">{message.message}</div>
         ) : (
           <div className="small">No message here</div>
@@ -81,8 +74,8 @@ export default function Contact({ name, message, image, data, discussionId }) {
 
 Contact.propTypes = {
   name: PropTypes.string,
-  message: PropTypes.object,
+  message: PropTypes.bool,
   image: PropTypes.string,
   data: PropTypes.object,
-  discussionId: PropTypes.strind,
+  discussionId: PropTypes.string,
 };

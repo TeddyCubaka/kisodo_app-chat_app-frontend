@@ -1,11 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import discussionContext from "../../contexts/discussion";
 import Contact from "../basics/contact";
-import { socket } from "./home";
 
 export default function Contacts() {
-  const { discut, allMember, relations, me } = useContext(discussionContext);
-
+  const { discut, allMember, me } = useContext(discussionContext);
   return (
     <div className=" radius bloc_with_shaddow">
       <div className="first_block strongest">Recent</div>
@@ -41,19 +39,3 @@ export default function Contacts() {
     </div>
   );
 }
-
-/* relations.length > 1 ? (
-                    relations.map((cont, index) => (
-                        <Contact
-                            name={cont[0].fullName}
-                            message={null}
-                            data={cont}
-                            index={index}
-                            array={allMember}
-                            key={cont[1]}
-                            discussionId={cont.membres ? cont._id : null}
-                        />
-                    ))
-                ) : (
-                    <div> siuuuuuuu</div>
-                ) */

@@ -13,8 +13,8 @@ export default function DiscutMessages() {
     loading,
     messages,
     setMessages,
-    setDiscut,
   } = useContext(discussionContext);
+  const [socketConvn, setSocketConv] = useState([]);
   const [text, setText] = useState(" ");
   useEffect(() => {
     if (actualDiscussion.discussionId) {
@@ -42,9 +42,8 @@ export default function DiscutMessages() {
     }
   }, [actualDiscussion]);
   useEffect(() => {
-    socket.on("message", (converse) => {
-      console.log("message from socket", converse);
-      setMessages(converse);
+    socket.on("new message", (converse) => {
+      setMessages((prev) => [converse, ...prev]);
     });
   }, []);
 
