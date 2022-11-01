@@ -26,9 +26,9 @@ export default function TextZone() {
         onClick={() => {
           if (actualDiscussion.discussionId && value !== "") {
             setDiscut({
-              content: value,
-              date: new Date().toLocaleDateString(),
-              send: false,
+              // content: value,
+              // date: new Date().toLocaleDateString(),
+              // send: false,
             });
             axios({
               method: "post",
@@ -52,9 +52,9 @@ export default function TextZone() {
             })
               .then((res) => {
                 setDiscut({
-                  content: value,
-                  date: new Date().toLocaleDateString(),
-                  send: true,
+                  // content: value,
+                  // date: new Date().toLocaleDateString(),
+                  // send: true,
                 });
                 setTimeout(() => {
                   setDiscut({});

@@ -14,8 +14,8 @@ export default function DiscutMessages() {
     messages,
     setMessages,
   } = useContext(discussionContext);
-  const [socketConvn, setSocketConv] = useState([]);
   const [text, setText] = useState(" ");
+  const [last, setLast] = useState({});
   useEffect(() => {
     if (actualDiscussion.discussionId) {
       axios({
@@ -44,8 +44,16 @@ export default function DiscutMessages() {
   useEffect(() => {
     socket.on("new message", (converse) => {
       setMessages((prev) => [converse, ...prev]);
+      setLast(converse);
     });
   }, []);
+  useEffect(() => {
+    let arr = messages.filter((mess, index) => {
+      return mess.content !== last.content && index < 20;
+    });
+    if (last.content) arr.unshift(last);
+    setMessages(arr);
+  }, [last]);
 
   return (
     <div className="discut_msg">

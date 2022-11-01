@@ -19,7 +19,7 @@ function App() {
   const [userInbox, setUserInbox] = useState({});
   const [allMember, setAllMember] = useState({});
   const [relations, setRelations] = useState({});
-  const [messages, setMessages] = useState({});
+  const [messages, setMessages] = useState([]);
   return (
     <discussionContext.Provider
       value={{
