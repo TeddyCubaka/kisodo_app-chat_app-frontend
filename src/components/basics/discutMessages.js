@@ -13,8 +13,6 @@ export default function DiscutMessages() {
     loading,
     messages,
     setMessages,
-    allMember,
-    freind,
   } = useContext(discussionContext);
   const [text, setText] = useState(" ");
   const [id, setId] = useState("");
