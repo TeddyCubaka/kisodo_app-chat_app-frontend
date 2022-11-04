@@ -34,6 +34,9 @@
 .margin_x-10 {
   margin: 0px 10px;
 }
+.hide{
+  display: none;
+}
 .img_card > img {
   width: 50px;
   height: 50px;
@@ -96,4 +99,42 @@
 .absolute {
   position: absolute;
   margin: auto !important;
+}
+.image-card{
+  height: 0px;
+}
+.displayer_image{
+  position: relative;
+  border: 1px solid black ;
+  height: 250px;
+  width: 100%;
+  bottom: 250px;
+  background-color: rgba(0, 0, 0, 0.247);
+  display: flex;
+  justify-content: flex-end;
+}
+.displayer_image > button{
+  /* position: absolute; */
+  width: 30px;
+  height: 30px;
+}
+.images{
+  position: relative;
+  height: 250px;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.image_message{
+  max-height: 100%;
+  max-width: 100%;
+  min-height: 50px;
+  min-width: 50px;
+  text-align: center;
+}
+.image_message > img{
+  max-height: 100%;
+  max-width: 100%;
+  min-height: 50px;
+  min-width: 50px;
 }
