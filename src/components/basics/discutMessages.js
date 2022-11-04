@@ -13,8 +13,6 @@ export default function DiscutMessages() {
     loading,
     messages,
     setMessages,
-    allMember,
-    freind,
   } = useContext(discussionContext);
   const [text, setText] = useState(" ");
   const [id, setId] = useState("");
@@ -33,7 +31,6 @@ export default function DiscutMessages() {
         },
       })
         .then((res) => {
-          setId(res.data._id);
           res.data.messages.reverse();
           setMessages(res.data.messages);
           setLoading("null");
@@ -47,14 +44,14 @@ export default function DiscutMessages() {
   }, [actualDiscussion]);
   useEffect(() => {
     socket.on("new message", async (converse) => {
-      setLast(converse.message);
+      setLast(converse);
     });
   }, [last]);
   useEffect(() => {
     let arr = messages.filter((mess, index) => {
       return mess.content !== last.content && index < 20;
     });
-    if (last.content) arr.unshift(last);
+    if (last.content) arr.unshift(last.message);
     setMessages(arr);
   }, [last]);
 
