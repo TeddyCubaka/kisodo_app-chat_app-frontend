@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
 import { socket } from "../bigs/home";
@@ -7,18 +7,39 @@ import { socket } from "../bigs/home";
 export default function TextZone() {
   const { me, setDiscut, actualDiscussion } = useContext(discussionContext);
   const [value, setValue] = useState("");
+  const [images, setImages] = useState([]);
+  const [urls, setUrls] = useState([]);
+  useEffect(() => {
+    if (images.length < 1) return;
+    const imagesUrls = [];
+    images.map((img) => imagesUrls.push(URL.createObjectURL(img)));
+    setUrls(imagesUrls);
+  }, [images]);
 
   return (
     <div className="text_zone">
+      <div className="img_card">
+        {urls.map((url) => (
+          <img src={url} alt="" key={url} />
+        ))}
+      </div>
       <div className="text_input">
         <textarea
           spellCheck="true"
           onChange={(e) => {
-            setValue(e.target.value);
+            setValue([...e.target.value]);
           }}
           value={value}
         ></textarea>
         <div>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(e) => {
+              setImages([...e.target.files]);
+            }}
+          />
           <AiOutlineCamera size="30px" />
         </div>
       </div>

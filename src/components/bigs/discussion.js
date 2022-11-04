@@ -6,11 +6,11 @@ import StartConverse from "../basics/satartConverse";
 import TextZone from "../basics/textZone";
 
 export default function Discussion() {
-  const { actualDiscussion } = useContext(discussionContext);
+  const { actualDiscussion, allMember } = useContext(discussionContext);
   return (
     <div className="discussion radius margin bloc_with_shaddow">
       <DiscutInfo />
-      <DiscutMessages />
+      <DiscutMessages member={allMember} />
       {actualDiscussion.discussionId ? <TextZone /> : <StartConverse />}
     </div>
   );
