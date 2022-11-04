@@ -1,25 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function DisplayerImage(urls, state) {
-  const [position, setPosition] = useState(state);
+export default function DisplayerImage(urls) {
+  const [url, setUrl] = useState([]);
+
+  useEffect(() => {
+    setUrl(urls.urls);
+  }, [urls]);
+
   return (
     <div className="image-card">
-      <div className={position}>
-        <button
-          onClick={() => {
-            setPosition("hide");
-          }}
-        >
-          X
-        </button>
-        <div className="images">
-          {urls.urls.map((url) => (
-            <div className="image_message" key={url}>
-              <img src={url} alt="" />
-            </div>
-          ))}
+      {url.length < 1 ? (
+        ""
+      ) : (
+        <div className="displayer_image">
+          <button
+            onClick={() => {
+              setUrl([]);
+            }}
+          >
+            X
+          </button>
+          <div className="images">
+            {url.map((url) => (
+              <div className="image_message" key={url}>
+                <img src={url} alt="" />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -34,8 +34,11 @@
 .margin_x-10 {
   margin: 0px 10px;
 }
-.hide{
+.hide {
   display: none;
+}
+.height-null {
+  height: 0%;
 }
 .img_card > img {
   width: 50px;
@@ -100,12 +103,11 @@
   position: absolute;
   margin: auto !important;
 }
-.image-card{
+.image-card {
   height: 0px;
 }
-.displayer_image{
+.displayer_image {
   position: relative;
-  border: 1px solid black ;
   height: 250px;
   width: 100%;
   bottom: 250px;
@@ -113,26 +115,25 @@
   display: flex;
   justify-content: flex-end;
 }
-.displayer_image > button{
-  /* position: absolute; */
+.displayer_image > button {
   width: 30px;
   height: 30px;
 }
-.images{
+.images {
   position: relative;
-  height: 250px;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-wrap: nowrap;
 }
-.image_message{
+.image_message {
   max-height: 100%;
   max-width: 100%;
   min-height: 50px;
   min-width: 50px;
   text-align: center;
 }
-.image_message > img{
+.image_message > img {
   max-height: 100%;
   max-width: 100%;
   min-height: 50px;

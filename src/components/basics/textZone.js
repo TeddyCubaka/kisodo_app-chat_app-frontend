@@ -10,7 +10,7 @@ export default function TextZone() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
-  const [state, setState] = useState([]);
+  const [state, setState] = useState(" ");
   useEffect(() => {
     if (images.length < 1) return;
     const imagesUrls = [];
@@ -20,7 +20,11 @@ export default function TextZone() {
 
   return (
     <div className="send-zone">
-      <DisplayerImage urls={urls.length < 1 ? [] : urls} state={state} />
+      <DisplayerImage
+        urls={urls.length < 1 ? [] : urls}
+        state={state}
+        setUrls={setUrls}
+      />
       <div className="text_zone">
         <div className="text_input">
           <textarea

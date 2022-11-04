@@ -8,7 +8,7 @@
   grid-template-columns: 10% 30% 60%;
   grid-template-rows: 1fr;
   align-items: center;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 
 .navbarre {
