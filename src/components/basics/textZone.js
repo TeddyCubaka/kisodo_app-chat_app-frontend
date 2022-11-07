@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
 import { socket } from "../bigs/home";
-import DisplayerImage from "./displayerImage";
 
 export default function TextZone() {
   const { me, setDiscut, actualDiscussion } = useContext(discussionContext);
@@ -16,13 +15,35 @@ export default function TextZone() {
     const imagesUrls = [];
     images.map((img) => imagesUrls.push(URL.createObjectURL(img)));
     setUrls(imagesUrls);
+    setImages([]);
   }, [images]);
 
   return (
     <div className="send-zone">
-      <DisplayerImage urls={urls.length < 1 ? [] : urls} />
-      <div className="text_zone">
-        <div className="text_input">
+      <div className="image-card">
+        {urls.length < 1 ? (
+          ""
+        ) : (
+          <div className="displayer_image">
+            <button
+              onClick={() => {
+                setUrls([]);
+              }}
+            >
+              X
+            </button>
+            <div className="images">
+              {urls.map((url) => (
+                <div className="image_message" key={url}>
+                  <img src={url} alt="" />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="text_zone small_radius">
+        <div className="text_input small_radius">
           <textarea
             spellCheck="true"
             onChange={(e) => {
@@ -39,10 +60,11 @@ export default function TextZone() {
                 setImages([...e.target.files]);
               }}
             />
-            <AiOutlineCamera size="40px" />
+            <AiOutlineCamera size="20px" />
           </div>
         </div>
         <button
+          className="send_button small_radius"
           onClick={() => {
             if (actualDiscussion.discussionId && value !== "") {
               setDiscut({});
@@ -93,7 +115,7 @@ export default function TextZone() {
             }
           }}
         >
-          <AiOutlineSend />
+          <AiOutlineSend size="15px" color="#F5F5F5" />
         </button>
       </div>
     </div>

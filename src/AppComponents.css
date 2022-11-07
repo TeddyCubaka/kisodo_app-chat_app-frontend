@@ -1,6 +1,9 @@
 .radius {
   border-radius: 9px;
 }
+.small_radius{
+  border-radius: 5px;
+}
 .margin {
   height: 540px;
   margin: 10px;
@@ -141,7 +144,6 @@
   min-width: 50px;
 }
 .input_file {
-  border: 1px solid green;
   width: 35px;
   height: 35px;
   position: absolute;
