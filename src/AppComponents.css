@@ -112,6 +112,7 @@
   width: 100%;
   bottom: 250px;
   background-color: rgba(0, 0, 0, 0.247);
+  margin-bottom: -250px;
   display: flex;
   justify-content: flex-end;
 }
@@ -138,4 +139,11 @@
   max-width: 100%;
   min-height: 50px;
   min-width: 50px;
+}
+.input_file {
+  border: 1px solid green;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  opacity: 0;
 }

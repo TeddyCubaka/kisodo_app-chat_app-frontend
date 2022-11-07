@@ -10,7 +10,7 @@ export default function TextZone() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
-  const [state, setState] = useState(" ");
+
   useEffect(() => {
     if (images.length < 1) return;
     const imagesUrls = [];
@@ -20,11 +20,7 @@ export default function TextZone() {
 
   return (
     <div className="send-zone">
-      <DisplayerImage
-        urls={urls.length < 1 ? [] : urls}
-        state={state}
-        setUrls={setUrls}
-      />
+      <DisplayerImage urls={urls.length < 1 ? [] : urls} />
       <div className="text_zone">
         <div className="text_input">
           <textarea
@@ -38,12 +34,12 @@ export default function TextZone() {
             <input
               type="file"
               accept="image/*"
+              className="input_file"
               onChange={(e) => {
                 setImages([...e.target.files]);
-                setState("displayer_image");
               }}
             />
-            <AiOutlineCamera size="30px" />
+            <AiOutlineCamera size="40px" />
           </div>
         </div>
         <button
