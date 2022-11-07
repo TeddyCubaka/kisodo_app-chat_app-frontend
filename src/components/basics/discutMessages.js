@@ -15,7 +15,6 @@ export default function DiscutMessages() {
     setMessages,
   } = useContext(discussionContext);
   const [text, setText] = useState(" ");
-  const [id, setId] = useState("");
   const [last, setLast] = useState({});
   useEffect(() => {
     if (actualDiscussion.discussionId) {
@@ -43,7 +42,7 @@ export default function DiscutMessages() {
     }
   }, [actualDiscussion]);
   useEffect(() => {
-    socket.on("new message", async (converse) => {
+    socket.on("new message", (converse) => {
       setLast(converse);
     });
   }, [last]);
@@ -51,7 +50,7 @@ export default function DiscutMessages() {
     let arr = messages.filter((mess, index) => {
       return mess.content !== last.content && index < 20;
     });
-    if (last.content) arr.unshift(last.message);
+    arr.unshift(last.message);
     setMessages(arr);
   }, [last]);
 
