@@ -1,11 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function Message({ position, content, date, bulle, state }) {
+export default function Message({
+  position,
+  content,
+  date,
+  bulle,
+  state,
+  hasPicture,
+}) {
   return (
     <div className={`message ${position}`}>
+      {hasPicture ? (
+        <div className="message_picture">
+          {" "}
+          <img src={hasPicture} alt="" />{" "}
+        </div>
+      ) : null}
       <div className={`${bulle} msg_bulle`}>
-        <div className="content">{content}</div>
+        <div className="content">{content} </div>
         <span className={`${state} smaller`}>
           {" "}
           {state == "msg_sended" ? "ok" : false}{" "}
@@ -25,4 +38,5 @@ Message.propTypes = {
   bulle: PropTypes.string,
   state: PropTypes.string,
   data: PropTypes.object,
+  hasPicture: PropTypes.string,
 };

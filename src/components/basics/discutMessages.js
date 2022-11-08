@@ -32,6 +32,7 @@ export default function DiscutMessages() {
         .then((res) => {
           res.data.messages.reverse();
           setMessages(res.data.messages);
+          console.log(res.data.messages[1]);
           setLoading("null");
           if (res.data.messages.length === 0) setText("Empty");
         })
@@ -94,6 +95,7 @@ export default function DiscutMessages() {
             }
             content={data.content}
             date={data.sendDate}
+            hasPicture={data.pictureUrl ? data.pictureUrl : null}
           />
         ))
       ) : messages.length === 0 ? (

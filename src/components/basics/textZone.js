@@ -9,19 +9,9 @@ export default function TextZone() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
+  const [file, setFile] = useState({});
 
-  useEffect(() => {
-    if (images.length < 1) return;
-    const imagesUrls = [];
-    images.map((img) => imagesUrls.push(URL.createObjectURL(img)));
-    setUrls(imagesUrls);
-    setImages([]);
-  }, [images]);
-
-  const [file, setFile] = useState();
-  const [imgUrl, setImgUrl] = useState("");
-
-  const axiosPost = (isPicture) => {
+  const axiosPost = (isPicture, imgUrl) => {
     const bool = isPicture == false ? false : true;
     axios({
       method: "post",
@@ -71,18 +61,40 @@ export default function TextZone() {
     setFile(e.target.files[0]);
   };
 
-  const uploadFile = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "chat_app_memory");
-    await axios
-      .post("https://api.cloudinary.com/v1_1/di64z9yxk/image/upload", formData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+  const uploadPicture = async () => {
+    if (file.name) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "chat_app_memory");
+      await axios
+        .post(
+          "https://api.cloudinary.com/v1_1/di64z9yxk/image/upload",
+          formData
+        )
+        .then((res) => {
+          axiosPost(true, res.data.secure_url);
+        })
+        .catch((err) => console.log(err));
+    }
+    axiosPost(false);
   };
+
+  const sendMessage = () => {
+    if (file.constructor === Object) {
+      console.log("envoie du message : ", value);
+      axiosPost(false);
+    }
+    console.log("envoie de l'image : ", file);
+    uploadPicture();
+  };
+
+  useEffect(() => {
+    if (file.name) {
+      const imagesUrls = [];
+      imagesUrls.push(URL.createObjectURL(file));
+      setUrls(imagesUrls);
+    }
+  }, [file]);
 
   return (
     <div className="send-zone">
@@ -124,20 +136,19 @@ export default function TextZone() {
               accept="image/*"
               className="input_file"
               onChange={(e) => {
-                setImages([...e.target.files]);
                 saveFile(e);
               }}
             />
             <AiOutlineCamera size="20px" />
           </div>
         </div>
-        <button onClick={uploadFile}>Upload image</button>
+        {/* <button onClick={sendMessage}>Upload image</button> */}
         <button
           className="send_button small_radius"
           onClick={() => {
             if (actualDiscussion.discussionId && value !== "") {
               setDiscut({});
-              axiosPost(false);
+              sendMessage();
             }
             if (value !== "") {
               setValue("");
