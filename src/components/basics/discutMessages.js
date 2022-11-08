@@ -74,7 +74,7 @@ export default function DiscutMessages() {
       ) : (
         false
       )}
-      {messages.length > 0 ? (
+      {messages.length > 1 ? (
         messages.map((data, index) => (
           <Message
             key={data._id ? data._id : index}

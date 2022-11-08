@@ -85,6 +85,9 @@
   display: flex;
   justify-content: space-around;
 }
+.text_input > div {
+  margin: auto 10px auto 20px;
+}
 
 .text_input > textarea {
   height: 30px;

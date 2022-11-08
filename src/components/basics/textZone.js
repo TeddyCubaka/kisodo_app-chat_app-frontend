@@ -18,6 +18,72 @@ export default function TextZone() {
     setImages([]);
   }, [images]);
 
+  const [file, setFile] = useState();
+  const [imgUrl, setImgUrl] = useState("");
+
+  const axiosPost = (isPicture) => {
+    const bool = isPicture == false ? false : true;
+    axios({
+      method: "post",
+      url:
+        process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/add_message",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      data: {
+        discussionId: actualDiscussion.discussionId,
+        message: {
+          isPicture: true,
+          pictureUrl: imgUrl,
+          content: value,
+          sender: {
+            userId: me.userId,
+            fullName: `${me.firstName} ${me.secondName}`,
+          },
+        },
+      },
+    })
+      .then(() => {
+        socket.emit("send", {
+          discussionId: actualDiscussion.discussionId,
+          message: {
+            content: value,
+            sendDate: new Date().toLocaleDateString(),
+            sender: {
+              userId: me.userId,
+              fullName: `${me.firstName} ${me.secondName}`,
+            },
+          },
+        });
+      })
+      .catch((err) => {
+        setDiscut({
+          content: value,
+          date: new Date().toLocaleDateString(),
+          send: "failure",
+        });
+        console.log(err);
+      });
+  };
+
+  const saveFile = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const uploadFile = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "chat_app_memory");
+    await axios
+      .post("https://api.cloudinary.com/v1_1/di64z9yxk/image/upload", formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="send-zone">
       <div className="image-card">
@@ -32,6 +98,7 @@ export default function TextZone() {
             >
               X
             </button>
+            files
             <div className="images">
               {urls.map((url) => (
                 <div className="image_message" key={url}>
@@ -58,57 +125,19 @@ export default function TextZone() {
               className="input_file"
               onChange={(e) => {
                 setImages([...e.target.files]);
+                saveFile(e);
               }}
             />
             <AiOutlineCamera size="20px" />
           </div>
         </div>
+        <button onClick={uploadFile}>Upload image</button>
         <button
           className="send_button small_radius"
           onClick={() => {
             if (actualDiscussion.discussionId && value !== "") {
               setDiscut({});
-              axios({
-                method: "post",
-                url:
-                  process.env.REACT_APP_SERVER_LINK_DEV +
-                  "/api/discussion/add_message",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: "Bearer " + localStorage.getItem("token"),
-                },
-                data: {
-                  discussionId: actualDiscussion.discussionId,
-                  message: {
-                    content: value,
-                    sender: {
-                      userId: me.userId,
-                      fullName: `${me.firstName} ${me.secondName}`,
-                    },
-                  },
-                },
-              })
-                .then((res) => {
-                  socket.emit("send", {
-                    discussionId: actualDiscussion.discussionId,
-                    message: {
-                      content: value,
-                      sendDate: new Date().toLocaleDateString(),
-                      sender: {
-                        userId: me.userId,
-                        fullName: `${me.firstName} ${me.secondName}`,
-                      },
-                    },
-                  });
-                })
-                .catch((err) => {
-                  setDiscut({
-                    content: value,
-                    date: new Date().toLocaleDateString(),
-                    send: "failure",
-                  });
-                  console.log(err);
-                });
+              axiosPost(false);
             }
             if (value !== "") {
               setValue("");
