@@ -40,6 +40,12 @@
 .margin_x-10 {
   margin: 0px 10px;
 }
+.margin_x-20{
+  margin: 0px 20px;
+}
+.margin_y-20_10 {
+  margin: 30px auto;
+}
 .hide {
   display: none;
 }
@@ -49,6 +55,12 @@
 .img_card > img {
   width: 50px;
   height: 50px;
+  border-radius: 35px;
+}
+.big_img_card > img {
+  width: 100px;
+  height: 100px;
+  border-radius: 70px;
 }
 .width-max {
   width: 100%;
@@ -154,4 +166,45 @@
 }
 .profile {
   border: 1px solid green;
+}
+.edit_photo {
+  display: inline;
+  position: relative;
+  top: -100px;
+  right: -35px;
+  margin-bottom: -30px;
+}
+.profile_static {
+  height: 50%;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  background-color: #0142c4;
+  border-radius: 9px; 
+}
+.profile_static > div {
+  margin: 20px;
+}
+.form_profile {
+  display: flex;
+  flex-direction: column;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.form_profile > input {
+  width: 100%;
+  height: 30px;
+  margin: 10px 0px;
+  border: none;
+  border-radius: 5px;
+  background-color: #b9b9b9;
+  font-size: 16px;
+  font-weight: 200;
+}
+.form_profile > label {
+  width: 70%;
+  height: 40px;
+  margin-bottom: -10px;
+  height: fit-content;
+  font-size: 18px;
+  font-weight: 400;
 }
