@@ -1,112 +1,139 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [msg, setMsg] = useState("");
-  const [pwdSize, setPwdSize] = useState(0);
-  const [mailSize, setMailSize] = useState(0);
-  const [CorrectMail, setCorrectMail] = useState("");
-  const [nicePwdSize, setNicePwdSize] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  return (
+  const [user, setUser] = useState({});
+  const [signed, setSigned] = useState(false);
+
+  useEffect(() => {
+    if (signed === true) {
+      axios({
+        method: "post",
+        url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/user/login",
+        data: {
+          mail: user.mail,
+          password: user.password,
+        },
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("userId", res.data.userId);
+          window.location = "/home";
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [signed]);
+
+  return signed === false ? (
     <div className="mum_card">
-      <h2>Did you want to join us ?</h2>
+      <h1>Did you want to join us ?</h1>
       <fieldset className="fieldset_of_connexion">
-        {msg === "" ? false : <div style={{ color: "red" }}> {msg} </div>}
-        <label>What is your name ?</label>
-        <input
-          type="text"
-          name="firstName"
-          placeholder="Enter your name"
-          required
-          onChange={(e) => {
-            setFirstName(e.target.value);
-          }}
-        />
-        <label>What&lsquos your secondName ?</label>
-        <input
-          type="text"
-          name="secondName"
-          placeholder="Enter your send name"
-          required
-          onChange={(e) => {
-            setLastName(e.target.value);
-          }}
-        />
-        <label>
-          Enter your mail address {mailSize > 1 ? mailSize : false}{" "}
-          {CorrectMail}{" "}
-        </label>
-        <input
-          type="mail"
-          name="email"
-          placeholder="Enter your email address"
-          required
-          onChange={(e) => {
-            setMailSize(e.target.value.length);
-            if (mailSize > 10) setMail(e.target.value);
-          }}
-        />
-        <label>
-          What&lsquos your password {pwdSize > 1 ? pwdSize : false}{" "}
-          {nicePwdSize}
-        </label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-          required
-          onChange={(e) => {
-            setPassword(e.target.value);
-            if (nicePwdSize > 8) setPwdSize(mailSize + 1);
-          }}
-        />
-        <input
-          type="button"
-          name="signUp"
-          value="Sign up"
-          onClick={() => {
-            mailSize < 10
-              ? setCorrectMail("Check your mail")
-              : setCorrectMail("");
-            pwdSize < 8
-              ? setNicePwdSize("Too short passeword change it plz")
-              : setNicePwdSize("nice password");
-            if (mail === "" || password === "") {
-              setMsg("The mail or the password is invalid");
-            } else if (mail.endsWith("gmail.com") === false) {
-              setMsg("A gmail plz");
-            } else {
-              setMsg("");
+        <h4>Sign up</h4>
+        <div>
+          <label>What is your name ?</label>
+          <input
+            type="text"
+            name="firstName"
+            placeholder="Enter your name"
+            required
+            onChange={(e) => {
+              e.target.className = " bad_size";
+              if (e.target.value.length > 2) {
+                e.target.className = " right_size";
+                setUser({ ...user, firstName: e.target.value });
+              } else {
+                e.target.className = " bad_size";
+              }
+            }}
+          />
+        </div>
+        <div>
+          {" "}
+          <label>What{"'"}s your secondName ?</label>
+          <input
+            type="text"
+            name="secondName"
+            placeholder="Enter your send name"
+            required
+            onChange={(e) => {
+              e.target.className = " bad_size";
+              if (e.target.value.length > 2) {
+                e.target.className = " right_size";
+                setUser({ ...user, secondName: e.target.value });
+              } else {
+                e.target.className = " bad_size";
+              }
+            }}
+          />
+        </div>
+        <div>
+          <label>Enter your mail address</label>
+          <input
+            type="mail"
+            name="email"
+            placeholder="Enter your email address"
+            required
+            onChange={(e) => {
+              e.target.className = " bad_size";
+              if (
+                e.target.value.length > 10 &&
+                e.target.value.includes("@gmail.com")
+              ) {
+                e.target.className = " right_size";
+                setUser({ ...user, mail: e.target.value });
+              } else {
+                e.target.className = " bad_size";
+              }
+            }}
+          />
+        </div>
+        <div>
+          <label>What{"'"}s your password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+            onChange={(e) => {
+              if (e.target.value.length > 5) {
+                e.target.className = " right_size";
+                setUser({ ...user, password: e.target.value });
+              } else {
+                e.target.className = " bad_size";
+              }
+            }}
+          />
+        </div>
+        <div>
+          <input
+            type="button"
+            name="signUp"
+            className="btn_with_shaddow"
+            value="Sign up"
+            onClick={() => {
               axios({
                 method: "post",
                 url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/user/signup",
-                data: {
-                  firstName: firstName,
-                  secondName: lastName,
-                  mail: mail,
-                  password: password,
-                },
+                data: user,
                 headers: { "Content-Type": "application/json" },
               })
-                .then((res) => {
-                  console.log(res);
-                  window.location = "/login";
+                .then(() => {
+                  setSigned(true);
                 })
                 .catch((err) => console.log(err));
-              console.log({
-                firstName: firstName,
-                secondName: lastName,
-                mail: mail,
-                password: password,
-              });
-            }
-          }}
-        />
+            }}
+          />
+        </div>
+        <div>
+          <div>
+            You have an account ? <Link to="/login">Login ?</Link>{" "}
+          </div>
+        </div>
       </fieldset>
     </div>
+  ) : (
+    <div className="big_loader"></div>
   );
 }
