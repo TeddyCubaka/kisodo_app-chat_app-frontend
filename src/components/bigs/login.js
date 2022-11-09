@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import discussionContext from "../../contexts/discussion";
 
 export default function Login() {
   const [mail, setMail] = useState("");

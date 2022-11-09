@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
 
 export default function AllMemberButton() {
-  const { setAllMember } = useContext(discussionContext);
+  const { setAllMember, allMember } = useContext(discussionContext);
   const [members, setMembers] = useState([]);
   useEffect(() => {
     axios({
@@ -21,7 +21,13 @@ export default function AllMemberButton() {
   }, []);
   return (
     <button
-      className="nav_btn"
+      className={`nav_btn ${
+        allMember.length
+          ? allMember[0].membres
+            ? " "
+            : "current_nav_btn"
+          : " "
+      }`}
       onClick={() => {
         setAllMember(members);
       }}

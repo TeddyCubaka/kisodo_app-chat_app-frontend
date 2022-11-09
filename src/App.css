@@ -260,6 +260,11 @@
   border-right: 6px solid yellow;
   transition: border-right 0.1s, background-color 0.5s;
 }
+.current_nav_btn {
+  background-color: #003297;
+  border-right: 6px solid yellow;
+  transition: border-right 0.1s, background-color 0.5s;
+}
 
 .msg_loader {
   width: 6px;
@@ -394,4 +399,9 @@
   z-index: 2;
   border: none;
   background-color: white;
+}
+.user_card {
+  margin: 10px auto;
+  text-align: center;
+  height: 70px;
 }

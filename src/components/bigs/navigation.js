@@ -5,6 +5,7 @@ import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
 import { socket } from "./home";
 import User from "../basics/user";
+import { NavLink, Link } from "react-router-dom";
 
 export default function Navigation() {
   const { me, setMe, setUserInbox, setAllMember, setRelations, setDiscut } =
@@ -23,9 +24,8 @@ export default function Navigation() {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
-      .then((res) => {
-        console.log(res.data);
-        setMe({
+      .then(async (res) => {
+        await setMe({
           firstName: res.data.firstName,
           secondName: res.data.secondName,
           joinDate: res.data.joinDate,
@@ -58,6 +58,8 @@ export default function Navigation() {
           const arr = disc.membres.filter(
             (user) => user.userId !== localStorage.getItem("userId")
           );
+          if (arr.length === 0)
+            arr.push({ userId: localStorage.getItem("userId") });
           arr.push(disc._id);
           array.push(arr);
         });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { TbPoint } from "react-icons/tb";
 import avatar from "../../images/avatar.png";
+import { TbPoint } from "react-icons/tb";
 import { MdEdit } from "react-icons/md";
 import { GrClose } from "react-icons/gr";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -163,7 +163,7 @@ export default function User(me) {
                     }
                   }}
                 />
-                <MdEdit size="30px" color="white" />
+                <MdEdit size="30px" color="#0142c4" />
               </div>
               <div className="strongest">
                 {names.firstName} {names.secondName}{" "}
@@ -176,7 +176,7 @@ export default function User(me) {
       </div>
     </div>
   ) : (
-    <div>
+    <div className="user_card">
       <div
         className="margin_x-10 content_center img_card"
         onClick={() => {
@@ -184,13 +184,8 @@ export default function User(me) {
         }}
       >
         <img src={newAvatar} alt="" />
-        {names.onLine ? (
-          <TbPoint size="15px" color="green" />
-        ) : (
-          <TbPoint size="15px" color="green" />
-        )}
       </div>
-      <div>
+      <div className="small">
         {" "}
         {names.firstName} {names.secondName}{" "}
       </div>
