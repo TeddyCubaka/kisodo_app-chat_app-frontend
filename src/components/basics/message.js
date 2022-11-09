@@ -11,14 +11,14 @@ export default function Message({
 }) {
   return (
     <div className={`message ${position}`}>
-      {hasPicture ? (
-        <div className="message_picture">
-          {" "}
-          <img src={hasPicture} alt="" />{" "}
-        </div>
-      ) : null}
       <div className={`${bulle} msg_bulle`}>
-        <div className="content">{content} </div>
+        {hasPicture ? (
+          <div className="message_picture">
+            {" "}
+            <img src={hasPicture} alt="" />{" "}
+          </div>
+        ) : null}
+        {content === "" ? null : <div className="content">{content}</div>}
         <span className={`${state} smaller`}>
           {" "}
           {state == "msg_sended" ? "ok" : false}{" "}

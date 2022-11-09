@@ -3,8 +3,8 @@ import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
 import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
-import { TbPoint } from "react-icons/tb";
 import { socket } from "./home";
+import User from "../basics/user";
 
 export default function Navigation() {
   const { me, setMe, setUserInbox, setAllMember, setRelations, setDiscut } =
@@ -71,21 +71,7 @@ export default function Navigation() {
 
   return (
     <div className="navbarre radius margin">
-      <div className="margin_x-10 content_center img_card">
-        <img
-          src="https://cdn1.iconfinder.com/data/icons/circle-flats/170/contacts-512.png"
-          alt=""
-        />
-        {me.onLine ? (
-          <TbPoint size="15px" color="green" />
-        ) : (
-          <TbPoint size="15px" color="green" />
-        )}
-      </div>
-      <div>
-        {" "}
-        {me.firstName} {me.secondName}{" "}
-      </div>
+      <User me={me} />
       <div className="nav_list">
         <Inbox />
         <AllMemberButton />

@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
 import discussionContext from "../../contexts/discussion";
+import avatar from "../../images/avatar.png";
 
 export default function DiscutInfo() {
   const { freind } = useContext(discussionContext);
   return (
     <div className="discut_info">
       <div className="img_card">
-        <img
-          src="https://cdn1.iconfinder.com/data/icons/circle-flats/170/contacts-512.png"
-          alt=""
-        />
+        <img src={avatar} alt="" />
       </div>
       <div className="margin_x-10 content_center width-max">
         <div className="strong">

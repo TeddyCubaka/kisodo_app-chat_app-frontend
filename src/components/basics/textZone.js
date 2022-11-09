@@ -7,9 +7,9 @@ import { socket } from "../bigs/home";
 export default function TextZone() {
   const { me, setDiscut, actualDiscussion } = useContext(discussionContext);
   const [value, setValue] = useState("");
-  const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
   const [file, setFile] = useState({});
+  const [load, setLoad] = useState("");
 
   const axiosPost = (isPicture, imgUrl) => {
     const bool = isPicture == false ? false : true;
@@ -24,7 +24,7 @@ export default function TextZone() {
       data: {
         discussionId: actualDiscussion.discussionId,
         message: {
-          isPicture: true,
+          isPicture: bool,
           pictureUrl: imgUrl,
           content: value,
           sender: {
@@ -35,9 +35,12 @@ export default function TextZone() {
       },
     })
       .then(() => {
+        setLoad("");
         socket.emit("send", {
           discussionId: actualDiscussion.discussionId,
           message: {
+            isPicture: bool,
+            pictureUrl: imgUrl,
             content: value,
             sendDate: new Date().toLocaleDateString(),
             sender: {
@@ -72,20 +75,18 @@ export default function TextZone() {
           formData
         )
         .then((res) => {
-          axiosPost(true, res.data.secure_url);
+          if (urls.length === 1) axiosPost(true, res.data.secure_url);
+          setLoad("");
+          setFile({ url: res.data.secure_url });
+          setUrls([]);
         })
         .catch((err) => console.log(err));
     }
-    axiosPost(false);
   };
 
   const sendMessage = () => {
-    if (file.constructor === Object) {
-      console.log("envoie du message : ", value);
-      axiosPost(false);
-    }
-    console.log("envoie de l'image : ", file);
-    uploadPicture();
+    if (urls.length === 1) uploadPicture();
+    if (urls.length === 0) axiosPost(false);
   };
 
   useEffect(() => {
@@ -110,7 +111,6 @@ export default function TextZone() {
             >
               X
             </button>
-            files
             <div className="images">
               {urls.map((url) => (
                 <div className="image_message" key={url}>
@@ -142,20 +142,21 @@ export default function TextZone() {
             <AiOutlineCamera size="20px" />
           </div>
         </div>
-        {/* <button onClick={sendMessage}>Upload image</button> */}
         <button
           className="send_button small_radius"
           onClick={() => {
+            setLoad("sending");
             if (actualDiscussion.discussionId && value !== "") {
               setDiscut({});
               sendMessage();
             }
+            if (urls.length > 0) sendMessage();
             if (value !== "") {
               setValue("");
             }
           }}
         >
-          <AiOutlineSend size="15px" color="#F5F5F5" />
+          {load !== "" ? load : <AiOutlineSend size="15px" color="#F5F5F5" />}
         </button>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
 import PropTypes from "prop-types";
 import { socket } from "../bigs/home";
+import avatar from "../../images/avatar.png";
 
 export default function Contact({ name, message, image, data, discussionId }) {
   const { setFreind, setActualDiscussion, setLoading, setMessages, relations } =
@@ -57,14 +58,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
       }}
     >
       <div className="margin_x-10 content_center img_card">
-        {image ? (
-          <img src={image} alt="" />
-        ) : (
-          <img
-            src="https://cdn1.iconfinder.com/data/icons/circle-flats/170/contacts-512.png"
-            alt=""
-          />
-        )}
+        {image ? <img src={image} alt="" /> : <img src={avatar} alt="" />}
       </div>
       <div className="contact_info">
         <div className="strong"> {name} </div>

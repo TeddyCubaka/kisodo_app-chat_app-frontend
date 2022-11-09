@@ -32,7 +32,6 @@ export default function DiscutMessages() {
         .then((res) => {
           res.data.messages.reverse();
           setMessages(res.data.messages);
-          console.log(res.data.messages[1]);
           setLoading("null");
           if (res.data.messages.length === 0) setText("Empty");
         })
@@ -48,11 +47,14 @@ export default function DiscutMessages() {
     });
   }, [last]);
   useEffect(() => {
-    let arr = messages.filter((mess, index) => {
-      return mess.content !== last.content && index < 20;
-    });
-    arr.unshift(last.message);
-    setMessages(arr);
+    let arr = new Array();
+    if (messages.length > 0) {
+      arr = messages.filter((mess, index) => {
+        return mess.content !== last.content && index < 20;
+      });
+      arr.unshift(last.message);
+    }
+    if (last.discussionId === actualDiscussion.discussionId) setMessages(arr);
   }, [last]);
 
   return (

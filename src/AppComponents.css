@@ -152,3 +152,6 @@
   opacity: 0;
   position: absolute;
 }
+.profile {
+  border: 1px solid green;
+}
