@@ -380,10 +380,18 @@
   align-items: center;
   z-index: 10;
 }
-.profile_form{
+.profile_form {
   background-color: white;
   width: 500px;
   height: 500px;
-  z-index: 10;
+  z-index: 1;
   border-radius: 9px;
+}
+.close_button {
+  position: relative;
+  top: -220px;
+  right: 48px;
+  z-index: 2;
+  border: none;
+  background-color: white;
 }

@@ -24,12 +24,14 @@ export default function Navigation() {
       },
     })
       .then((res) => {
+        console.log(res.data);
         setMe({
           firstName: res.data.firstName,
           secondName: res.data.secondName,
           joinDate: res.data.joinDate,
           userId: res.data._id,
           biography: res.data.biography,
+          image: res.data.image,
         });
       })
       .catch((err) => console.log(err));

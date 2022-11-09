@@ -7,6 +7,9 @@
 .small_radius:focus {
   border-radius: 5px;
 }
+.text_center {
+  text-align: center;
+}
 .margin {
   height: 540px;
   margin: 10px;
@@ -19,6 +22,7 @@
   font-size: large;
   font-weight: 600;
 }
+
 .medium {
   font-size: 18px;
   font-weight: 300;
@@ -40,7 +44,7 @@
 .margin_x-10 {
   margin: 0px 10px;
 }
-.margin_x-20{
+.margin_x-20 {
   margin: 0px 20px;
 }
 .margin_y-20_10 {
@@ -165,7 +169,8 @@
   position: absolute;
 }
 .profile {
-  border: 1px solid green;
+  display: flex;
+  flex-direction: row-reverse;
 }
 .edit_photo {
   display: inline;
@@ -179,7 +184,7 @@
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   background-color: #0142c4;
-  border-radius: 9px; 
+  border-radius: 9px;
 }
 .profile_static > div {
   margin: 20px;

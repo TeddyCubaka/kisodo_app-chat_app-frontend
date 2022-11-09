@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TbPoint } from "react-icons/tb";
 import avatar from "../../images/avatar.png";
 import { MdEdit } from "react-icons/md";
+import { GrClose } from "react-icons/gr";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import axios from "axios";
 
 export default function User(me) {
   const [updateProfile, setUpdateProfile] = useState(false);
-  const [newAvatar, setAvatar] = useState(me.me.image ? me.me.image : avatar);
+  const [newAvatar, setAvatar] = useState("");
+  const [names, setNames] = useState({});
 
+  useEffect(() => {
+    setNames(me.me);
+    setAvatar(me.me.image ? me.me.image : avatar);
+  }, [me]);
   const ModifyProfile = () => {
     const [state, setState] = useState(false);
+    const [newMe, setNewMe] = useState({});
     return state === false ? (
       <div className="profile_static margin_x-10">
         <div className="strongest">
@@ -30,15 +39,64 @@ export default function User(me) {
       </div>
     ) : (
       <form className="form_profile margin_x-20">
-        <label>Nom</label>
-        <input type="text" value={me.me.firstName} />
-        <label>Post-nom</label>
-        <input type="text" value={me.me.secondName} />
-        <label>Bio</label>
-        <input type="text" value={me.me.biography} />
         <button
           onClick={() => {
             setState(false);
+          }}
+        >
+          {" "}
+          <IoMdArrowRoundBack size="20px" />{" "}
+        </button>
+        <label>Nom</label>
+        <input
+          type="text"
+          placeholder={names.firstName}
+          onChange={(e) => {
+            setNewMe({ ...newMe, firstName: e.target.value });
+          }}
+        />
+        <label>Post-nom</label>
+        <input
+          type="text"
+          placeholder={names.secondName}
+          onChange={(e) => {
+            setNewMe({ ...newMe, secondName: e.target.value });
+          }}
+        />
+        <label>Bio</label>
+        <input
+          type="text"
+          placeholder={names.biography}
+          onChange={(e) => {
+            setNewMe({ ...newMe, biography: e.target.value });
+          }}
+        />
+        <button
+          type="button"
+          onClick={() => {
+            axios({
+              method: "post",
+              url:
+                process.env.REACT_APP_SERVER_LINK_DEV +
+                "/api/user/" +
+                names.userId,
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+              data: newMe,
+            })
+              .then((res) => {
+                console.log(res.data);
+                if (newMe.firstName)
+                  setNames({ ...names, firstName: newMe.firstName });
+                if (newMe.secondName)
+                  setNames({ ...names, secondName: newMe.secondName });
+                if (newMe.biography)
+                  setNames({ ...names, biography: newMe.biography });
+                setState(false);
+              })
+              .catch((err) => console.log(err));
           }}
         >
           valider
@@ -50,11 +108,12 @@ export default function User(me) {
     <div>
       <div className="profile">
         <button
+          className="close_button"
           onClick={() => {
             setUpdateProfile(false);
           }}
         >
-          X
+          <GrClose size="25px" />
         </button>
         <div
           className="profile_form"
@@ -73,6 +132,32 @@ export default function User(me) {
                   onChange={(e) => {
                     if (prompt("changer la photo de profile ?", "oui")) {
                       setAvatar(URL.createObjectURL(e.target.files[0]));
+                      const formData = new FormData();
+                      formData.append("file", e.target.files[0]);
+                      formData.append("upload_preset", "chat_app_memory");
+                      axios
+                        .post(
+                          "https://api.cloudinary.com/v1_1/di64z9yxk/image/upload",
+                          formData
+                        )
+                        .then((res) => {
+                          axios({
+                            method: "post",
+                            url:
+                              process.env.REACT_APP_SERVER_LINK_DEV +
+                              "/api/user/" +
+                              names.userId,
+                            headers: {
+                              "Content-Type": "application/json",
+                              Authorization:
+                                "Bearer " + localStorage.getItem("token"),
+                            },
+                            data: { image: res.data.secure_url },
+                          })
+                            .then((res) => console.log(res.data))
+                            .catch((err) => console.log(err));
+                        })
+                        .catch((err) => console.log(err));
                     } else {
                       alert("nope");
                     }
@@ -81,10 +166,10 @@ export default function User(me) {
                 <MdEdit size="30px" color="white" />
               </div>
               <div className="strongest">
-                {me.me.firstName} {me.me.secondName}{" "}
+                {names.firstName} {names.secondName}{" "}
               </div>
+              <div className="small text_center"> {names.biography} </div>
             </div>
-            <div> {me.me.bio} </div>
           </div>
           <ModifyProfile />
         </div>
@@ -99,7 +184,7 @@ export default function User(me) {
         }}
       >
         <img src={newAvatar} alt="" />
-        {me.me.onLine ? (
+        {names.onLine ? (
           <TbPoint size="15px" color="green" />
         ) : (
           <TbPoint size="15px" color="green" />
@@ -107,7 +192,7 @@ export default function User(me) {
       </div>
       <div>
         {" "}
-        {me.me.firstName} {me.me.secondName}{" "}
+        {names.firstName} {names.secondName}{" "}
       </div>
     </div>
   );
