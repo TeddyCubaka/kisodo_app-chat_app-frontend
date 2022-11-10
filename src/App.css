@@ -8,7 +8,6 @@
   grid-template-columns: 10% 30% 60%;
   grid-template-rows: 1fr;
   align-items: center;
-  /* overflow-y: hidden; */
 }
 
 .navbarre {
@@ -17,14 +16,14 @@
 }
 
 .home {
-  height: fit-content;
   min-height: 400px;
   padding-bottom: 20px;
-  max-height: 500px;
+  height: 100%;
 }
 
 .contacts {
   background-color: white;
+  height: fit-content;
   overflow-y: scroll;
   max-height: 447px;
   min-height: 150px;
@@ -220,6 +219,16 @@
   width: 90%;
   display: flex;
   flex-direction: column;
+}
+.welcome_card {
+  background-color: #1966ff;
+  border-radius: 9px;
+  width: 70%;
+  height: 500px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
 }
 
 .fieldset_of_connexion > div > input {
@@ -427,4 +436,84 @@
   margin: 10px auto;
   text-align: center;
   height: 70px;
+}
+.welcome_action_card {
+  border: 1px solid green;
+  margin: auto 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.user_connected_card {
+  width: 250px;
+  height: 75px;
+  background-color: white;
+  margin: 10px auto;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  transition: transform 0.5s, background-color 0.5s;
+}
+.user_connected_card > div {
+  text-align: left;
+  width: 100%;
+}
+.user_connected_card:hover {
+  transform: scale(1.01);
+  background-color: rgb(207, 204, 204);
+  transition: transform 0.5s, background-color 0.5s;
+}
+.first_form {
+  height: 300px;
+  width: 500px;
+  font-size: 16px;
+  font-weight: 300;
+  background-color: #fff;
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 3;
+}
+.first_form > div {
+  border: 1px solid green;
+  background-color: white;
+  width: 300px;
+  display: flex;
+}
+.first_form > div > input {
+  height: 30px;
+  width: 270px;
+  border: none;
+  background-color: transparent;
+}
+.first_form > div > button {
+  width: 30px;
+  border: none;
+  background-color: transparent;
+  transition: background-color 1s;
+}
+.first_form > div > button:hover {
+  background-color: #b9b9b97e;
+  transition: background-color 1s;
+}
+.first_form > div > button:hover > svg {
+  transform: scale(1.2);
+}
+.first_form > input {
+  width: 300px;
+  height: 30px;
+  font-size: 15px;
+}
+.close{
+  position: relative;
+  top: -120px;
+  right: -490px;
+  z-index: 4;
+  border: none;
+  background-color: white;
 }

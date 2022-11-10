@@ -53,7 +53,6 @@ export default function Contact({ name, message, image, data, discussionId }) {
             biography: data.biography,
             discussionId: data._id,
           });
-          console.log(relations);
           socket.emit("join room", data._id);
         }
       }}
