@@ -98,7 +98,7 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.699);
   border: none;
 }
-.btn_with_shaddow_not_actif{
+.btn_with_shaddow_not_actif {
   background-color: #0142c473;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.699);
   border: none;
@@ -252,4 +252,18 @@
 }
 .bad_size:focus {
   box-shadow: 0px 0px 0px 2px red;
+}
+.image_d_accueil {
+  width: 600px;
+  height: 600px;
+}
+.image_d_accueil > img {
+  width: 100%;
+  height: auto;
+}
+.choose_conversation_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
