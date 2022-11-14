@@ -112,11 +112,32 @@
   }
   .discussion {
     width: 100%;
-    height: 87.5vh;
+    height: 90vh;
     position: absolute;
-    bottom: -10px;
+    top: 80px;
   }
   .retour{
     display: block;
+  }
+  .message_left {
+    min-width: 50px;
+    max-width: 250px;
+  }
+  
+  .message_right {
+    min-width: 50px;
+    max-width: 250px;
+  }
+  
+  .message_right:before {
+    right: -10px;
+    border-top: 10px solid transparent;
+    border-left: 10px solid #1966ff;
+  }
+  
+  .message_left::before {
+    left: -10px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #b9b9b9;
   }
 }

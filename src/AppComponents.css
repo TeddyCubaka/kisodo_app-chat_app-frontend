@@ -254,8 +254,8 @@
   box-shadow: 0px 0px 0px 2px red;
 }
 .image_d_accueil {
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
 }
 .image_d_accueil > img {
   width: 100%;

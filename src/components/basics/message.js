@@ -1,5 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { MdDelete, MdReadMore, MdSaveAlt } from "react-icons/md";
+import axios from "axios";
 
 export default function Message({
   position,
@@ -9,16 +11,44 @@ export default function Message({
   state,
   hasPicture,
   data,
+  discussionId,
 }) {
-  const [see, setSee] = useState(false);
   const details = useRef();
+  const [link, setLink] = useState("");
+
+  const deleteMessage = () => {
+    axios({
+      method: "post",
+      url:
+        process.env.REACT_APP_SERVER_LINK_DEV +
+        "/api/discussion/delete_message/",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      data: {
+        // discussionId: discussionId,
+        messageId: data._id,
+        delete: true,
+      },
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    if (hasPicture) {
+      let a = hasPicture.split("upload/");
+      setLink(a[0] + "upload/fl_attachment/" + a[1]);
+    }
+  }, [hasPicture]);
 
   return (
     <div className={`message ${position}`}>
       <div
         className={`${bulle} msg_bulle`}
         onClick={() => {
-          return see === false ? setSee(true) : setSee(false);
+          console.log(data._id);
         }}
       >
         {hasPicture ? (
@@ -35,26 +65,25 @@ export default function Message({
         </span>
         <details ref={details}>
           <summary>
-            {" "}
-            {details.current && details.current.open === false
-              ? "info"
-              : ""}{" "}
+            <span className="medium">Info</span>
           </summary>
           <ul>
-            <li>Delete this message</li>
-            <li>More info</li>
+            <li
+              onClick={() => {
+                deleteMessage();
+              }}
+            >
+              {" "}
+              <MdDelete size="30px" color="black" />{" "}
+            </li>
             <li>
-              <a
-                href="http://res.cloudinary.com/di64z9yxk/image/upload/v1668182521/chat_app_memory/duunxuwxcx0h5dpxmuts.png"
-                download
-              >
-                une image de cloudinary
-              </a>
+              {" "}
+              <MdReadMore size="30px" color="black" />{" "}
             </li>
             {hasPicture ? (
               <li>
-                <a href={hasPicture} download={`${data._id}`}>
-                  download
+                <a href={link} download={`kisodo_app_${data._id}`}>
+                  <MdSaveAlt size="30px" color="black" />
                 </a>
               </li>
             ) : (
@@ -77,4 +106,5 @@ Message.propTypes = {
   state: PropTypes.string,
   data: PropTypes.object,
   hasPicture: PropTypes.string,
+  discussionId: PropTypes.string,
 };

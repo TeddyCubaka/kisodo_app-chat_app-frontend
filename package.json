@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.1.2",
+    "cloudinary-react": "^1.8.1",
     "emoji-picker-react": "^4.4.4",
     "eslint": "^8.26.0",
     "eslint-plugin-prettier": "^4.2.1",

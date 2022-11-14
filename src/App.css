@@ -141,6 +141,7 @@
 .message {
   height: fit-content;
   width: 100%;
+  margin: 10px 0px;
 }
 
 .msg_bulle {
@@ -153,32 +154,6 @@
   height: 100%;
   width: 100%;
   overflow-wrap: break-word;
-}
-
-details {
-  display: block;
-  position: absolute;
-  right: 110%;
-  bottom: 12px;
-  width: 15px;
-  color: black;
-  list-style-type: none;
-}
-
-details[open] {
-  background-color: yellow;
-  z-index: 2;
-  width: 180px;
-}
-
-summary {
-  height: 10px;
-}
-
-details[open] summary {
-  border: 1px solid green;
-  height: 20px;
-  border: 1px solid green;
 }
 
 .message_left {
@@ -233,6 +208,70 @@ details[open] summary {
   border-top: 12px solid transparent;
   border-right: 12px solid #b9b9b9;
   border-bottom: 0px solid transparent;
+}
+
+.message_left > details {
+  display: block;
+  position: absolute;
+  left: 110%;
+  bottom: 12px;
+  width: 15px;
+  color: black;
+  list-style-type: none;
+}
+.message_right > details {
+  display: block;
+  position: absolute;
+  right: 110%;
+  bottom: 12px;
+  width: 15px;
+  color: black;
+  list-style-type: none;
+}
+
+details[open] {
+  background-color: #1966ff;
+  z-index: 2;
+  width: 70px;
+  border-radius: 5px;
+}
+
+.message_right > details[open] {
+  left: -75px;
+}
+
+.message_left > details[open] {
+  right: -0px;
+}
+
+details > ul {
+  list-style-type: none;
+  margin-left: -20px;
+
+}
+details > ul > li > svg:hover {
+  transform: scale(1.1);
+}
+details > ul > li > a > svg:hover {
+  transform: scale(1.1);
+}
+
+summary {
+  height: 15px;
+  border-radius: 5px;
+}
+
+summary span {
+  display: none;
+}
+
+details[open] summary span {
+  display: inline;
+}
+
+details[open] summary {
+  border: 1px solid white;
+  height: 20px;
 }
 .mum_card {
   background-color: #1966ff;

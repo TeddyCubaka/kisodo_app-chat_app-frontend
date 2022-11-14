@@ -100,6 +100,7 @@ export default function DiscutMessages() {
             date={data.sendDate}
             data={data}
             hasPicture={data.pictureUrl ? data.pictureUrl : null}
+            discussionId={actualDiscussion.discussionId}
           />
         ))
       ) : messages.length === 0 ? (

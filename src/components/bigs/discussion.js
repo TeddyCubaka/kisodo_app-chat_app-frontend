@@ -17,7 +17,7 @@ export default function Discussion() {
         <>
           <DiscutInfo />
           <DiscutMessages member={allMember} />
-          {actualDiscussion.discussionId ? <TextZone /> : " "}
+          {actualDiscussion.discussionId ? <TextZone /> : <StartConverse />}
         </>
       ) : (
         <div className="choose_conversation_card">

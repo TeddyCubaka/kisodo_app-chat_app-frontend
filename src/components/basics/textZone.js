@@ -77,7 +77,7 @@ export default function TextZone() {
         .then((res) => {
           if (urls.length === 1) axiosPost(true, res.data.secure_url);
           setLoad("");
-          setFile({ url: res.data.secure_url });
+          setFile({ url: res.data.url });
           console.log(res.data);
           setUrls([]);
         })

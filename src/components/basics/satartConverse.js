@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdOutlineContactMail } from "react-icons/md";
 import { AiOutlineCamera } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
@@ -12,9 +12,68 @@ export default function StartConverse() {
   const [file, setFile] = useState({});
   const [load, setLoad] = useState("");
 
+  const saveFile = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  useEffect(() => {
+    if (file.name) {
+      const imagesUrls = [];
+      imagesUrls.push(URL.createObjectURL(file));
+      setUrls(imagesUrls);
+    }
+  }, [file]);
+
+  const axiosPost = () => {
+    if (prompt("sure ?", "oui")) {
+      axios({
+        method: "post",
+        url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        data: {
+          isGroup: false,
+          membres: [
+            {
+              userId: freind.userId,
+              fullName: freind.fullName,
+              image: freind.image,
+              biography: freind.biography,
+            },
+            {
+              userId: me.userId,
+              fullName: me.firstName + " " + me.secondName,
+              image: me.image,
+              biography: me.biography,
+            },
+          ],
+          message: [
+            {
+              isPicture: bool,
+              pictureUrl: imgUrl,
+              content: value,
+              sender: {
+                userId: me.userId,
+                fullName: `${me.firstName} ${me.secondName}`,
+              },
+            },
+          ],
+        },
+      })
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err));
+    } else {
+      console.log("nan");
+    }
+  };
+
+  const sendMessage = () => {};
+
   return (
     <div className="send-zone">
-      {/* <div className="image-card">
+      <div className="image-card">
         {urls.length < 1 ? (
           ""
         ) : (
@@ -61,37 +120,7 @@ export default function StartConverse() {
         <button
           className="send_button small_radius"
           onClick={() => {
-            if (prompt("sure ?", "oui")) {
-              axios({
-                method: "post",
-                url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: "Bearer " + localStorage.getItem("token"),
-                },
-                data: {
-                  isGroup: false,
-                  membres: [
-                    {
-                      userId: freind.userId,
-                      fullName: freind.fullName,
-                      image: freind.image,
-                      biography: freind.biography,
-                    },
-                    {
-                      userId: me.userId,
-                      fullName: me.firstName + " " + me.secondName,
-                      image: me.image,
-                      biography: me.biography,
-                    },
-                  ],
-                },
-              })
-                .then((res) => console.log(res.data))
-                .catch((err) => console.log(err));
-            } else {
-              console.log("nan");
-            }
+            sendMessage();
           }}
         >
           {load !== "" ? (
@@ -100,7 +129,7 @@ export default function StartConverse() {
             <MdOutlineContactMail size="15px" color="#F5F5F5" />
           )}
         </button>
-      </div> */}
+      </div>
     </div>
   );
 }
