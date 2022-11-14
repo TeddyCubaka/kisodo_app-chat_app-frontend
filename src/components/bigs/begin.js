@@ -52,7 +52,7 @@ export default function Begin() {
         setBool(true);
       }}
     >
-      <div>Illustration here</div>
+      <div className="welcome_illustration">Illustration here</div>
       <div className="welcome_action_card">
         <div>
           <h1>Welcome to KisodO App</h1>

@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./components/bigs/home";
 import "./App.css";
 import "./AppComponents.css";
+import "./media.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import discussionContext from "./contexts/discussion";
 import { useState } from "react";
@@ -20,6 +21,7 @@ function App() {
   const [allMember, setAllMember] = useState([]);
   const [relations, setRelations] = useState({});
   const [messages, setMessages] = useState([]);
+  const [position, setPosition] = useState("none");
   return (
     <discussionContext.Provider
       value={{
@@ -41,6 +43,8 @@ function App() {
         setRelations,
         messages,
         setMessages,
+        position,
+        setPosition,
       }}
     >
       <Router>

@@ -5,8 +5,14 @@ import { socket } from "../bigs/home";
 import avatar from "../../images/avatar.png";
 
 export default function Contact({ name, message, image, data, discussionId }) {
-  const { setFreind, setActualDiscussion, setLoading, setMessages, relations } =
-    useContext(discussionContext);
+  const {
+    setFreind,
+    setActualDiscussion,
+    setLoading,
+    setMessages,
+    relations,
+    setPosition,
+  } = useContext(discussionContext);
   const [last, setLast] = useState("");
   useEffect(() => {
     socket.on("new message", (msg) => {
@@ -55,6 +61,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
           });
           socket.emit("join room", data._id);
         }
+        setPosition("flex");
       }}
     >
       <div className="margin_x-10 content_center img_card">

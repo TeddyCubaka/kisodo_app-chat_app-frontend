@@ -16,6 +16,7 @@ export default function DiscutMessages() {
   } = useContext(discussionContext);
   const [text, setText] = useState(" ");
   const [last, setLast] = useState({});
+
   useEffect(() => {
     if (actualDiscussion.discussionId) {
       axios({
@@ -50,7 +51,7 @@ export default function DiscutMessages() {
     let arr = new Array();
     if (messages.length > 0) {
       arr = messages.filter((mess, index) => {
-        return mess.content !== last.content && index < 20;
+        return mess.content !== last.content && index < 80;
       });
       arr.unshift(last.message);
     }
@@ -77,7 +78,7 @@ export default function DiscutMessages() {
       ) : (
         false
       )}
-      {messages.length > 1 ? (
+      {messages[0] ? (
         messages.map((data, index) => (
           <Message
             key={data._id ? data._id : index}
@@ -97,6 +98,7 @@ export default function DiscutMessages() {
             }
             content={data.content}
             date={data.sendDate}
+            data={data}
             hasPicture={data.pictureUrl ? data.pictureUrl : null}
           />
         ))
