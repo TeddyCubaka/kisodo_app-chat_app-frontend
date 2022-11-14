@@ -83,13 +83,6 @@
   .profile_form {
     margin-left: 40px;
   }
-  .contacts {
-    background-color: white;
-    height: fit-content;
-    overflow-y: scroll;
-    max-height: 447px;
-    min-height: 150px;
-  }
   .image_d_accueil {
     width: 400px;
     height: 400px;

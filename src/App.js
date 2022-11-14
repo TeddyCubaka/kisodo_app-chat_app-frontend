@@ -21,7 +21,7 @@ function App() {
   const [allMember, setAllMember] = useState([]);
   const [relations, setRelations] = useState({});
   const [messages, setMessages] = useState([]);
-  const [position, setPosition] = useState("none");
+  const [position, setPosition] = useState(-10);
   return (
     <discussionContext.Provider
       value={{

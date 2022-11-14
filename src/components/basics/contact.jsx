@@ -61,7 +61,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
           });
           socket.emit("join room", data._id);
         }
-        setPosition("flex");
+        setPosition(0);
       }}
     >
       <div className="margin_x-10 content_center img_card">

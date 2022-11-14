@@ -9,7 +9,7 @@ export default function DiscutInfo() {
     <div className="discut_info">
       <div
         onClick={() => {
-          setPosition("none");
+          setPosition(-10);
         }}
         className="retour"
       >

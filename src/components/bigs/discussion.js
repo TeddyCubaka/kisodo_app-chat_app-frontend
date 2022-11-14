@@ -11,13 +11,13 @@ export default function Discussion() {
   return (
     <div
       className="discussion radius margin bloc_with_shaddow"
-      style={{ display: position }}
+      style={{ zIndex: position }}
     >
       {freind.userId ? (
         <>
           <DiscutInfo />
           <DiscutMessages member={allMember} />
-          {actualDiscussion.discussionId ? <TextZone /> : <StartConverse />}
+          {actualDiscussion.discussionId ? <TextZone /> : " "}
         </>
       ) : (
         <div className="choose_conversation_card">
