@@ -8,10 +8,11 @@ import User from "../basics/user";
 import { NavLink, Link } from "react-router-dom";
 
 export default function Navigation() {
-  const { me, setMe, setUserInbox, setAllMember, setRelations, setDiscut } =
+  const { me, setMe, setUserInbox, setAllMember, setRelations, allMember } =
     useContext(discussionContext);
   const [discussion, setDiscussion] = useState({});
   const [count, setCount] = useState(0);
+
   useEffect(() => {
     axios({
       method: "get",
@@ -75,7 +76,7 @@ export default function Navigation() {
 
   return (
     <div className="navbarre radius margin">
-      <User me={me} />
+      <User me={me} allMember={allMember} />
       <div className="nav_list">
         <Inbox />
         <AllMemberButton />

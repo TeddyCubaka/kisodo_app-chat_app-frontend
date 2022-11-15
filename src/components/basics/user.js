@@ -1,15 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import avatar from "../../images/avatar.png";
 import { TbPoint } from "react-icons/tb";
 import { MdEdit } from "react-icons/md";
 import { GrClose } from "react-icons/gr";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import axios from "axios";
+import discussionContext from "../../contexts/discussion";
 
 export default function User(me) {
+  const { allMember } = useContext(discussionContext);
   const [updateProfile, setUpdateProfile] = useState(false);
   const [newAvatar, setAvatar] = useState("");
   const [names, setNames] = useState({});
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (allMember.length === 0) return;
+    let counter = 0;
+    allMember.map((contact) => {
+      counter = counter + contact.messages.length;
+    });
+    setCount(counter);
+  }, [allMember]);
 
   useEffect(() => {
     setNames(me.me);
@@ -31,10 +43,10 @@ export default function User(me) {
           </button>
         </div>
         <div>
-          Nombre des contacts : <strong>30</strong>{" "}
+          Nombre des contacts : <strong> {allMember.length} </strong>{" "}
         </div>
         <div>
-          Nombre des messages : <strong>6576</strong>{" "}
+          Nombre des messages : <strong> {count} </strong>{" "}
         </div>
       </div>
     ) : (
