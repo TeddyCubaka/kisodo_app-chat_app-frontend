@@ -18,6 +18,7 @@ export default function User(me) {
     if (allMember.length === 0) return;
     let counter = 0;
     allMember.map((contact) => {
+      if (!contact.messages) return;
       counter = counter + contact.messages.length;
     });
     setCount(counter);

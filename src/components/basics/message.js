@@ -15,6 +15,7 @@ export default function Message({
 }) {
   const details = useRef();
   const [link, setLink] = useState("");
+  const [deleted, setDeleted] = useState("");
 
   const deleteMessage = () => {
     axios({
@@ -27,13 +28,19 @@ export default function Message({
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
       data: {
-        // discussionId: discussionId,
+        discussionId: discussionId,
         messageId: data._id,
         delete: true,
       },
     })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res);
+        setDeleted("Message deleted");
+      })
+      .catch((err) => {
+        setDeleted("Message was not deleted");
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -45,19 +52,16 @@ export default function Message({
 
   return (
     <div className={`message ${position}`}>
-      <div
-        className={`${bulle} msg_bulle`}
-        onClick={() => {
-          console.log(data._id);
-        }}
-      >
+      <div className={`${bulle} msg_bulle`}>
         {hasPicture ? (
           <div className="message_picture">
             {" "}
-            <img src={hasPicture} alt="" />{" "}
+            <img src={deleted === "" ? hasPicture : ""} alt="" />{" "}
           </div>
         ) : null}
-        {content === "" ? null : <div className="content">{content}</div>}
+        {content === "" ? null : (
+          <div className="content">{deleted === "" ? content : deleted}</div>
+        )}
         <span className={`${state} smaller`}>
           {" "}
           {state == "msg_sended" ? "ok" : false}{" "}

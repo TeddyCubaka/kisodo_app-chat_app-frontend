@@ -5,13 +5,13 @@ import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
 import { socket } from "./home";
 import User from "../basics/user";
-import { NavLink, Link } from "react-router-dom";
 
 export default function Navigation() {
   const { me, setMe, setUserInbox, setAllMember, setRelations, allMember } =
     useContext(discussionContext);
-  const [discussion, setDiscussion] = useState({});
+  const [discussion, setDiscussion] = useState([]);
   const [count, setCount] = useState(0);
+  const [messagesNumber, setMessagesNumber] = useState(0);
 
   useEffect(() => {
     axios({
@@ -65,6 +65,12 @@ export default function Navigation() {
           array.push(arr);
         });
         setRelations(array);
+
+        let counter = 0;
+        res.data.map((contact) => {
+          counter = counter + contact.messages.length;
+        });
+        setMessagesNumber(counter);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -76,7 +82,7 @@ export default function Navigation() {
 
   return (
     <div className="navbarre radius margin">
-      <User me={me} allMember={allMember} />
+      <User me={me} messagesNumber={messagesNumber} />
       <div className="nav_list">
         <Inbox />
         <AllMemberButton />

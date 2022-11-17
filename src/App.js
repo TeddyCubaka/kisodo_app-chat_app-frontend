@@ -22,6 +22,7 @@ function App() {
   const [relations, setRelations] = useState({});
   const [messages, setMessages] = useState([]);
   const [position, setPosition] = useState(-10);
+  const [userOnline, setUsersOnline] = useState(-10);
   return (
     <discussionContext.Provider
       value={{
@@ -45,6 +46,8 @@ function App() {
         setMessages,
         position,
         setPosition,
+        userOnline,
+        setUsersOnline,
       }}
     >
       <Router>

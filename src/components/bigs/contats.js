@@ -22,7 +22,7 @@ export default function Contacts() {
               data={cont}
               index={index}
               array={allMember}
-              key={cont._id}
+              key={cont._id ? cont._id : cont.userId}
               discussionId={cont.membres ? cont._id : null}
             />
           ))
