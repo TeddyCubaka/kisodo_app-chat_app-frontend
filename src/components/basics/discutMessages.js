@@ -99,7 +99,7 @@ export default function DiscutMessages() {
             content={data.content}
             date={data.sendDate}
             data={data}
-            hasPicture={data.pictureUrl ? data.pictureUrl : null}
+            hasPicture={data.image ? data.image.url : null}
             discussionId={actualDiscussion.discussionId}
           />
         ))

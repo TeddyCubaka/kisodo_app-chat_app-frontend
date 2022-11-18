@@ -6,7 +6,7 @@ import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
 
 export default function StartConverse() {
-  const { actualDiscussion, freind, me } = useContext(discussionContext);
+  const { freind, me } = useContext(discussionContext);
   const [value, setValue] = useState("");
   const [urls, setUrls] = useState([]);
   const [file, setFile] = useState({});
@@ -16,60 +16,91 @@ export default function StartConverse() {
     setFile(e.target.files[0]);
   };
 
-  useEffect(() => {
+  const axiosPost = async () => {
+    let bool = false;
+    let img = {};
     if (file.name) {
-      const imagesUrls = [];
-      imagesUrls.push(URL.createObjectURL(file));
-      setUrls(imagesUrls);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "chat_app_memory");
+      await axios
+        .post(
+          "https://api.cloudinary.com/v1_1/di64z9yxk/image/upload",
+          formData
+        )
+        .then((res) => {
+          setUrls({});
+          bool = true;
+          img = {
+            width: res.data.width,
+            height: res.data.height,
+            url: res.data.secure_url,
+            originalFilename: res.data.original_filename,
+            format: res.data.format,
+            createDate: res.data.created_at,
+          };
+        })
+        .catch((err) => console.log(err));
     }
-  }, [file]);
-
-  const axiosPost = () => {
-    if (prompt("sure ?", "oui")) {
-      axios({
-        method: "post",
-        url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-        data: {
-          isGroup: false,
-          membres: [
-            {
-              userId: freind.userId,
-              fullName: freind.fullName,
-              image: freind.image,
-              biography: freind.biography,
-            },
-            {
-              userId: me.userId,
-              fullName: me.firstName + " " + me.secondName,
-              image: me.image,
-              biography: me.biography,
-            },
-          ],
-          message: [
-            {
+    axios({
+      method: "post",
+      url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/discussion/",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      data: {
+        isGroup: false,
+        membres: [
+          {
+            userId: freind.userId,
+            fullName: freind.fullName,
+            image: freind.image,
+            biography: freind.biography,
+          },
+          {
+            userId: me.userId,
+            fullName: me.firstName + " " + me.secondName,
+            image: me.image,
+            biography: me.biography,
+          },
+        ],
+      },
+    })
+      .then((res) => {
+        axios({
+          method: "post",
+          url:
+            process.env.REACT_APP_SERVER_LINK_DEV +
+            "/api/discussion/add_message",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          data: {
+            discussionId: res.data.discussionId,
+            message: {
               isPicture: bool,
-              pictureUrl: imgUrl,
               content: value,
+              image: img,
               sender: {
                 userId: me.userId,
                 fullName: `${me.firstName} ${me.secondName}`,
               },
             },
-          ],
-        },
+          },
+        })
+          .then((res) => {
+            setLoad("");
+          })
+          .catch((err) => {
+            setLoad("failure");
+            console.log(err);
+          });
+        console.log(res.data);
       })
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
-    } else {
-      console.log("nan");
-    }
+      .catch((err) => console.log(err));
   };
-
-  const sendMessage = () => {};
 
   return (
     <div className="send-zone">
@@ -112,6 +143,9 @@ export default function StartConverse() {
               className="input_file"
               onChange={(e) => {
                 saveFile(e);
+                const imagesUrls = [];
+                imagesUrls.push(URL.createObjectURL(e.target.files[0]));
+                setUrls(imagesUrls);
               }}
             />
             <AiOutlineCamera size="20px" />
@@ -120,7 +154,10 @@ export default function StartConverse() {
         <button
           className="send_button small_radius"
           onClick={() => {
-            sendMessage();
+            if (value.length || file.name) {
+              setLoad("sending...");
+              axiosPost();
+            }
           }}
         >
           {load !== "" ? (

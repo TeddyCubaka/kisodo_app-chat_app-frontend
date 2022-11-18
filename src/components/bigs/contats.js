@@ -4,6 +4,17 @@ import Contact from "../basics/contact";
 
 export default function Contacts() {
   const { discut, allMember, me } = useContext(discussionContext);
+
+  useEffect(() => {
+    if (allMember.length === 0) return;
+    const images = [];
+    images = allMember.filter((cont) => {
+      if (!cont.image) return;
+      return { id: cont._id, image: cont.image };
+    });
+    console.log(images);
+  }, []);
+
   return (
     <div className=" radius bloc_with_shaddow">
       <div className="first_block strongest">Recent</div>

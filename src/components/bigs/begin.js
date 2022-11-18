@@ -5,7 +5,7 @@ import { GrClose } from "react-icons/gr";
 import { BiShow, BiHide } from "react-icons/bi";
 
 export default function Begin() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ name: "begin" });
   const [pwd, setPwd] = useState("");
   const [type, setType] = useState("password");
   const [bool, setBool] = useState(false);
@@ -41,7 +41,10 @@ export default function Begin() {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
-      .then((res) => setUser(res.data))
+      .then((res) => {
+        if (res.data == null) return;
+        setUser(res.data);
+      })
       .catch((err) => console.log(err));
   }, [localStorage.getItem("token")]);
 
