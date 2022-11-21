@@ -30,7 +30,6 @@ export default function AllMemberButton() {
       }`}
       onClick={() => {
         setAllMember(members);
-        console.log("all ", members);
       }}
     >
       <h3>Member</h3>

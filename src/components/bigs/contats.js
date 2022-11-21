@@ -3,17 +3,12 @@ import discussionContext from "../../contexts/discussion";
 import Contact from "../basics/contact";
 
 export default function Contacts() {
-  const { discut, allMember, me } = useContext(discussionContext);
+  const { discut, allMember, me, userInbox, relations } =
+    useContext(discussionContext);
 
   useEffect(() => {
     if (allMember.length === 0) return;
-    const images = [];
-    images = allMember.filter((cont) => {
-      if (!cont.image) return;
-      return { id: cont._id, image: cont.image };
-    });
-    console.log(images);
-  }, []);
+  }, [allMember]);
 
   return (
     <div className=" radius bloc_with_shaddow">
@@ -33,6 +28,7 @@ export default function Contacts() {
               data={cont}
               index={index}
               array={allMember}
+              image={cont.image ? cont.image : ""}
               key={cont._id ? cont._id : cont.userId}
               discussionId={cont.membres ? cont._id : null}
             />

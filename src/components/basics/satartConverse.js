@@ -22,14 +22,14 @@ export default function StartConverse() {
     if (file.name) {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "chat_app_memory");
+      formData.append("upload_preset", "kisodo_app");
       await axios
         .post(
           "https://api.cloudinary.com/v1_1/di64z9yxk/image/upload",
           formData
         )
         .then((res) => {
-          setUrls({});
+          setUrls([]);
           bool = true;
           img = {
             width: res.data.width,
@@ -92,12 +92,24 @@ export default function StartConverse() {
         })
           .then((res) => {
             setLoad("");
+            socket.emit("send", {
+              discussionId: res.data.discussionId,
+              message: {
+                isPicture: bool,
+                pictureUrl: imgUrl,
+                content: value,
+                sendDate: new Date().toLocaleDateString(),
+                sender: {
+                  userId: me.userId,
+                  fullName: `${me.firstName} ${me.secondName}`,
+                },
+              },
+            });
           })
           .catch((err) => {
             setLoad("failure");
             console.log(err);
           });
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };

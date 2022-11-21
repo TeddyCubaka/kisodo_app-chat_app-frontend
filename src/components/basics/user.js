@@ -147,7 +147,7 @@ export default function User(me) {
                       setAvatar(URL.createObjectURL(e.target.files[0]));
                       const formData = new FormData();
                       formData.append("file", e.target.files[0]);
-                      formData.append("upload_preset", "chat_app_memory");
+                      formData.append("upload_preset", "kisodo_app");
                       axios
                         .post(
                           "https://api.cloudinary.com/v1_1/di64z9yxk/image/upload",

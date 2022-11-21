@@ -11,8 +11,34 @@ export default function TextZone() {
   const [file, setFile] = useState({});
   const [load, setLoad] = useState("");
 
-  const axiosPost = (isPicture, imgUrl) => {
-    const bool = isPicture == false ? false : true;
+  const sendMessage = async () => {
+    let bool = false;
+    let img = {};
+    if (file.name) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "kisodo_app");
+      await axios
+        .post(
+          "https://api.cloudinary.com/v1_1/di64z9yxk/image/upload",
+          formData
+        )
+        .then((res) => {
+          setFile({});
+          setUrls([]);
+          bool = true;
+          img = {
+            width: res.data.width,
+            height: res.data.height,
+            url: res.data.secure_url,
+            originalFilename: res.data.original_filename,
+            format: res.data.format,
+            createDate: res.data.created_at,
+          };
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
     axios({
       method: "post",
       url:
@@ -25,7 +51,7 @@ export default function TextZone() {
         discussionId: actualDiscussion.discussionId,
         message: {
           isPicture: bool,
-          pictureUrl: imgUrl,
+          image: img,
           content: value,
           sender: {
             userId: me.userId,
@@ -40,7 +66,7 @@ export default function TextZone() {
           discussionId: actualDiscussion.discussionId,
           message: {
             isPicture: bool,
-            pictureUrl: imgUrl,
+            image: img,
             content: value,
             sendDate: new Date().toLocaleDateString(),
             sender: {
@@ -52,6 +78,8 @@ export default function TextZone() {
       })
       .catch((err) => {
         setDiscut({
+          isPicture: bool,
+          image: { url: urls },
           content: value,
           date: new Date().toLocaleDateString(),
           send: "failure",
@@ -59,43 +87,6 @@ export default function TextZone() {
         console.log(err);
       });
   };
-
-  const saveFile = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const uploadPicture = async () => {
-    if (file.name) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "chat_app_memory");
-      await axios
-        .post(
-          "https://api.cloudinary.com/v1_1/di64z9yxk/image/upload",
-          formData
-        )
-        .then((res) => {
-          if (urls.length === 1) axiosPost(true, res.data.secure_url);
-          setLoad("");
-          setFile({ url: res.data.url });
-          setUrls([]);
-        })
-        .catch((err) => console.log(err));
-    }
-  };
-
-  const sendMessage = () => {
-    if (urls.length === 1) uploadPicture();
-    if (urls.length === 0) axiosPost(false);
-  };
-
-  useEffect(() => {
-    if (file.name) {
-      const imagesUrls = [];
-      imagesUrls.push(URL.createObjectURL(file));
-      setUrls(imagesUrls);
-    }
-  }, [file]);
 
   return (
     <div className="send-zone">
@@ -136,7 +127,10 @@ export default function TextZone() {
               accept="image/*"
               className="input_file"
               onChange={(e) => {
-                saveFile(e);
+                setFile(e.target.files[0]);
+                const imagesUrls = [];
+                imagesUrls.push(URL.createObjectURL(e.target.files[0]));
+                setUrls(imagesUrls);
               }}
             />
             <AiOutlineCamera size="20px" />

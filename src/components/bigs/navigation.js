@@ -7,7 +7,7 @@ import { socket } from "./home";
 import User from "../basics/user";
 
 export default function Navigation() {
-  const { me, setMe, setUserInbox, setAllMember, setRelations, allMember } =
+  const { me, setMe, setUserInbox, setAllMember, setRelations } =
     useContext(discussionContext);
   const [discussion, setDiscussion] = useState([]);
   const [count, setCount] = useState(0);
@@ -71,6 +71,7 @@ export default function Navigation() {
           counter = counter + contact.messages.length;
         });
         setMessagesNumber(counter);
+        
       })
       .catch((err) => console.log(err));
   }, []);
