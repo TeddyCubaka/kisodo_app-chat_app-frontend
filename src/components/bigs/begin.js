@@ -9,7 +9,6 @@ export default function Begin() {
   const [pwd, setPwd] = useState("");
   const [type, setType] = useState("password");
   const [bool, setBool] = useState(false);
-  const [badPwd, setBadPwd] = useState("");
 
   const login = () => {
     axios({
@@ -107,7 +106,7 @@ export default function Begin() {
               </strong>{" "}
               , just put your password{" "}
             </label>
-            <div className="small_radius">
+            <div className="outlet_from_begin">
               <input
                 type={type.length > 0 ? type : "password"}
                 placeholder="put your password"
@@ -135,12 +134,12 @@ export default function Begin() {
               type="button"
               value="Submit"
               className={`${
-                pwd.length > 6
+                pwd.length > 5
                   ? "btn_with_shaddow"
                   : "btn_with_shaddow_not_actif"
               } small_radius`}
               onClick={() => {
-                pwd.length > 6 ? login() : console.log("remplissez d'abord");
+                pwd.length > 5 ? login() : console.log("remplissez d'abord");
               }}
             />
           </div>

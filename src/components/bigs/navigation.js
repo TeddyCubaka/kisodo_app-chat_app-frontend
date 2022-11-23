@@ -71,7 +71,6 @@ export default function Navigation() {
           counter = counter + contact.messages.length;
         });
         setMessagesNumber(counter);
-        
       })
       .catch((err) => console.log(err));
   }, []);

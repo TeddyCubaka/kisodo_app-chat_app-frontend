@@ -551,31 +551,6 @@ details[open] summary {
   align-items: center;
   z-index: 3;
 }
-.first_form > div {
-  border: 1px solid green;
-  background-color: white;
-  width: 300px;
-  display: flex;
-}
-.first_form > div > input {
-  height: 30px;
-  width: 270px;
-  border: none;
-  background-color: transparent;
-}
-.first_form > div > button {
-  width: 30px;
-  border: none;
-  background-color: transparent;
-  transition: background-color 1s;
-}
-.first_form > div > button:hover {
-  background-color: #b9b9b97e;
-  transition: background-color 1s;
-}
-.first_form > div > button:hover > svg {
-  transform: scale(1.2);
-}
 .first_form > input {
   width: 300px;
   height: 30px;

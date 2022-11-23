@@ -1,12 +1,38 @@
 .radius {
   border-radius: 9px;
 }
-.small_radius {
-  border-radius: 5px;
-}
+
 .small_radius:focus {
   border-radius: 5px;
 }
+
+.outlet_from_begin {
+  border-radius: 5px;
+  border: 1px solid green;
+  background-color: white;
+  width: 300px;
+  display: flex;
+}
+.outlet_from_begin > input {
+  height: 30px;
+  width: 270px;
+  border: none;
+  background-color: transparent;
+}
+.outlet_from_begin > button {
+  width: 30px;
+  border: none;
+  background-color: transparent;
+  transition: background-color 1s;
+}
+.outlet_from_begin > button:hover {
+  background-color: #b9b9b97e;
+  transition: background-color 1s;
+}
+.outlet_from_begin > button:hover > svg {
+  transform: scale(1.2);
+}
+
 .text_center {
   text-align: center;
 }

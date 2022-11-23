@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { BiShow, BiHide } from "react-icons/bi";
 
 export default function Login() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [loader, setLoader] = useState("");
   const [error, setError] = useState("");
+  const [type, setType] = useState("password");
+
   return (
     <div className="mum_card">
       <h1>What{"'"}s up ?</h1>
@@ -28,15 +31,28 @@ export default function Login() {
         </div>
         <div>
           <label>Enter your password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            required
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
+          <div className="small_radius">
+            <input
+              type={type.length > 0 ? type : "password"}
+              placeholder="put your password"
+              className="small_radius"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => {
+                type === "text" ? setType("password") : setType("text");
+              }}
+            >
+              {type === "text" ? (
+                <BiHide size="20px" />
+              ) : (
+                <BiShow size="20px" />
+              )}
+            </button>
+          </div>
         </div>
         <div>
           <input
