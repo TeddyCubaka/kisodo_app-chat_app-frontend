@@ -16,6 +16,16 @@ export default function Message({
   const details = useRef();
   const [link, setLink] = useState("");
   const [deleted, setDeleted] = useState("");
+  const [sendDate, setSendDate] = useState("");
+
+  useEffect(() => {
+    let now = new Date().getDate();
+    if (now.toString() == date.split("/")[0]) {
+      setSendDate("today");
+    } else {
+      setSendDate(date);
+    }
+  }, [date]);
 
   const deleteMessage = () => {
     axios({
@@ -51,7 +61,16 @@ export default function Message({
   }, [hasPicture]);
 
   return (
-    <div className={`message ${position}`}>
+    <div
+      className={`message ${position}`}
+      onClick={() => {
+        if (details.current.open === true) {
+          details.current.open = false;
+        } else {
+          details.current.open = true;
+        }
+      }}
+    >
       <div className={`${bulle} msg_bulle`}>
         {hasPicture ? (
           <div className="message_picture">
@@ -59,14 +78,18 @@ export default function Message({
             <img src={deleted === "" ? hasPicture : ""} alt="" />{" "}
           </div>
         ) : null}
+
         {content === "" ? null : (
           <div className="content">{deleted === "" ? content : deleted}</div>
         )}
+
         <span className={`${state} smaller`}>
           {" "}
           {state == "msg_sended" ? "ok" : false}{" "}
           {state == "failure" ? "échec d&lsquoenvoie" : false}{" "}
         </span>
+        <div className="smaller"> {sendDate} </div>
+
         <details ref={details}>
           <summary>
             <span className="medium">Info</span>
@@ -75,6 +98,7 @@ export default function Message({
             <li
               onClick={() => {
                 deleteMessage();
+                details.current.open = false;
               }}
             >
               {" "}
@@ -96,7 +120,6 @@ export default function Message({
           </ul>
         </details>
       </div>
-      <div className="smaller"> {date} </div>
     </div>
   );
 }
