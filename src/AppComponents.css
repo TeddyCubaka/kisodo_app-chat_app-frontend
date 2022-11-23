@@ -303,3 +303,9 @@
   justify-content: center;
   align-items: center;
 }
+.cut_text {
+  width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

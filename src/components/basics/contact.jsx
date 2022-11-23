@@ -12,8 +12,8 @@ export default function Contact({ name, message, image, data, discussionId }) {
     setMessages,
     relations,
     setPosition,
-    me,
   } = useContext(discussionContext);
+
   const [last, setLast] = useState("");
   useEffect(() => {
     socket.on("new message", (msg) => {
@@ -70,10 +70,10 @@ export default function Contact({ name, message, image, data, discussionId }) {
       </div>
       <div className="contact_info">
         <div className="strong"> {name} </div>
-        {message ? (
-          <div className="small">{message}</div>
+        {last ? (
+          <div className="small cut_text"> {last} </div>
         ) : (
-          <div className="small"> {last} </div>
+          <div className="small cut_text">{message}</div>
         )}
       </div>
     </div>
@@ -82,7 +82,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
 
 Contact.propTypes = {
   name: PropTypes.string,
-  message: PropTypes.bool,
+  message: PropTypes.string,
   image: PropTypes.string,
   data: PropTypes.object,
   discussionId: PropTypes.string,

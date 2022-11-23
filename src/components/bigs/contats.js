@@ -9,6 +9,9 @@ export default function Contacts() {
   useEffect(() => {
     if (allMember.length === 0) return;
     if (userInbox.length === 0) return;
+    allMember.map((disc, index) => {
+      return (disc.lastMessage = userInbox[index].messages.at(-1).content);
+    });
   }, [allMember]);
 
   return (
@@ -25,7 +28,7 @@ export default function Contacts() {
                     : cont.membres[0].fullName
                   : `${cont.firstName} ${cont.secondName}`
               }
-              message={discut.length ? discut.message.at(-1) : false}
+              message={userInbox[index].messages.at(-1).content}
               data={cont}
               index={index}
               array={allMember}
