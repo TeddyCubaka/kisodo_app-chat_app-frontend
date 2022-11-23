@@ -106,7 +106,7 @@ export default function Begin() {
               </strong>{" "}
               , just put your password{" "}
             </label>
-            <div className="outlet_from_begin">
+            <div className="width-270 outlet_from_begin">
               <input
                 type={type.length > 0 ? type : "password"}
                 placeholder="put your password"

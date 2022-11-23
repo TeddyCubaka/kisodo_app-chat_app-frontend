@@ -247,7 +247,6 @@ details[open] {
 details > ul {
   list-style-type: none;
   margin-left: -20px;
-
 }
 details > ul > li > svg:hover {
   transform: scale(1.1);
@@ -314,6 +313,13 @@ details[open] summary {
 }
 
 .fieldset_of_connexion > div > input {
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  background-color: #b9b9b9;
+}
+
+.pwd_input {
   height: 30px;
   border-radius: 5px;
   border: none;

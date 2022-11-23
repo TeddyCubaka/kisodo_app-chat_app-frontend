@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { BiShow, BiHide } from "react-icons/bi";
 
 export default function Signup() {
   const [user, setUser] = useState({});
   const [signed, setSigned] = useState(false);
+  const [type, setType] = useState("password");
 
   useEffect(() => {
     if (signed === true) {
@@ -91,20 +93,34 @@ export default function Signup() {
         </div>
         <div>
           <label>What{"'"}s your password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            required
-            onChange={(e) => {
-              if (e.target.value.length > 5) {
-                e.target.className = " right_size";
-                setUser({ ...user, password: e.target.value });
-              } else {
-                e.target.className = " bad_size";
-              }
-            }}
-          />
+          <div className="outlet_from_begin pwd_input">
+            <input
+              type={type.length > 0 ? type : "password"}
+              placeholder="put your password"
+              className="small_radius"
+              required
+              onChange={(e) => {
+                if (e.target.value.length > 5) {
+                  e.target.className = " right_size";
+                  setUser({ ...user, password: e.target.value });
+                } else {
+                  e.target.className = " bad_size";
+                }
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => {
+                type === "text" ? setType("password") : setType("text");
+              }}
+            >
+              {type === "text" ? (
+                <BiHide size="20px" />
+              ) : (
+                <BiShow size="20px" />
+              )}
+            </button>
+          </div>
         </div>
         <div>
           <input

@@ -25,19 +25,33 @@ export default function Login() {
             placeholder="Enter your email address"
             required
             onChange={(e) => {
-              setMail(e.target.value);
+              e.target.className = " bad_size";
+              if (
+                e.target.value.length > 10 &&
+                e.target.value.includes("@gmail.com")
+              ) {
+                e.target.className = " right_size";
+                setMail(e.target.value);
+              } else {
+                e.target.className = " bad_size";
+              }
             }}
           />
         </div>
         <div>
           <label>Enter your password</label>
-          <div className="small_radius">
+          <div className="outlet_from_begin pwd_input">
             <input
               type={type.length > 0 ? type : "password"}
               placeholder="put your password"
               className="small_radius"
               onChange={(e) => {
-                setPassword(e.target.value);
+                if (e.target.value.length > 5) {
+                  e.target.className = " right_size";
+                  setPassword(e.target.value);
+                } else {
+                  e.target.className = " bad_size";
+                }
               }}
             />
             <button
