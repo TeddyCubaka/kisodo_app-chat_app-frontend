@@ -10,6 +10,7 @@ import Begin from "./components/bigs/begin";
 import Signup from "./components/bigs/signup";
 import Login from "./components/bigs/login";
 import SocketTest from "./components/basics/socketTest";
+import TakeConnection from "./components/basics/takeConnection";
 
 function App() {
   const [discut, setDiscut] = useState([]);
@@ -52,7 +53,9 @@ function App() {
     >
       <Router>
         <Routes>
-          <Route path="/" element={<Begin />} />
+          <Route path="/" element={<Begin />}>
+            <Route path="/takeconnection/:name" element={<TakeConnection />} />
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
