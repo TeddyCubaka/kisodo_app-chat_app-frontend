@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import discussionContext from "../../contexts/discussion";
+import { GoCommentDiscussion } from "react-icons/go";
 
 export default function Inbox() {
   const { setAllMember, userInbox, allMember } = useContext(discussionContext);
@@ -16,7 +17,7 @@ export default function Inbox() {
         setAllMember(userInbox);
       }}
     >
-      <h3>Inbox</h3>
+      <GoCommentDiscussion size="25px" color="white" />
     </button>
   );
 }

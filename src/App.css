@@ -370,6 +370,7 @@ details[open] summary {
   border: none;
   background-color: #0142c4;
   width: 80%;
+  height: 60px;
   border-right: 4px solid yellow;
   border-bottom: none;
   border-radius: 9px 0px 0px 9px;
@@ -387,6 +388,7 @@ details[open] summary {
 }
 .current_nav_btn {
   border-right: 6px solid yellow;
+  background-color: #003297;
   border-bottom: none;
   transition: border-right 0.1s, background-color 0.5s;
 }
@@ -578,5 +580,10 @@ details[open] summary {
 }
 
 .logout_button {
+  background-color: transparent;
   border: none;
+}
+.logout_button:hover > svg {
+  transform: scale(1.1);
+  transition: transform 0.5s;
 }

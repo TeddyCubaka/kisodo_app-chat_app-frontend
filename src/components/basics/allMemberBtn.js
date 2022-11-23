@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import discussionContext from "../../contexts/discussion";
+import { CgCommunity } from "react-icons/cg";
 
 export default function AllMemberButton() {
   const { setAllMember, allMember } = useContext(discussionContext);
@@ -32,7 +33,7 @@ export default function AllMemberButton() {
         setAllMember(members);
       }}
     >
-      <h3>Member</h3>
+      <CgCommunity size="25px" color="white" />
     </button>
   );
 }

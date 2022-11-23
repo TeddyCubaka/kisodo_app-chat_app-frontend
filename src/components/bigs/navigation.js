@@ -92,8 +92,10 @@ export default function Navigation() {
         type="button"
         className="logout_button"
         onClick={() => {
-          localStorage.setItem("token", "");
-          window.location = "/";
+          if (prompt("se deconnecter ?", "oui")) {
+            localStorage.setItem("token", "");
+            window.location = "/";
+          }
         }}
       >
         <FiLogOut size="40px" color="white" />

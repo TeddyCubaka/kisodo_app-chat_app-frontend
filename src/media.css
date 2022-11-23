@@ -14,7 +14,7 @@
     width: 100vw;
     border-radius: 0px;
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1.5fr 0.5fr 0.5fr;
   }
   .nav_list {
     margin: 24px 0px;
@@ -22,25 +22,29 @@
     flex-direction: row;
     align-items: center;
   }
+  .logout_button > svg {
+    width: 25px;
+  }
   .nav_btn {
-    width: 75px;
+    width: fit-content;
     border-right: none;
-    border-bottom: 4px solid yellow;
-    border-radius: 9px 9px 0px 0px;
-    margin: 0px 20px;
+    border-bottom: none;
+    border-radius: 0px;
+    margin: 0px 15px;
+    background-color: #1966ff;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: border-bottom 0.1s, background-color 0.5s;
   }
   .nav_btn:hover {
-    background-color: #003297;
+    background-color: #1966ff;
     border-right: none;
-    border-bottom: 6px solid yellow;
+    border-bottom: 3px solid yellow;
     transition: border-bottom 0.1s, background-color 0.5s;
   }
   .current_nav_btn {
-    background-color: #003297;
+    background-color: #1966ff;
     border-bottom: 6px solid yellow;
     border-right: none;
   }
@@ -116,25 +120,25 @@
     position: absolute;
     top: 80px;
   }
-  .retour{
+  .retour {
     display: block;
   }
   .message_left {
     min-width: 50px;
     max-width: 250px;
   }
-  
+
   .message_right {
     min-width: 50px;
     max-width: 250px;
   }
-  
+
   .message_right:before {
     right: -10px;
     border-top: 10px solid transparent;
     border-left: 10px solid #1966ff;
   }
-  
+
   .message_left::before {
     left: -10px;
     border-top: 10px solid transparent;
