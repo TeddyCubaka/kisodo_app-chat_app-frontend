@@ -8,6 +8,7 @@ export default function Contacts() {
 
   useEffect(() => {
     if (allMember.length === 0) return;
+    if (userInbox.length === 0) return;
   }, [allMember]);
 
   return (
@@ -24,11 +25,17 @@ export default function Contacts() {
                     : cont.membres[0].fullName
                   : `${cont.firstName} ${cont.secondName}`
               }
-              message={discut.length ? discut[discut.length - 1] : false}
+              message={discut.length ? discut.message.at(-1) : false}
               data={cont}
               index={index}
               array={allMember}
-              image={cont.image ? cont.image : ""}
+              image={
+                cont.image
+                  ? cont.image
+                  : relations[index][0].image
+                  ? relations[index][0].image
+                  : ""
+              }
               key={cont._id ? cont._id : cont.userId}
               discussionId={cont.membres ? cont._id : null}
             />

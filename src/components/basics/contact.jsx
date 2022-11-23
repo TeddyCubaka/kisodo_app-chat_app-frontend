@@ -69,8 +69,8 @@ export default function Contact({ name, message, image, data, discussionId }) {
       </div>
       <div className="contact_info">
         <div className="strong"> {name} </div>
-        {message.message ? (
-          <div className="small">{message.message}</div>
+        {message ? (
+          <div className="small">{message}</div>
         ) : (
           <div className="small"> {last} </div>
         )}
