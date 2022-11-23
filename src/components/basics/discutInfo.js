@@ -5,6 +5,7 @@ import { IoArrowBack } from "react-icons/io5";
 
 export default function DiscutInfo() {
   const { freind, setPosition } = useContext(discussionContext);
+
   return (
     <div className="discut_info">
       <div
@@ -16,7 +17,7 @@ export default function DiscutInfo() {
         <IoArrowBack size="20px" />
       </div>
       <div className="img_card">
-        <img src={avatar} alt="" />
+        <img src={freind.image ? freind.image : avatar} alt="" />
       </div>
       <div className="margin_x-10 content_center width-max">
         <div className="strong">

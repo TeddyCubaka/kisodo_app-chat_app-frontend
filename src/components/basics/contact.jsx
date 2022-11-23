@@ -12,6 +12,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
     setMessages,
     relations,
     setPosition,
+    me,
   } = useContext(discussionContext);
   const [last, setLast] = useState("");
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Contact({ name, message, image, data, discussionId }) {
           setFreind({
             userId: data._id,
             fullName: name,
-            image: data.image,
+            image: image,
             biography: data.biography,
             discussionId: discussionId,
           });
@@ -48,14 +49,14 @@ export default function Contact({ name, message, image, data, discussionId }) {
           setActualDiscussion({
             userId: data.membres[0]._id,
             fullName: name,
-            image: data.image,
+            image: image,
             biography: data.biography,
             discussionId: data._id,
           });
           setFreind({
             userId: data.membres[0]._id,
             fullName: name,
-            image: data.image,
+            image: image,
             biography: data.biography,
             discussionId: data._id,
           });
