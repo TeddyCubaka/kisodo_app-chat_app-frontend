@@ -92,7 +92,9 @@ export default function Message({
 
         <details ref={details}>
           <summary>
-            <span className="medium">Info</span>
+            <span className="medium" style={{ color: "white" }}>
+              Info
+            </span>
           </summary>
           <ul>
             <li
@@ -102,16 +104,16 @@ export default function Message({
               }}
             >
               {" "}
-              <MdDelete size="30px" color="black" />{" "}
+              <MdDelete size="30px" color="white" />{" "}
             </li>
             <li>
               {" "}
-              <MdReadMore size="30px" color="black" />{" "}
+              <MdReadMore size="30px" color="white" />{" "}
             </li>
             {hasPicture ? (
               <li>
                 <a href={link} download={`kisodo_app_${data._id}`}>
-                  <MdSaveAlt size="30px" color="black" />
+                  <MdSaveAlt size="30px" color="white" />
                 </a>
               </li>
             ) : (

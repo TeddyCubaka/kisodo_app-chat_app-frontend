@@ -37,12 +37,36 @@ export default function Begin() {
       <div className="welcome_action_card">
         <div>
           <h1>Welcome to KisodO App</h1>
-          <button>
-            <Link to="/signup">Sign up</Link>
-          </button>
-          <button>
-            <Link to="/login">Login</Link>
-          </button>
+          <Link
+            to="/signup"
+            style={{
+              color: "black",
+              textDecoration: "none",
+              width: "80px",
+              height: "30px",
+              display: "inline-block",
+              borderRadius: "5px",
+              margin: "0px 20px",
+              backgroundColor: "white",
+            }}
+          >
+            Sign up
+          </Link>
+          <Link
+            to="/login"
+            style={{
+              color: "black",
+              textDecoration: "none",
+              width: "80px",
+              height: "30px",
+              display: "inline-block",
+              borderRadius: "5px",
+              margin: "0px 20px",
+              backgroundColor: "white",
+            }}
+          >
+            Login
+          </Link>
         </div>
         {user._id ? (
           <div>
@@ -50,6 +74,7 @@ export default function Begin() {
             <Link
               to={`/takeconnection/${user.firstName}_${user.mail}`}
               className="user_connected_card"
+              style={{ color: "black", textDecoration: "none" }}
             >
               <p className="margin_x-10 content_center img_card">
                 {" "}

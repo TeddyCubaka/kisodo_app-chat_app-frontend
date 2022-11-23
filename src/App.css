@@ -228,12 +228,12 @@
   right: 110%;
   bottom: 12px;
   width: 15px;
-  color: black;
+  color: white;
   list-style-type: none;
 }
 
 details[open] {
-  background-color: #1966ff;
+  background-color: #003297;
   z-index: 2;
   width: 70px;
   border-radius: 5px;
@@ -272,7 +272,7 @@ details[open] summary span {
 }
 
 details[open] summary {
-  border: 1px solid white;
+  border: 1px solid #1966ff;
   height: 20px;
 }
 .mum_card {
