@@ -5,6 +5,7 @@ import AllMemberButton from "../basics/allMemberBtn";
 import Inbox from "../basics/inbox";
 import { socket } from "./home";
 import User from "../basics/user";
+import { FiLogOut } from "react-icons/fi";
 
 export default function Navigation() {
   const { me, setMe, setUserInbox, setAllMember, setRelations } =
@@ -87,6 +88,16 @@ export default function Navigation() {
         <Inbox />
         <AllMemberButton />
       </div>
+      <button
+        type="button"
+        className="logout_button"
+        onClick={() => {
+          localStorage.setItem("token", "");
+          window.location = "/";
+        }}
+      >
+        <FiLogOut size="40px" color="white" />
+      </button>
     </div>
   );
 }

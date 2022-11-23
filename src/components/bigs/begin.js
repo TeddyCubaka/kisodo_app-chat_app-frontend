@@ -29,6 +29,7 @@ export default function Begin() {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem("token")) return;
     axios({
       method: "get",
       url:
@@ -51,7 +52,7 @@ export default function Begin() {
     <div
       className="welcome_card"
       onClick={() => {
-        setBool(true);
+        if (user._id) setBool(true);
       }}
     >
       <div className="welcome_illustration">Illustration here</div>
@@ -92,7 +93,7 @@ export default function Begin() {
             className="close"
             onClick={() => {
               if (bool === true) setBool(false);
-              window.location.reload();
+              // window.location.reload();
             }}
           >
             {" "}

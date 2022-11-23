@@ -13,6 +13,9 @@
 .navbarre {
   background-color: #1966ff;
   height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 75px 72% 50px;
 }
 
 .home {
@@ -572,4 +575,8 @@ details[open] summary {
 }
 .retour {
   display: none;
+}
+
+.logout_button {
+  border: none;
 }
