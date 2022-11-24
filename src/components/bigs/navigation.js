@@ -17,8 +17,8 @@ export default function Navigation() {
 
   useEffect(() => {
     let array = inbox;
-    array.map((disc, index) => {
-      let arr = disc.membres.map((cont, index) => {
+    array.map((disc) => {
+      let arr = disc.membres.map((cont) => {
         let a = members.find((user) => {
           return user._id === cont.userId;
         });

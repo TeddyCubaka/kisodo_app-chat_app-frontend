@@ -587,3 +587,21 @@ details[open] summary {
   transform: scale(1.1);
   transition: transform 0.5s;
 }
+.search_div {
+  height: 35px;
+  background-color: #b9b9b97e;
+  border-radius: 20px;
+  margin: 10px 0px 20px 0px;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+.search_div > input {
+  width: 92%;
+  height: 100%;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  background-color: transparent;
+  font-size: 16px;
+}
