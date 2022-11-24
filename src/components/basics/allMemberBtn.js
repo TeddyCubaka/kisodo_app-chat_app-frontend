@@ -1,25 +1,12 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import discussionContext from "../../contexts/discussion";
 import { CgCommunity } from "react-icons/cg";
 
-export default function AllMemberButton() {
+export default function AllMemberButton({ members }) {
   const { setAllMember, allMember } = useContext(discussionContext);
-  const [members, setMembers] = useState([]);
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/user",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((data) => {
-        setMembers(data.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+
   return (
     <button
       className={`nav_btn ${
@@ -37,3 +24,7 @@ export default function AllMemberButton() {
     </button>
   );
 }
+
+AllMemberButton.propTypes = {
+  members: PropTypes.array,
+};

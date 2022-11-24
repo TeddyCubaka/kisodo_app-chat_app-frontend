@@ -23,9 +23,9 @@ export default function Contacts() {
             <Contact
               name={
                 cont.membres
-                  ? cont.membres[0].userId === me.userId
-                    ? cont.membres[1].fullName
-                    : cont.membres[0].fullName
+                  ? cont.membres[0]
+                    ? cont.membres[0].fullName
+                    : `${me.firstName} ${me.secondName}`
                   : `${cont.firstName} ${cont.secondName}`
               }
               message={
@@ -43,7 +43,7 @@ export default function Contacts() {
                   ? cont.image
                   : relations[index]
                   ? relations[index][0].image
-                  : ""
+                  : cont.image
               }
               key={cont._id ? cont._id : cont.userId}
               discussionId={cont.membres ? cont._id : null}

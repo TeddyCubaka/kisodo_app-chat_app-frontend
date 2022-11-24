@@ -18,7 +18,7 @@ function App() {
   const [me, setMe] = useState({});
   const [actualDiscussion, setActualDiscussion] = useState({});
   const [loading, setLoading] = useState("");
-  const [userInbox, setUserInbox] = useState({});
+  const [userInbox, setUserInbox] = useState([]);
   const [allMember, setAllMember] = useState([]);
   const [relations, setRelations] = useState({});
   const [messages, setMessages] = useState([]);

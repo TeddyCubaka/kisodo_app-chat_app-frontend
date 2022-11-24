@@ -10,9 +10,46 @@ import { FiLogOut } from "react-icons/fi";
 export default function Navigation() {
   const { me, setMe, setUserInbox, setAllMember, setRelations } =
     useContext(discussionContext);
-  const [discussion, setDiscussion] = useState([]);
+  const [inbox, setInbox] = useState([]);
   const [count, setCount] = useState(0);
   const [messagesNumber, setMessagesNumber] = useState(0);
+  const [members, setMembers] = useState([]);
+
+  useEffect(() => {
+    let array = inbox;
+    array.map((disc, index) => {
+      let arr = disc.membres.map((cont, index) => {
+        let a = members.find((user) => {
+          return user._id === cont.userId;
+        });
+        cont.image = a.image;
+        if (cont.userId !== localStorage.getItem("userId")) return cont;
+        return;
+      });
+      disc.membres = arr.filter((cont) => {
+        if (cont !== undefined) return cont;
+      });
+    });
+    array = array.filter((dis) => {
+      if (dis.membres.length !== 0) return dis;
+    });
+    setAllMember(array);
+  }, [members, inbox]);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: process.env.REACT_APP_SERVER_LINK_DEV + "/api/user",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        setMembers(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     axios({
@@ -38,6 +75,7 @@ export default function Navigation() {
       })
       .catch((err) => console.log(err));
   }, []);
+
   useEffect(() => {
     axios({
       method: "get",
@@ -52,8 +90,8 @@ export default function Navigation() {
     })
       .then((res) => {
         setUserInbox(res.data);
-        setAllMember(res.data);
-        setDiscussion(res.data);
+        setInbox(res.data);
+        socket.emit("send rooms", res.data);
         setCount(count + 1);
         const array = [];
         res.data.map((disc) => {
@@ -71,22 +109,18 @@ export default function Navigation() {
         res.data.map((contact) => {
           counter = counter + contact.messages.length;
         });
+
         setMessagesNumber(counter);
       })
       .catch((err) => console.log(err));
   }, []);
-  useEffect(() => {
-    if (count === 1) {
-      socket.emit("send rooms", discussion);
-    }
-  }, [discussion]);
 
   return (
     <div className="navbarre radius margin">
       <User me={me} messagesNumber={messagesNumber} />
       <div className="nav_list">
-        <Inbox />
-        <AllMemberButton />
+        <Inbox members={members} />
+        <AllMemberButton members={members} />
       </div>
       <button
         type="button"
