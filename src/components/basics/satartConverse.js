@@ -3,6 +3,7 @@ import { MdOutlineContactMail } from "react-icons/md";
 import { AiOutlineCamera } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
 import axios from "axios";
+import { socket } from "../bigs/home";
 import EmojiPicker from "emoji-picker-react";
 
 export default function StartConverse() {
@@ -96,7 +97,7 @@ export default function StartConverse() {
               discussionId: res.data.discussionId,
               message: {
                 isPicture: bool,
-                pictureUrl: imgUrl,
+                pictureUrl: img,
                 content: value,
                 sendDate: new Date().toLocaleDateString(),
                 sender: {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineCamera, AiOutlineSend } from "react-icons/ai";
 import discussionContext from "../../contexts/discussion";
 import { socket } from "../bigs/home";
@@ -10,6 +10,13 @@ export default function TextZone() {
   const [urls, setUrls] = useState([]);
   const [file, setFile] = useState({});
   const [load, setLoad] = useState("");
+  const input = useRef();
+
+  function updateTextareaHeight() {
+    // input.style.height = "auto";
+    // input.style.height = input.scrollHeight + "px";
+    // console.log(input);
+  }
 
   const sendMessage = async () => {
     let bool = false;
@@ -116,6 +123,21 @@ export default function TextZone() {
         <div className="text_input small_radius">
           <textarea
             spellCheck="true"
+            rows="1"
+            ref={input}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setLoad("sending");
+                if (actualDiscussion.discussionId && value !== "") {
+                  setDiscut({});
+                  sendMessage();
+                }
+                if (urls.length > 0) sendMessage();
+                if (value !== "") {
+                  setValue("");
+                }
+              }
+            }}
             onChange={(e) => {
               setValue(e.target.value);
             }}

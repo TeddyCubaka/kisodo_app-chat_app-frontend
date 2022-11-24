@@ -144,4 +144,7 @@
     border-top: 10px solid transparent;
     border-right: 10px solid #b9b9b9;
   }
+  .text_zone {
+    margin: auto 10px;
+  }
 }

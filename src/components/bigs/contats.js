@@ -28,14 +28,20 @@ export default function Contacts() {
                     : cont.membres[0].fullName
                   : `${cont.firstName} ${cont.secondName}`
               }
-              message={userInbox[index].messages.at(-1).content}
+              message={
+                userInbox
+                  ? userInbox[index]
+                    ? userInbox[index].messages.at(-1).content
+                    : ""
+                  : ""
+              }
               data={cont}
               index={index}
               array={allMember}
               image={
                 cont.image
                   ? cont.image
-                  : relations[index][0].image
+                  : relations[index]
                   ? relations[index][0].image
                   : ""
               }

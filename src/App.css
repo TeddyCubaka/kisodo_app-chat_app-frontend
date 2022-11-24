@@ -93,11 +93,11 @@
 .text_input > div {
   margin: auto 10px auto 20px;
 }
-
 .text_input > textarea {
-  height: 30px;
+  max-height: 150px;
+  min-height: 30px;
+  height: max-content;
   width: 95%;
-  height: fit-content;
   resize: none;
   background-color: #b9b9b900;
   border: none;
